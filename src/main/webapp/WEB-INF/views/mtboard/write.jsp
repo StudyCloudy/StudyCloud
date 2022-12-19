@@ -65,6 +65,11 @@ function updateContents() {
 <h6 style="font-weight: bold; padding-bottom: 20px">&nbsp;기본 정보</h6>
 
 <div class="form-group">
+<label for="id">&nbsp;아이디<span class="rq">*</span></label>
+<input class="form-control" id="loginId" name="loginId" value="${login_id}" type="text" style="margin-top: 3px; font-size: 13px" readonly="readonly">
+</div>
+
+<div class="form-group">
 <label for="name">&nbsp;닉네임<span class="rq">*</span></label>
 <input class="form-control" id="memberNick" name="memberNick" value="${member_nick}" type="text" style="margin-top: 3px; font-size: 13px" readonly="readonly">
 </div>
@@ -74,7 +79,6 @@ function updateContents() {
 <select class="form-select"  id="field" name="field" style="margin-top: 3px; font-size: 13px">
   <option selected >선택</option>
   <option>개발 · 프로그래밍</option>
-  <option>어학 · 외국어</option>
   <option>직무 · 마케팅</option>
   <option>커리어</option>
   <option>기타</option>

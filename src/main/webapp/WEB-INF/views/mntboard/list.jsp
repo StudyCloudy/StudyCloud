@@ -13,7 +13,6 @@
 <!-- css연결 -->
 <link rel="stylesheet" href="/resources/css/mntBoardList.css?ver=3"> 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -141,15 +140,14 @@
 <!-- 상단 멘토지원 이미지바 -->
 <div class="mento_intro">
 	<div class="mento_intro_content">
-			<p class="mentee_txt">
-				☁️ 멘티 찾기 ☁️
-			</p>
-			<span>다양한 지식을 서로 공유 해보아요!</span>
+			<strong class="mentee_txt">
+				☁️ 📢도움이 필요한 멘티에게 지식 공유를 해보아요📢 ☁️
+			</strong>
 	</div>
 </div>
 
 <main class="all_content">
-
+<strong style=" margin-left: 211px; font-size: 20px; color: #aacde5;" >🔍 멘티찾기</strong>
 <div class="content-container">
 
 	 <!-- 왼쪽 정렬 항목-->

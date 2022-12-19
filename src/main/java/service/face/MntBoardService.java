@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import dto.ApplyMnt;
 import dto.Commt;
 import dto.FileUpload;
 import dto.MntBoard;
@@ -90,8 +91,12 @@ public interface MntBoardService {
 	public List<HashMap<String, Object>> getSearchList(HashMap<String, Object> map);
 	
 	public CommtPaging getSearchPaging(HashMap<String, Object> map);
-	
 
+	
+	// 멤버 닉네임 가져오기
+	public String getMemNick(int memberNo);
+	
+	
 
 	
 

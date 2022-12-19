@@ -95,7 +95,7 @@ function check() {
 // 	  modalTitle.textContent = `${member_name}님이 스터디를 신청하였습니다.`
 // 	  modalBodyInput.value = member_name
 // 	})
-	
+
 	
 </script>
 
@@ -114,6 +114,63 @@ $(document).ready(function() {
 	})
 })
 
+</script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	
+// 	좋아요 여부 확인
+// 	var markcase = ${markCnt };
+	
+// 	if( markcase > 0) {
+// 		console.log(markcase);
+// 		$("#sMark").attr("src", "/resources/se2/img/heart-regular.svg");
+// 	} else {
+// 		console.log(markcase);
+// 		$("#sMark").attr("src", "/resources/se2/img/heart-solid.svg");
+// 	}
+	
+	$("#sMarkbtn").on("click", function() {
+		var heart = $("#sMarkbtn");
+		var no = ${detailSboard.STUDY_NO };
+		
+		if(${empty login}) {
+			alert("로그인 후 이용해주세요.")
+			return false;
+		}
+	
+		$.ajax({
+			url: "/sboard/studyMark"
+			, type : "POST"
+			, data : { "studyNo" : no }
+			, success : function(res) {
+				heart.prop("name", res);
+				if(res==1) {
+					$("#sMark").attr("src", "/resources/se2/img/heart-regular.svg");
+				} else {
+					$("#sMark").attr("src", "/resources/se2/img/heart-solid.svg");
+					alert("스터디 찜하기가 완료되었습니다!")
+				}
+			}
+			
+		})
+	})
+})
+
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#btnApply").click(function(){
+		$("form").submit();
+	})
+})
+
+$(document).ready(function(){
+	$("#btnGoMypage").click(function(){
+		$("form").submit();
+	})
+})
 </script>
 
 
@@ -237,12 +294,12 @@ textarea:focus {
 
 :root {
 	--bs-body-color: #60392a; 
+
 }
 
-
-
-
-
+#sMark {
+	filter: invert(46%) sepia(93%) saturate(308%) hue-rotate(153deg) brightness(94%) contrast(87%);
+}
 
 </style>
 
@@ -300,8 +357,8 @@ textarea:focus {
 				
 				<div class="button-bar">
 				
-					<div class="button" style="float: left; padding-top: 3px;">
-						<img src="/resources/se2/img/heart-regular.svg" style="width: 20px; height: 20px">
+					<div class="button" type="button" id="sMarkbtn" style="float: left; padding-top: 3px;">
+						<img id="sMark" src="/resources/se2/img/heart-regular.svg" style="width: 20px; height: 20px">
 						<span class="con-detail-2" style="font-size:14px;">찜하기</span>
 					</div>
 					
@@ -311,7 +368,7 @@ textarea:focus {
 							style="background-color: #6cc4dc; border: none;">신청하기</button> 
 					</div>
 					
-					<div class="button" style="padding-top: 3px;">
+					<div class="button" id="shareBtn" style="padding-top: 3px;">
 						<img src="/resources/se2/img/share-nodes-solid.svg" style="width: 20px; height: 20px">
 						<span class="con-detail-2" style="font-size:14px;">공유하기</span>
 					</div>
@@ -337,7 +394,7 @@ textarea:focus {
 				<h1 class="modal-title fs-5" id="exampleModalLabel">스터디 신청을 환영합니다!</h1>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
-				<form action="/mypage/mystudy" method="post" class="applyform" name="userInfo" onsubmit="return check()">
+				<form action="/sboard/applyStudy" method="post" class="applyform" name="userInfo" onsubmit="return check()">
 			<div class="modal-body">
 					<div class="input-group mb-3">
 						<span class="input-group-text">✔️</span>
@@ -395,14 +452,15 @@ textarea:focus {
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 2</h1>
+        <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Success!</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Hide this modal and show the first with the button below.
+      	스터디 신청이 성공적으로 완료되었습니다.
+      	'마이페이지 ➡️ 나의 스터디' 로 이동하여 스터디 신청내역을 확인하실 수 있습니다.
       </div>
       <div class="modal-footer">
-        <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Back to first</button>
+        <button class="btn btn-primary" type="submit" id="btnGoMypage" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">확인</button>
       </div>
     </div>
   </div>

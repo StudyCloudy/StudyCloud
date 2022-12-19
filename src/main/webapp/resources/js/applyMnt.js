@@ -5,7 +5,7 @@ window.onload = function () {
 	"locale": "ko",
  });
  
- 
+
  $('#stTimepicker').timepicker({
     timeFormat: 'H:00',
     interval: 60,
@@ -18,7 +18,8 @@ window.onload = function () {
     change: stTimeSelectChange
 });	    		
    
-   var stTime = "";
+    var stTime = "";
+ 	var edTime = "";
    
    
    	   function stTimeSelectChange(){
@@ -40,5 +41,4 @@ window.onload = function () {
     });
 	  
 	 console.log(stTime);  
-	  
 }

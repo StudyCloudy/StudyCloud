@@ -90,7 +90,7 @@
 	
 	
 	<select id="selectMntBoard" resultType="hashmap" parameterType="int">
-		SELECT	 n.mntboard_no,  m.member_nick, n.field, n.mntboard_title, n.mntboard_content 
+		SELECT	 n.mntboard_no,  m.member_nick, m.member_no, n.field, n.mntboard_title, n.mntboard_content 
 				, n.mntboard_cmcnt , n.mntboard_hit , n.mntboard_date
 				, ( SELECT count(*) FROM mntboardlike ML WHERE N.mntboard_no = ML.mntboard_no ) like_cnt
 			FROM mntboard n 
@@ -148,16 +148,19 @@
 		WHERE mntboard_no = #{mntboardNo}
 	</update>
 	
+	<!-- 게시글 삭제 -->
+	<delete id="deleteMntBoard" parameterType="dto.MntBoard">
+		DELETE mntboard
+		WHERE mntboard_no = #{mntboardNo}
+	</delete>
 	
 	<delete id="deleteFile" parameterType="dto.MntBoard">
 		DELETE fileupload
 		WHERE mntboard_no = #{mntboardNo}
 	</delete>
 	
-	
-	<!-- 게시글 삭제 -->
-	<delete id="deleteMntBoard" parameterType="dto.MntBoard">
-		DELETE mntboard
+	<delete id="deleteComtByMntBoardNo" parameterType="dto.MntBoard">
+		DELETE Commt 
 		WHERE mntboard_no = #{mntboardNo}
 	</delete>
 	
@@ -207,11 +210,10 @@
    
     <insert id="insertCommt" parameterType="dto.Commt">
         INSERT INTO commt(
-			commt_no, mntboard_no, member_no, commt_content )
+			commt_no, mntboard_no, member_no, commt_content, commt_date  )
 		
 		VALUES ( commt_seq.nextval, #{mntBoardNo },  #{memberNo }
-				, #{commtContent }
-		)
+				, #{commtContent }, sysdate)
     </insert>
 
     <select id="selectCmtByCommtNo" parameterType="int" resultType="dto.Commt">
@@ -306,8 +308,14 @@
 				</when>
 			</choose>
 		</foreach>
-		
 	</select>
+	
+	<select id="getNickByMemberNo" parameterType="int" resultType="String">
+		SELECT member_nick 
+		FROM member 
+		WHERE member_no = #{memberNo}
+	</select>
+	
 	
 	
 	
