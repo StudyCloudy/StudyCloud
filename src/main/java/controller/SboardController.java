@@ -2,7 +2,6 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import dto.ApplyStudy;
 import dto.Commt;
 import dto.Member;
 import dto.StudyBoard;
@@ -80,13 +80,13 @@ public class SboardController {
 		//모델값 전달
 		model.addAttribute("detailSboard", Sboarddetail);
 		
-		//댓글 보여주기
-		ArrayList<HashMap<String, Object>> sboardclist = sboardService.sboardcmt(studyNo);
-			for( HashMap<String, Object> sc : sboardclist )
-				logger.debug("{}", sc);
-	
-			model.addAttribute("slist", sboardclist);
-			
+//		//댓글 보여주기
+//		ArrayList<HashMap<String, Object>> sboardclist = sboardService.sboardcmt(studyNo);
+//			for( HashMap<String, Object> sc : sboardclist )
+//				logger.debug("{}", sc);
+//	
+//			model.addAttribute("slist", sboardclist);
+//			
 			return;
 	}
 	
@@ -127,10 +127,11 @@ public class SboardController {
 		
 		//게시글 조회
 		HashMap<String, Object> Sboarddetail = sboardService.detail(studyNo);
+		model.addAttribute("updateDetail", Sboarddetail);
+		
 		logger.debug("조회된 게시글 {}", Sboarddetail);
 		
 		//모델값 전달
-		model.addAttribute("updateSboard", Sboarddetail);
 		
 	}
 	
@@ -141,11 +142,12 @@ public class SboardController {
 			,HttpSession session
 			
 			) {
+		
 		logger.debug("{}", sboard);
 
 		sboardService.update(sboard);
 		
-		return "redirect:/sboard/detail";
+		return "redirect:/sboard/main";
 		
 	}
 	
@@ -222,23 +224,140 @@ public class SboardController {
 	}
 	
 	
-	//----------------------------------------------------------------------------------------------------
-	
-	@GetMapping("/sboard/getSearchList")
-	@ResponseBody
-	public List<StudyBoard> getSearchList(
+	@RequestMapping("/sboard/studyMark")
+	public @ResponseBody int res (
 			
-			@RequestParam("keyword") String keyword
-			, Model model
+			int studyNo
+			,HttpSession session 
 			
-			) throws Exception {
+			) {
+		//작성자 정보
+		int memberNo = (int) session.getAttribute("member_no");
 		
-		logger.info("keyword {}", keyword);
+		int res = sboardService.insertMark(studyNo, memberNo);
+		logger.info("{}", res);
 		
-		StudyBoard sboard = new StudyBoard();
-		sboard.setKeyword(keyword);
-		return sboardService.getSearchList(sboard);
+		return res;
 	}
+	
+	@PostMapping("/sboard/searchpeople")
+	public String studySearchByPeople(
+			
+			Model model
+			, int peopleNo
+			, @RequestParam(defaultValue = "1") int curPage
+			
+			) {
+		
+		HashMap<String, Object> pagingMap = new HashMap<>();
+		
+		pagingMap.put("peopleNo", peopleNo);
+		pagingMap.put("curPage", curPage);
+		
+		Paging pSearchPaging = sboardService.getPagingByPeopleNo(pagingMap);
+		
+		int startNo = pSearchPaging.getStartNo();
+		int endNo = pSearchPaging.getEndNo();
+		
+		HashMap<String, Object> map = new HashMap<>();
+		
+		map.put("paging", pagingMap);
+		map.put("peopleNo", peopleNo);
+		map.put("startNo", startNo);
+		map.put("endNo", endNo);
+		
+		ArrayList<HashMap<String, Object>> pSearchList = sboardService.SearchByPeople(map);
+		model.addAttribute("searchBypeople", pSearchList);
+		model.addAttribute("paging", pSearchPaging);
+		model.addAttribute("peopleNo", peopleNo);
+		
+		return "/sboard/searchByPeople";
+		
+	}
+	
+	
+	@PostMapping("/sboard/searchtag")
+	public String studySearchByTag(
+			
+			Model model
+			,@RequestParam("study_tag") String studyTag
+			, HttpSession session
+			,@RequestParam(defaultValue="1") int curPage
+			
+			) {
+		
+//		Paging paging = sboardService.getPaging(curPage);
+//		ArrayList<HashMap<String, Object>> list = sboardService.tagkeyword(tagword, session, paging);
+//		
+//		model.addAttribute("slist", list);
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("tagword", studyTag);
+		map.put("curPage", curPage);
+		
+		Paging paging = sboardService.getSearchPaging(map);
+		int startNo = paging.getStartNo();
+		int endNo = paging.getEndNo();
+		int totalCount = paging.getTotalCount();
+		int totalPage = paging.getTotalPage();
+		
+		map.put("startNo", startNo);
+		map.put("endNo", endNo);
+		
+//		ArrayList<HashMap<String, Object>> slist = sboardService.getTagSearch(map);
+		model.addAttribute("paging", paging);
+		
+		String tagword = (String)map.get("tagword");
+		
+		map.get("studyTag");
+//		model.addAttribute("slist",slist);
+		model.addAttribute("tagword", tagword);
+//		
+		return "/sboard/searchByTagAjax";
+	}
+			
+			
+	
+	@PostMapping("/sboard/studypeople")
+	public String peopleSort(
+			
+			Model model
+			, int peopleNo
+			, @RequestParam(defaultValue = "1") int curpage
+			
+			) {
+		
+		return "/sboard/studypeople";
+	}
+	
+	
+	@GetMapping("/sboard/applyStudy")
+	public void applystudy() {}
+	
+	@PostMapping("/sboard/appltstudy")
+	public String applystudyProc(
+			
+			Member member
+			,ApplyStudy applystudy
+			,HttpSession session
+			
+			) {
+		
+		logger.debug("{}", applystudy);
+		
+		//작성자 정보 추가
+//		sboard.setMemberNo( (int) session.getAttribute("member_no"));
+		
+		int member_no = (int) session.getAttribute("member_no");
+		applystudy.setMemberNo(member_no);
+		
+		sboardService.applystudy(applystudy);
+		
+		//스터디 게시판 메인으로 리다이렉트
+		return "redirect:/sboard/main";
+		
+	}
+	
+	
 	
 	
 	
