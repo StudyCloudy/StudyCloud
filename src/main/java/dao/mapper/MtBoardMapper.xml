@@ -87,9 +87,9 @@
 	</update>
 	
 	<select id="selectMtBoard" resultType="hashmap" parameterType="int">
-			SELECT n.mtboard_no, m.member_nick, n.field, n.jobduty, n.jobgroup, n.career
+			SELECT n.mtboard_no, m.member_nick, m.member_no, n.field, n.jobduty, n.jobgroup, n.career
 				   , n.mtboard_title, n.mtboard_content , n.mtboard_cmcnt , n.mtboard_hit 
-				   , n.mtboard_date, n.co_name, n.mt_price
+				   , n.mtboard_date, n.co_name, n.mt_price, m.member_id
 				   , ( SELECT count(*) FROM mtmark MK WHERE N.mtboard_no = MK.mtboard_no ) mark_cnt
 			FROM mtboard n 
 			JOIN member m
@@ -145,6 +145,23 @@
 		WHERE mtboard_no = #{mtboardNo}
 	</update>
 	
+	
+	<!-- 게시글 삭제 -->
+	<delete id="deleteComtByMtBoardNo" parameterType="dto.MtBoard">
+		DELETE mtreview 
+		WHERE mtboard_no = #{mtboardNo}
+	</delete>
+	
+	<delete id="deleteMarkByMtBoardNo" parameterType="dto.MtBoard">
+		DELETE mtmark
+		WHERE mtboard_no = #{mtboardNo}
+	</delete>
+	
+	<delete id="deleteApplyByMtBoardNo" parameterType="dto.MtBoard">
+		DELETE applymnt
+		WHERE mtboard_no = #{mtboardNo}
+	</delete>
+	
 	<delete id="deleteFile" parameterType="dto.MtBoard">
 		DELETE fileupload
 		WHERE  mtboard_no = #{mtboardNo}
@@ -155,8 +172,17 @@
 		WHERE mtboard_no = #{mtboardNo}
 	</delete>
 	
-	<!-- 게시파 리스트 좋아요수 -->
-	<update id="mntBoardLike" parameterType="dto.MtBoard">
+	<!-- 게시판 리스트 리뷰수 -->
+	<update id="mtBoardReview" parameterType="dto.MtBoard">
+		UPDATE mtboard m
+		SET m.mtboard_cmcnt = 
+		(SELECT COUNT(mtreview_no) FROM mtreview WHERE mtboard_no = #{mtboardNo})
+		WHERE m.mtboard_no = #{mtboardNo}
+	</update>
+	
+	
+	<!-- 게시판 리스트 좋아요수 -->
+	<update id="mtBoardMark" parameterType="dto.MtBoard">
 		UPDATE mtboard m
 		SET m.mark_cnt = 
 		(SELECT COUNT(mtmark_no) FROM mtmark WHERE mtboard_no = #{mtboardNo})
@@ -164,9 +190,6 @@
 	</update>
 
 
-
-
- <!-- 여기 -->
  
 	<!-- 좋아요 -->
 	<select id="selectCntMark" parameterType="dto.MtMark" resultType="int">
@@ -192,6 +215,10 @@
 		INSERT INTO mtmark (mtmark_no, mtboard_no, member_no)
 		VALUES (mtmark_seq.nextval, #{mtboardNo }, #{memberNo })
 	</insert>
+	
+	
+	
+	<!-- 검색 -->
 	
 	<select id="getSearchList" parameterType="hashMap" resultType="hashmap">
 		SELECT n.mtboard_no, m.member_nick, n.field, n.jobduty, n.jobgroup, n.career
@@ -243,9 +270,97 @@
 		
 	</select>
 	
+	
+	<!-- 멘토지원 -->	
+	
+	<!-- 멘토지원 유저 정보 불러오기 -->
+	 <select id="getIdByMemberNo" parameterType="int" resultType="String">
+		SELECT member_id 
+		FROM member 
+		WHERE member_no = #{memberNo}
+	</select>
+	
+	<select id="getEmailByMemberNo" parameterType="int" resultType="String">
+		SELECT member_email 
+		FROM member 
+		WHERE member_no = #{memberNo}
+	</select>
+	
+	<select id="getNameByMemberNo" parameterType="int" resultType="String">
+		SELECT member_name
+		FROM member 
+		WHERE member_no = #{memberNo}
+	</select>
+	
+	<select id="getPhoneByMemberNo" parameterType="int" resultType="String">
+		SELECT member_phone
+		FROM member 
+		WHERE member_no = #{memberNo}
+	</select>
+	
+	<select id="getNickByMemberNo" parameterType="int" resultType="String">
+		SELECT member_nick
+		FROM member 
+		WHERE member_no = #{memberNo}
+	</select>
+	
+	<insert id="applyMt" parameterType="dto.ApplyMt">
+		INSERT INTO applyMt (applymt_no, member_no, field, applymt_content, applymt_date)
+		VALUES (applymt_seq.nextval, #{memberNo }, #{field }, #{applymtContent}, sysdate)
+	</insert>
+	
+	<insert id="applyMnt" parameterType="map">
+		INSERT INTO applymnt (applymnt_no, mtboard_no, member_no, sttime, edtime, mnt_date, mnt_content, total_price, mnt_paydate)
+		VALUES(	APPLYMNT_SEQ.nextval, #{mtboardNo}, #{memberNo}, #{stTime}, #{edTime}, #{mntDate}, #{mntContent}, #{totalPrice}, sysdate)
+	</insert>
 
+	<!-- 리뷰  -->
+	<select id="CntReview" parameterType="dto.MtReview" resultType="int">
+        SELECT count(*) 
+        FROM mtreview
+        WHERE mtboard_no = #{mtboardNo}
+    </select>
+    	
+	<insert id="writeReview" parameterType="dto.MtReview">
+		INSERT INTO mtreview 
+		VALUES( mtreview_seq.nextval, #{mtboardNo}, #{memberNo}, #{mtreviewContent}, sysdate, #{mtreviewScore} )
+	</insert>
 	
+	<select id="isBuyer" resultType="int" parameterType="map">
+		SELECT count(*) 
+		FROM applymnt
+		WHERE mtboard_no = #{mtboardNo}
+		AND member_no = #{memberNo}
+		AND total_price is not null
+	</select>
 	
+	<select id="getReviewList" parameterType="int" resultType="map">
+		SELECT r.*, m.member_nick nickname
+	    FROM mtreview r
+	    JOIN member m 
+	    ON r.member_no = m.member_no
+	    WHERE mtboard_no = #{mtboardNo} 
+	</select>
+	
+	<update id="updateReview"  parameterType="dto.MtReview">
+		UPDATE mtreview
+		SET mtreview_content = #{mtreviewContent},
+			mtreview_score = #{mtreviewScore}
+		WHERE
+			mtreview_no = #{mtreviewNo}	
+	</update>
+	
+	<select id="isWrite" parameterType="map" resultType="int">
+		SELECT count(*) 
+		FROM mtreview 
+		WHERE member_no=#{memberNo} AND mtreview_no = #{reviewNo}
+	</select>
+
+	<delete id="deleteReview" parameterType="int">
+		DELETE from mtreview 
+		WHERE mtreview_no = #{reviewNo}	
+	</delete>
+
 </mapper>
 
 

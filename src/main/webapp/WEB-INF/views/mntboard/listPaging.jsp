@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <script>
 $(document).ready(function() {
 	$("#btnWrite").click(function() {
@@ -45,9 +46,9 @@ $(document).ready(function() {
 </tbody>
 </table>
 
-<!-- 회원만 보이게 -->
+<c:if test="${not empty sessionScope.loginid }">
 <div><button id="btnWrite" class="btn btn-primary pull-right">글쓰기</button></div>
-
+</c:if>
 
 <nav aria-label="Page navigation example">
 	  <ul class="pagination">
@@ -55,7 +56,7 @@ $(document).ready(function() {
 	<%-- 첫 페이지로 이동 --%>
 	<c:if test="${paging.curPage ne 1 }">
 		<li class="page-item">
-      <a class="page-link" onclick="pageMove(1)" aria-label="Previous">
+      <a class="page-link" onclick="pageMove(1)" aria-폼전송label="Previous">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>

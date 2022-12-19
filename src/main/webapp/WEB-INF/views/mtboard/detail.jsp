@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<% Object idObject = session.getAttribute("loginid");  
+ 	boolean isLogin = (idObject != null);  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +19,15 @@
 <script src="../resources/js/mntBoardView.js?ver=1"></script>
 
 <script type="text/javascript">
+
+
 	$(document).ready(function() {
+		function modify(e){
+			console.log(e)
+		}
+		
+		var isLogin = $('#hiddenIsLogin').val()
+		isLogin = $.parseJSON(isLogin);
 		
 		$("#MtbtnList").click(function() {
 			location.href = "/mtboard/list"
@@ -29,48 +39,73 @@
 			location.href = "/mtboard/delete?mtboardNo=${mtViewBoard.MTBOARD_NO}"
 		}) 
 		
+		/* 쪽지 보내기 */
+		$("#msg").click(function(){
+			if(isLogin){
+				// 쪽지보내기 로직 구현
+			}else{
+				alert('로그인 이후 이용해주세요.')
+			}
+		})
+		
 		/* 좋아요 버튼 */
 		$(".btn_heart").click(function() {
 			console.log("클릭됨");
 			
-			$.ajax({
-				type: "get"
-				, url: "/mtboard/like"
-				, data: {
-					"memberNo" : '${member_no}'
-					, "mtboardNo": ${param.mtboardNo}
-				}
-				, dataType: "json"
-				, success: function( data ) {
-	 				console.log("성공");
+			if(isLogin){
+				$.ajax({
+					type: "get"
+					, url: "/mtboard/mark"
+					, data: {
+						"memberNo" : '${member_no}'
+						, "mtboardNo": ${param.mtboardNo}
+					}
+					, dataType: "json"
+					, success: function( data ) {
+		 				console.log("성공");
 
-					
-	 				if(data.result) { //좋아요 성공
-						$("#Mheart").css("color", "red");
-						alert('좋아요 성공!')
-					
-					} else { //좋아요 취소 성공
-						$("#Mheart").css("color", "");
-						alert('좋아요 취소!')
+						
+		 				if(data.result) { //좋아요 성공
+							$("#Mheart").css("color", "red");
+							alert('찜하기 성공! \n찜한 멘토는 마이페이지에서 확인 가능합니다.')
+						
+						} else { //좋아요 취소 성공
+							$("#Mheart").css("color", "");
+							alert('찜하기 취소!')
+						
+						}
+						
+					}
+					, error: function() {
+						alert('다시 시도해주세요.')
+						console.log("실패");
 					
 					}
-					
-				}
-				, error: function() {
-					alert('다시 시도해주세요.')
-					console.log("실패");
-				
-				}
-			})	
-			
+				})	
+			} else {
+				alert('로그인 이후 이용해주세요.')
+			}
 		}); //$(".btn_heart").click(function() end
 				
 				
-	if('true' == '${like}') {
+	if('true' == '${mark}') {
 		$("#Mheart").css("color", "red");
 	} else {
 		$("#Mheart").css("color", "");
 	}
+		
+	// 신청하기 버튼 클릭시 로그인 여부 체크
+	$('#applyBtn').click(function (){
+		 if(isLogin){ // string value값에 따라 boolean으로 형변환
+			location.href="/mtboard/applyMnt?mtboardNo="+${mtViewBoard.MTBOARD_NO}
+			 
+		}else{
+			alert('로그인 이후 이용해주세요.')
+		} 
+		
+	})
+		
+		
 })	
 
 </script>
@@ -113,7 +148,6 @@
 </div>
 
 
-
 <div class="mt_allwrap">
 
 
@@ -125,10 +159,7 @@
 </div>
 
 
-<!-- 로그인시에만 눌리게 / 비로그인시 로그인해주세요 창 띄움-->
-<!-- 찜하기 아작스로 구현 / 찜하기가 완료/취소되었습니다 멘트-->
 <!-- 공유 -->
-
 <div class="func_btn">
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="share">
 <i class="bi bi-share"></i>
@@ -136,7 +167,7 @@
 
 <!-- 찜하기 -->
 <button type="button" class="btn_heart btn btn-primary" id="heart">
-<i id="Mheart" class="fa fa-heart"></i>
+<i id="Mheart" class="fa fa-heart"></i> 
 </button>
 
 <!-- 쪽지 -->
@@ -144,8 +175,6 @@
 	<i class="bi bi-envelope"></i>
 </button>
 </div>
-
-<!-- 아이디 부분 (수업자료보기) -->
 
 <p class="mt_id">${mtViewBoard.MEMBER_NICK }</p>
 
@@ -180,84 +209,26 @@
 ${mtViewBoard.MTBOARD_CONTENT }
 </div>
 
-<a class="btn btn-primary" href="/mtboard/applyMnt" type="button" style="float: right; font-size: 15px;">
-신청하기</a>
+<a class="btn btn-primary" id="applyBtn"  type="button" style="float: right; font-size: 15px;">
+신청하기</a> 
 </div><!-- mt_wrap2 끝 -->
-<div class="mt_wrap3">
-<h5>후기</h5>
 <hr>
-
-
-<!-- 댓글작성 -->
-<form class="mb-3" name="mt_review" id="mt_review" method="post">
-	<fieldset>
-		<span class="text-bold">별점을 선택해주세요</span>
-		<input type="radio" name="reviewStar" value="5" id="rate1"><label
-			for="rate1">★</label>
-		<input type="radio" name="reviewStar" value="4" id="rate2"><label
-			for="rate2">★</label>
-		<input type="radio" name="reviewStar" value="3" id="rate3"><label
-			for="rate3">★</label>
-		<input type="radio" name="reviewStar" value="2" id="rate4"><label
-			for="rate4">★</label>
-		<input type="radio" name="reviewStar" value="1" id="rate5"><label
-			for="rate5">★</label>
-	</fieldset>
-	<div>
-		<textarea class="col-auto form-control" id="reviewContents"
-				  placeholder="후기를 입력해주세요"></textarea>
-	</div>
+<div class="mt_wrap3">
+<input type="hidden" id="hiddenIsLogin" value="<%=isLogin %>">
 	
- <!-- Post 구현해야됨 -->
-	 <button class="btn btn-primary" id="btnReview">등록</button>
-	
-</form>						
 
-
-
-	<ul class="reply_content_ul">
-	<li>
-		<div class="comment_wrap">
-		<div class="reply_top">
-			<span class="id_span">아리멍멍</span>
-			<span class="date_span">2022-11-16</span>
-			<span class="rating_span">★<span class="rating_value_span">5.0</span></span>
-				<a class="update_reply_btn">수정</a><a class="delete_reply_btn">삭제</a>
-					</div>
-		<div class="reply_bottom">
-		<div class="reply_bottom_txt">
-		너무 유익하고 도움이 많이 됐습니다 추천해요!!
-			</div>
-			</div>
-		</div>
-	</li>
-	</ul>
-	<ul class="reply_content_ul">
-	<li>
-		<div class="comment_wrap">
-		<div class="reply_top">
-			<span class="id_span">아리멍멍</span>
-			<span class="date_span">2022-11-16</span>
-			<span class="rating_span">★<span class="rating_value_span">5.0</span></span>
-				<a class="update_reply_btn">수정</a><a class="delete_reply_btn">삭제</a>
-					</div>
-		<div class="reply_bottom">
-		<div class="reply_bottom_txt">
-		너무 유익하고 도움이 많이 됐습니다 추천해요!!
-			</div>
-			</div>
-		</div>
-	</li>
-	</ul>
-	
-<c:import url="/WEB-INF/views/mtboard/replyPaging.jsp" />
-
+<!-- 리뷰 -->	
+<div class="reviewPaging">
+<c:import url="/WEB-INF/views/mtboard/reviewPaging.jsp" />
+</div>
 
 
 <div class="text-center" style="margin-top: 241px">
 	<button id="MtbtnList" class="btn btn-primary">목록</button>
+	<c:if test="${member_no eq mtViewBoard.MEMBER_NO}">
 		<button id="MtbtnUpdate" class="btn btn-primary">수정</button>
 		<button id="MtbtnDelete" class="btn btn-primary">삭제</button>
+	</c:if>	
 </div>
 
 </div><!-- mt_wrap3 끝 -->

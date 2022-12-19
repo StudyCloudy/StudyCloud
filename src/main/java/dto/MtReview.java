@@ -7,20 +7,18 @@ public class MtReview {
 	private int mtreviewNo;
 	private int mtboardNo;
 	private int memberNo;
-	private int applymntNo;
 	private String mtreviewContent;
 	private Date mtreviewDate;
 	private int mtreviewScore;
 	
 	public MtReview() {}
 
-	public MtReview(int mtreviewNo, int mtboardNo, int memberNo, int applymntNo, String mtreviewContent,
-			Date mtreviewDate, int mtreviewScore) {
+	public MtReview(int mtreviewNo, int mtboardNo, int memberNo, String mtreviewContent, Date mtreviewDate,
+			int mtreviewScore) {
 		super();
 		this.mtreviewNo = mtreviewNo;
 		this.mtboardNo = mtboardNo;
 		this.memberNo = memberNo;
-		this.applymntNo = applymntNo;
 		this.mtreviewContent = mtreviewContent;
 		this.mtreviewDate = mtreviewDate;
 		this.mtreviewScore = mtreviewScore;
@@ -29,8 +27,8 @@ public class MtReview {
 	@Override
 	public String toString() {
 		return "MtReview [mtreviewNo=" + mtreviewNo + ", mtboardNo=" + mtboardNo + ", memberNo=" + memberNo
-				+ ", applymntNo=" + applymntNo + ", mtreviewContent=" + mtreviewContent + ", mtreviewDate="
-				+ mtreviewDate + ", mtreviewScore=" + mtreviewScore + "]";
+				+ ", mtreviewContent=" + mtreviewContent + ", mtreviewDate=" + mtreviewDate + ", mtreviewScore="
+				+ mtreviewScore + "]";
 	}
 
 	public int getMtreviewNo() {
@@ -57,14 +55,6 @@ public class MtReview {
 		this.memberNo = memberNo;
 	}
 
-	public int getApplymntNo() {
-		return applymntNo;
-	}
-
-	public void setApplymntNo(int applymntNo) {
-		this.applymntNo = applymntNo;
-	}
-
 	public String getMtreviewContent() {
 		return mtreviewContent;
 	}
@@ -88,6 +78,5 @@ public class MtReview {
 	public void setMtreviewScore(int mtreviewScore) {
 		this.mtreviewScore = mtreviewScore;
 	}
-	
-	
+
 }

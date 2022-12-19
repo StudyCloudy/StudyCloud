@@ -24,8 +24,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dto.Commt;
 import dto.FileUpload;
+import dto.Member;
 import dto.MntBoard;
 import dto.MntBoardLike;
+import service.face.MemberService;
 import service.face.MntBoardService;
 import util.CommtPaging;
 import util.PagingVUp;
@@ -38,6 +40,7 @@ public class MntBoardController {
 	
 	@Autowired MntBoardService mntBoardService;
 	@Autowired ServletContext context;
+	@Autowired MemberService memberService;
 	
 	
 	@RequestMapping("/list")
@@ -45,9 +48,7 @@ public class MntBoardController {
 			@RequestParam(defaultValue = "1") int curPage, HttpSession session
 			, Model model ) { 
 		
-		session.setAttribute("login", true); 
-		session.setAttribute("member_no", 1); 
-		session.setAttribute("member_nick", "nick"); 
+		
 		Map<String, Object> map = new HashMap<>();
 		PagingVUp paging = mntBoardService.getPaging(map, curPage);
 		model.addAttribute("paging", paging);  
@@ -83,11 +84,15 @@ public class MntBoardController {
 	
 	
 	@RequestMapping("/view")
-	public void view (HttpSession session, Model model,
+	public void view (HttpServletRequest req, Model model,
 			@RequestParam(defaultValue = "1") int curPage,
 			@RequestParam(required = true) int mntboardNo) {
 		/* logger.info("/mntboard/view - {} ", viewBoard); */
 		
+		HttpSession session = req.getSession();
+		String id = (String) session.getAttribute("loginid");
+		
+		Member member = memberService.getMemberById(id);
 		
 		// 글조회
 		HashMap<String, Object> mntViewBoard = mntBoardService.view(mntboardNo);
@@ -103,7 +108,6 @@ public class MntBoardController {
 		
 	// -------------------------------------------------------------------------------
 		
-		// viewBoard.setMemberNo( (int)session.getAttribute("member_no") );
 
 		CommtPaging commtPaging = mntBoardService.getCommtPaging(curPage, mntboardNo);
 		model.addAttribute("commtPaging", commtPaging);
@@ -118,17 +122,23 @@ public class MntBoardController {
 		// ----------- 좋아요 -----------
 		
 		MntBoardLike mntboardLike = new MntBoardLike();
-		mntboardLike.setMemberNo( (int)session.getAttribute("member_no") );
 		// 좋아요 모델값 
 		model.addAttribute("like", mntBoardService.like(mntboardLike));
 		// 좋아요 수 모델값
 		model.addAttribute("likeCnt", mntBoardService.getTotalCntLike(mntboardLike));
 		
+		model.addAttribute("loginNo", id == null? null : member.getMemberNo());
+		
 	}
 	
 	
 	@GetMapping("/write")
-	public void write() {}
+	public void write(HttpSession session) {
+		int memberNo = (int)session.getAttribute("member_no");
+		String memberNick = mntBoardService.getMemNick(memberNo);
+		session.setAttribute("member_nick", memberNick);
+		
+	}
 	
 	
 	@PostMapping("/write")
@@ -136,11 +146,7 @@ public class MntBoardController {
 		logger.debug("{}", mntBoard);
 		logger.debug("{}", file);
 		
-		
-		 //작성자 정보 추가
-		// 구현 예정 ( 로그인 세션 )
 		mntBoard.setMemberNo( (int)session.getAttribute("member_no") );
-		System.out.println("로그인 : " + session.getAttribute("member_no")) ;
 		logger.debug("{}", mntBoard);
 		logger.debug("{}", file);
 		
@@ -296,9 +302,10 @@ public class MntBoardController {
 	 
 	  // ------------------------ 좋아요 ---------------------
 	  @RequestMapping("/like")
-	  public ModelAndView Like(MntBoardLike mntboardLike, ModelAndView mav, HttpSession session) {
+	  public ModelAndView Like(MntBoardLike mntboardLike, ModelAndView mav, HttpServletRequest req) {
 		
 		  // 좋아요 하트
+		  HttpSession session = req.getSession();
 		  mntboardLike.setMemberNo((int)session.getAttribute("member_no"));
 		  
 		  

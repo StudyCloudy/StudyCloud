@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<% Object idObject = session.getAttribute("loginid");  
+ 	boolean isLogin = (idObject != null);  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,8 +23,6 @@
 
 
 function cntMove(pageNo, mntBoardNo) {
-// 	var pageNo = ${commtPaging.curPage};
-// 	var mntBoardNo = ${mntViewBoard.MNTBOARD_NO}
 	console.log(pageNo);
 	$.ajax({
 			type: "Get"
@@ -40,6 +40,9 @@ function cntMove(pageNo, mntBoardNo) {
 	
  
 $(document).ready(function() {
+	
+	var isLogin = $('#hiddenIsLogin').val()
+	isLogin = $.parseJSON(isLogin);
 
 	var pageNo = ${commtPaging.curPage};
 	var mntBoardNo = ${mntViewBoard.MNTBOARD_NO}
@@ -58,12 +61,21 @@ $(document).ready(function() {
 		location.href = "/mntboard/delete?mntboardNo=${mntViewBoard.MNTBOARD_NO}"
 	}) 
 	
-	
+		/* 쪽지 보내기 */
+	$("#msg").click(function(){
+		if(isLogin){
+				// 쪽지보내기 로직 구현
+		}else{
+			alert('로그인 이후 이용해주세요.')
+		}
+	})
+		
 	
 	/* 좋아요 버튼 */
 		$(".btn_heart").click(function() {
 			console.log("클릭됨");
 			
+		if(isLogin){	
 			$.ajax({
 				type: "get"
 				, url: "/mntboard/like"
@@ -93,8 +105,11 @@ $(document).ready(function() {
 				
 				}
 			})	
+		} else {
+			alert('로그인 이후 이용해주세요.')
+		}
 			
-		}); //$(".btn_heart").click(function() end
+	}); 
 				
 				
 	if('true' == '${like}') {
@@ -104,7 +119,6 @@ $(document).ready(function() {
 	}
 })
 				
-
 </script>
 
 
@@ -152,8 +166,6 @@ $(document).ready(function() {
 <div class="mnt_title">
 	<h2 style="font-weight: 600; margin-bottom: 36px;">${mntViewBoard.MNTBOARD_TITLE }</h2>
 </div>
-<!-- 로그인시에만 눌리게 / 비로그인시 로그인해주세요 창 띄움-->
-<!-- 찜하기 아작스로 구현 / 찜하기가 완료/취소되었습니다 멘트-->
 <!-- 공유 -->
 <div class="func_btn">
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="share">
@@ -173,7 +185,6 @@ $(document).ready(function() {
 </div>
 <span class="mnt_id">${mntViewBoard.MEMBER_NICK }</span><br>
 <span class="write_date"><fmt:formatDate value="${mntViewBoard.MNTBOARD_DATE }"  type="both" dateStyle="default" timeStyle="short"/></span>
-
 
 
 <br><br>
@@ -203,13 +214,15 @@ ${mntViewBoard.MNTBOARD_CONTENT }
 <hr>	
 
 <div class="mnt_wrap3">
-
-
-
+<input type="hidden" id="hiddenIsLogin" value="<%=isLogin %>">
 <!-- 댓글 페이징 -->
 <div id="commtPage">
 <c:import url="/WEB-INF/views/mntboard/commtPage.jsp?ver=3" /> 
 </div>
+
+
+</div><!-- mnt_wrap3 끝 -->
+
 
 <div class="btn-wrap">
 	<button id="MntbtnList" class="btn btn-primary">목록</button>
@@ -218,10 +231,6 @@ ${mntViewBoard.MNTBOARD_CONTENT }
 		<button id="MntbtnDelete" class="btn btn-primary">삭제</button>
 	</c:if>	
 </div>
-
-</div><!-- mnt_wrap3 끝 -->
-
-
 </div> <!-- mnt_allwrap 끝 -->
 </main> <!-- main 끝 -->
 
