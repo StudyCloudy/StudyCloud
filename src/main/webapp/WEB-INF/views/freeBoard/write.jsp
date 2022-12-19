@@ -122,7 +122,7 @@ function deleteImageAction(index) {
 
 		<div class="text-center">
 			<button id="writeBtn" class="button">글쓰기</button>
-			<button id="cancel" class="button">취소</button>
+			<button id="cancel" type="button" class="button" onclick="location.href='/freeBoard/list'">취소</button>
 		</div>
 	</form>
 </div>

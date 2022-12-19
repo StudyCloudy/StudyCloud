@@ -71,7 +71,7 @@ function cmtDelete(cmtNo) {
 }	
 		
 </script>
-<div class="cmt_header">댓글(${fBaordCmtCount })</div>
+<div class="cmt_header" style="font-weight: bold">💬 댓글(${fBaordCmtCount })</div>
 
 
 <c:choose>
