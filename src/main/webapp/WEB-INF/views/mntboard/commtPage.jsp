@@ -5,49 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
-
-
-
- <!-- 댓글작성 -->
-<input type="hidden" name="mntBoardNo" value="${param.mntboardNo }">
-	<div>
-		<textarea class="col-auto form-control" id="reviewContents" name="commtContent"
-				  placeholder="댓글을 입력해주세요"></textarea>
-	</div>	
-	 <button type="button" class="btn btn-primary" id="btnReview">등록</button>
-	 <button type="button" class="btn btn-primary" id="btnReviewUpdate" style="display:none" >수정</button>
-<!-- </form>	 -->
-<br><br>
-<!-- 댓글 끝 -->    
-
-
-	
-<h6>댓글 (<span class="reply_cnt" style="font-weight: bold;"> ${CntCommt } </span>)</h6>
-<br>	
-<c:forEach items="${commtList }" var="commt">
-	<ul class="reply_content_ul">
-	<!-- 첫번째 댓글 -->
-	<li>
-		<div class="comment_wrap">
-		<div class="reply_top">
-			<span class="id_span">☁️ ${commt.MEMBER_NICK  } ☁️</span>
-			<span class="date_span"><fmt:formatDate pattern="yyyy-MM-ddㅤHH:mm" value="${commt.COMMT_DATE }"/></span>
-			<a class="updateCmbtn updateCmt${commt.COMMT_NO}" data-commtno="${commt.COMMT_NO}" onclick="updateCmt(${commt.COMMT_NO})">수정</a>	
-			<a class="deleteCmbtn deleteCmt${commt.COMMT_NO}" data-commtno="${commt.COMMT_NO}" onclick="deleteCmt(${commt.COMMT_NO})">삭제</a>
-		</div>
-		<div class="reply_bottom">
-		<div class="reply_bottom_txt" id="content${commt.COMMT_NO}">
-		${commt.COMMT_CONTENT  }
-			</div>
-			</div>
-		</div>
-	</li>
-	</ul>
-</c:forEach>
-
 <script type="text/javascript">
-
-
 
 //댓글 수정버튼 클릭시 
 	function updateCmt(e){
@@ -75,10 +33,14 @@
 	// 댓글 등록 버튼 
 	$('#btnReview').click(function (e) {
 		e.preventDefault()
-		// textarea element를 변수에 저장
 		var boardNo = ${param.mntboardNo};
 		var content = $("#reviewContents").val();
-		// textarea에 있는 값 불러오기
+		
+		if (content == "") {
+			alert("댓글 내용을 입력해주세요.");
+			return false;
+		}
+		
 		console.log("글번호 :"  + boardNo);
 		console.log("내용 : " + content);
 		
@@ -176,6 +138,57 @@
 	}
 </script>
 
+
+ <!-- 댓글작성 -->
+ <c:choose>
+<c:when test="${not empty member_no}">
+<input type="hidden" name="mntBoardNo" value="${param.mntboardNo }">
+	<div>
+		<textarea class="col-auto form-control" id="reviewContents" name="commtContent"
+				  placeholder="댓글을 입력해주세요"></textarea>
+	</div>	
+	
+	 <button type="button" class="btn btn-primary" id="btnReview">등록</button>
+	 </c:when>
+	<c:otherwise>
+		<textarea class="col-auto form-control" id="reviewContents" name="commtContent"
+				  placeholder="로그인 후 댓글 작성이 가능합니다." disabled></textarea>
+	</c:otherwise>
+	</c:choose>
+
+<br><br>
+<!-- 댓글 끝 -->    
+
+	
+<h6>댓글 (<span class="reply_cnt" style="font-weight: bold;"> ${CntCommt } </span>)</h6>
+<br>
+
+<c:choose>
+	<c:when test="${not empty commtList }">
+<c:forEach items="${commtList }" var="commt">
+	<ul class="reply_content_ul">
+	<li>
+		<div class="comment_wrap">
+		<div class="reply_top">
+			<span class="id_span">☁️ ${commt.MEMBER_NICK  } ☁️</span>
+			<span class="date_span"><fmt:formatDate pattern="yyyy-MM-ddㅤHH:mm" value="${commt.COMMT_DATE }"/></span>
+			<c:if test="${member_no eq commt.MEMBER_NO }">
+			<a class="updateCmbtn updateCmt${commt.COMMT_NO}" data-commtno="${commt.COMMT_NO}" onclick="updateCmt(${commt.COMMT_NO})">수정</a>	
+			<a class="deleteCmbtn deleteCmt${commt.COMMT_NO}" data-commtno="${commt.COMMT_NO}" onclick="deleteCmt(${commt.COMMT_NO})">삭제</a>
+			</c:if>
+		</div>
+		<div class="reply_bottom">
+		<div class="reply_bottom_txt" id="content${commt.COMMT_NO}">
+		${commt.COMMT_CONTENT  }
+			</div>
+			</div>
+		</div>
+	</li>
+	</ul>
+</c:forEach>
+
+
+
 <div class="repy_pageInfo_div">
 	<ul class="pageMaker" id="pageMaker">
 
@@ -209,5 +222,9 @@
 
 </ul>
 </div>
-
+</c:when>
+<c:otherwise>
+		<div class="Empty" style="text-align: center; ">가장 먼저 댓글을 달아보세요 😄</div>
+	</c:otherwise>
+</c:choose>
            

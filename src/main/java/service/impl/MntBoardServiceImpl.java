@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import dao.face.MntBoardDao;
+import dto.ApplyMnt;
 import dto.Commt;
 import dto.FileUpload;
 import dto.MntBoard;
@@ -186,6 +187,8 @@ public class MntBoardServiceImpl implements MntBoardService {
 		
 		//첨부파일 삭제
 		mntBoardDao.deleteFile(mntBoard);
+		// 댓글 삭제
+		mntBoardDao.deleteComtByMntBoardNo(mntBoard);
 				
 		//게시글 삭제
 		mntBoardDao.deleteMntBoard(mntBoard);
@@ -300,6 +303,13 @@ public class MntBoardServiceImpl implements MntBoardService {
 		CommtPaging paging = new CommtPaging(totalCount, curPage);
 		return paging;
 	}
+
+	@Override
+	public String getMemNick(int memberNo) {
+		return mntBoardDao.getNickByMemberNo(memberNo);
+	}
+
+	
 
 	
 	

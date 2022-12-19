@@ -8,6 +8,7 @@ $(document).ready(function() {
 	$("#btnWrite").click(function() {
 		location.href = "/mtboard/write"
 	})
+	
 })
 </script>
 
@@ -48,10 +49,10 @@ $(document).ready(function() {
 </tbody>
 </table>
 
-<!-- 회원만 보이게 -->
+<!-- 현재 권한등급이 잘못되어있음 (수정요청함) 권한 2 -> 멘토여야됨 -->
+<c:if test="${authority eq 2 }">
 <div><button id="btnWrite" class="btn btn-primary pull-right">글쓰기</button></div>
-
-
+</c:if>
 <nav aria-label="Page navigation example">
 	  <ul class="pagination">
 

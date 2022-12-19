@@ -71,7 +71,6 @@ function updateContents() {
 <select class="form-select"  id="field" name="field" style="margin-top: 3px; font-size: 13px">
   <option selected>선택</option>
   <option>개발 · 프로그래밍</option>
-  <option>어학 · 외국어</option>
   <option>직무 · 마케팅</option>
   <option>커리어</option>
   <option>기타</option>

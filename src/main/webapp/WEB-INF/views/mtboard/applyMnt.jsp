@@ -31,7 +31,17 @@
 
 $(document).ready(function() {
 	$("#btnNext").click(function() {
-		location.href = "/mtboard/pay_info"
+		var stTimepicker = $('#stTimepicker').val()
+		var edTimepicker = $('#edTimepicker').val()
+		
+		var stTime  = stTimepicker.split(":")[0]
+		var edTime  = edTimepicker.split(":")[0]
+		
+		if(stTime > edTime){
+			console.log("over")
+		}
+		
+		//location.href = "/mtboard/pay_info"
 	})
 	
 })
@@ -72,7 +82,6 @@ $(document).ready(function() {
 <div class="mento_intro">
 	<div class="mento_intro_content">
 			<h1>☁️ ☁️ ☁️</h1>
-			${member.memberName} 1111
 	</div>
 </div>
 
@@ -88,17 +97,17 @@ $(document).ready(function() {
 
 
 <br><br><br>
-
+<input type="hidden" id="mtboardNo" name="mtboardNo" value="${mtboardNo}"/>
 <div class="naming">&nbsp;이메일<span class="rq">*</span>
-<input class="form-control" type="text" id="memberEmail" value="${member_email }" readonly="readonly" name="memberEmail" aria-label="default input example" style="margin-top: 5px; font-size: 13px"></div>
+<input class="form-control" type="text" id="memberEmail" value="${email}" readonly="readonly" name="memberEmail" aria-label="default input example" style="margin-top: 5px; font-size: 13px"></div>
 <div class="naming">&nbsp;연락처<span class="rq">*</span>
-<input class="form-control" type="text" id="memberPhone" name="memberPhone" value="${member_phone }" readonly="readonly" aria-label="default input example"  style="margin-top: 5px; font-size: 13px"></div>
+<input class="form-control" type="text" id="memberPhone" name="memberPhone" value="${phone}" readonly="readonly" aria-label="default input example"  style="margin-top: 5px; font-size: 13px"></div>
 
 <!-- 플랫피커 -->
 <div class="naming">
 &nbsp;<img src="https://ifh.cc/g/DKHHRY.png" style="width: 20px; margin-left: 5px; margin-bottom: 3px;">
 일정 선택<span class="rq">*</span>
-<input type="text" id="mntDate" class="form-control" placeholder="날짜를 선택하세요">
+<input type="text" id="mntDate" name="mntDate" class="form-control" placeholder="날짜를 선택하세요">
 </div>
 
 
@@ -108,13 +117,13 @@ $(document).ready(function() {
   <div class="col">
 <img src="https://ifh.cc/g/Snad3z.png" style="width: 20px; margin-left: 5px; margin-bottom: 3px;">
 &nbsp;시작<span class="rq">*</span> 
-<input id="stTimepicker" class="form-control" type="text"  style="width: 300px">
+<input id="stTimepicker" name="stTime" class="form-control" type="text"  style="width: 300px">
 </div>
 
 <div class="col">
 <img src="https://ifh.cc/g/Snad3z.png" style="width: 20px; margin-left: 40px; margin-bottom: 3px;">
 &nbsp;종료<span class="rq">*</span>
-<input id="edTimepicker" class="form-control" type="text" style="width: 300px; float: right;">
+<input id="edTimepicker" name="edTime" class="form-control" type="text" style="width: 300px; float: right;">
 </div>
 </div>
 </div>
@@ -122,12 +131,11 @@ $(document).ready(function() {
 
 
 <div class="naming">멘토에게 남길 메시지
-<textarea class="form-control" id="exampleFormControlTextarea1" rows="10" style="margin-top: 6px;" placeholder="자유롭게 적어주세요"></textarea>
+<textarea name="mntContent" class="form-control" id="exampleFormControlTextarea1" rows="10" style="margin-top: 6px;" placeholder="자유롭게 적어주세요"></textarea>
 </div>
 
 
 <div class="btn-zip">
- <!-- 글전송 구현해야됨 -->
  <button class="btn btn-primary" id="btnNext">다음</button>
 </div>
 
