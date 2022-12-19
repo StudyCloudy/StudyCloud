@@ -32,10 +32,11 @@ public interface ReserveService_admin {
 	/**
 	 * 키워드로 검색
 	 * 
-	 * @param keyword
+	 * @param param
 	 * @return
 	 */
-	public List<HashMap<String, Object>> searchName(String keyword);
+	public List<HashMap<String, Object>> searchName(HashMap<String,Object> param);
+
 
 
 }

@@ -152,11 +152,11 @@ myModal.addEventListener('shown.bs.modal', () => {
 								</c:when>
 								
 								<c:when test="${studyboard.member.authority  eq 2}">
-									스터디장
+									멘토
 								</c:when>
 								
 								<c:when test="${studyboard.member.authority  eq 3}">
-									멘토
+									스터디장
 								</c:when>
 								</c:choose>
 							</td>

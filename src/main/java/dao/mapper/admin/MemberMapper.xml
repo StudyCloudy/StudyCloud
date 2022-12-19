@@ -8,27 +8,32 @@
 <mapper namespace="dao.face.admin.MemberDao_admin">
 
 	<!-- 로그인 -->
-	<select id="selectCntMember" resultType="int" parameterType="dto.Member">
-		SELECT count(*) FROM member
-		WHERE member_id = #{memberId }
-		AND  member_pw = #{memberPw }
+	<select id="login" resultType="String" parameterType="Member">
+		SELECT withdrawal
+		FROM member
+		WHERE member_id = #{memberId}
+		AND member_pw = #{memberPw}
 		AND authority = 4
 	</select>
 	
-	<select id="selectLoginById" resultType="dto.Member" parameterType="String">
-		SELECT * FROM member
-		WHERE member_id = #{memberId }
+	<select id="getMemberById" parameterType="String" resultType="Member">
+	   	SELECT
+	        member_no memberNo,
+	        member_id memberId,
+	        member_email memberEmail,
+	        member_name memberName,
+	        member_nick memberNick,
+	        authority,
+	        member_phone memberPhone,
+	        member_pw memberPw  
+	     FROM member
+	     WHERE member_id = #{id}
 	</select>
 	
-	<select id="selectAdminNick" resultType="Member" parameterType="String">
-		SELECT * FROM member
-		WHERE member_id = #{memberId }
-	</select>
-
 	<select id="selectCntAll" resultType="int">
 		SELECT count(*) FROM member
 	</select>
-
+	
 	<!-- 회원관리 -->
 	<select id="selectList" resultType="Member" parameterType="util.Paging">
 		SELECT * FROM (
@@ -42,6 +47,27 @@
 			) M
 		) MEMBER
 		WHERE rownum BETWEEN #{startNo } AND #{endNo }
+	</select>
+	
+	<!-- 회원 검색 -->
+	<select id="searchMember" resultType="hashmap" parameterType="hashmap">
+		SELECT * FROM member
+		
+		WHERE 1=1
+		<choose>
+			<when test="category != null and category.equals('member_id')"> <!-- 아이디로 검색 -->
+				AND member_id LIKE '%' || #{keyword } || '%'
+			</when>		
+				
+			<when test="category != null and category.equals('member_nick')"> <!-- 닉네임으로 검색 -->
+				AND member_nick LIKE '%' || #{keyword } || '%'
+			</when>
+			
+			<when test="category != null and category.equals('member_name')"> <!-- 이름으로 검색 -->
+				AND member_name LIKE '%' || #{keyword } || '%'
+			</when>	
+		</choose>
+		ORDER BY member_no DESC
 	</select>
 
 </mapper>

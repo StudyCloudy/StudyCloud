@@ -16,16 +16,17 @@ public class AdminInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
-		logger.info("+ + + BoardInterceptor + + +");
+		logger.info("+ + + AdminInterceptor + + +");
 		
 		//세션 객체
 		HttpSession session = request.getSession();
 		
-		if( session.getAttribute("login") == null ) {
-			logger.info(" >> 접속 불가 : 비로그인 상태");
+		if( session.getAttribute("login") == null ||
+				(int)session.getAttribute("authority") != 4 ) { //비로그인 상태, 관리자 등급이 아니면 접근 불가
+			logger.info(" >> 접속 불가");
 			
 			response.sendRedirect("/login/admin");
-			
+		
 			return false; //컨트롤러 접근 금지
 		}
 		

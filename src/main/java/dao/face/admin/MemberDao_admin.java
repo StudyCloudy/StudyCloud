@@ -1,5 +1,6 @@
 package dao.face.admin;
 
+import java.util.HashMap;
 import java.util.List;
 
 import dto.Member;
@@ -22,21 +23,27 @@ public interface MemberDao_admin {
 	 */
 	public List<Member> selectList(Paging paging);
 
-	/**
-	 * ID/PW가 일치하는 사용자 수를 반환한다
-	 * 	-> 로그인 인증에 활용한다
-	 * 
-	 * @param member - 조회할 id/pw 정보
-	 * @return 조회된 행 수
-	 */
-	public int selectCntMember(Member member);
 	
+	//로그인
 	/**
-	 * 전달된 id를 이용하여 사용자 정보를 조회한다
+	 * 회원탈퇴 여부를 포함한 로그인 쿼리
 	 * 
-	 * @param loginid - 조회하려는 대상의 id
-	 * @return 조회된 회원의 정보
+	 * @param member
 	 */
-	public Member selectLoginById(String loginid);
+	public String login(Member member);
+	
+	public Member getMemberById(String memberId);
+	
+
+	//회원 관리 검색
+	/**
+	 * 검색
+	 * 
+	 * @param param
+	 * @return
+	 */
+	public List<HashMap<String, Object>> searchMember(HashMap<String,Object> param);
+
+
 
 }

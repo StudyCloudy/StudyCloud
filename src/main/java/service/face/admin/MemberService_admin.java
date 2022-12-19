@@ -1,5 +1,6 @@
 package service.face.admin;
 
+import java.util.HashMap;
 import java.util.List;
 
 import dto.Member;
@@ -27,21 +28,32 @@ public interface MemberService_admin {
 	 */
 	public List<Member> list(Paging paging);
 
-	/**
-	 * 로그인 인증 처리
-	 * 
-	 * @param member - 입력한 ID/PW 정보
-	 * @return - 로그인 인증 결과
-	 */
-	public boolean login(Member member);
+	//로그인
+	
+	public String loginMember(Member member);
+	
+	public Member memberInfo(Member member);
 
+//	/**
+//	 * 전달된 id를 이용하여 사용자 정보 조회하기
+//	 * 
+//	 * @param adminLogin - 조회할 사용자의 id
+//	 * @return 조회된 사용자 정보
+//	 */
+//	public Member info(String loginid);
+
+	// 검색기능
 	/**
-	 * 전달된 id를 이용하여 사용자 정보 조회하기
 	 * 
-	 * @param adminLogin - 조회할 사용자의 id
-	 * @return 조회된 사용자 정보
+	 * 
+	 * @param param
+	 * @return
 	 */
-	public Member info(String loginid);
+	public List<HashMap<String, Object>> searchMember(HashMap<String,Object> param);
+
+	
+	
+
 
 
 
