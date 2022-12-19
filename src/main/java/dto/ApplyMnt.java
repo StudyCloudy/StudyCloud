@@ -15,6 +15,22 @@ public class ApplyMnt {
 	private Date mntPaydate;
 	
 	public ApplyMnt() {}
+	
+
+	public ApplyMnt(int applymntNo, int mtboardNo, int memberNo, String stTime, String edTime, String mntDate,
+			String mntContent) {
+		super();
+		this.applymntNo = applymntNo;
+		this.mtboardNo = mtboardNo;
+		this.memberNo = memberNo;
+		this.stTime = stTime;
+		this.edTime = edTime;
+		this.mntDate = mntDate;
+		this.mntContent = mntContent;
+	}
+
+
+
 
 	public ApplyMnt(int applymntNo, int mtboardNo, int memberNo, String stTime, String edTime, String mntDate,
 			String mntContent, int totalPrice, Date mntPaydate) {

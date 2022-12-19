@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,9 +23,9 @@ import dto.ApplyMt;
 import dto.FileUpload;
 import dto.MtBoard;
 import dto.MtMark;
+import dto.MtReview;
 import service.face.MtBoardService;
 import util.CommtPaging;
-import util.Paging;
 import util.PagingVUp;
 
 @Service
@@ -174,6 +176,9 @@ public class MtBoardServiceImpl implements MtBoardService {
 
 	@Override
 	public void delete(MtBoard mtBoard) {
+		mtBoardDao.deleteComtByMtBoardNo(mtBoard);
+		mtBoardDao.deleteApplyByMtBoardNo(mtBoard);
+		mtBoardDao.deleteMarkByMtBoardNo(mtBoard);
 		mtBoardDao.deleteFile(mtBoard);
 		mtBoardDao.deleteMtBoard(mtBoard);
 	}
@@ -222,27 +227,91 @@ public class MtBoardServiceImpl implements MtBoardService {
 		CommtPaging paging = new CommtPaging(totalCount, curPage);
 		return paging;
 	}
+
 	
 	
+	// 유저 정보
+	@Override
+	public String getMemId(int memberNo) {
+		return mtBoardDao.getIdByMemberNo(memberNo);
+	}
+
+	@Override
+	public String getMemEmail(int memberNo) {
+		return mtBoardDao.getEmailByMemberNo(memberNo);
+	}
+
+	@Override
+	public String getMemName(int memberNo) {
+		return mtBoardDao.getNameByMemberNo(memberNo);
+	}
+
+	@Override
+	public String getMemPhone(int memberNo) {
+		return mtBoardDao.getPhoneByMemberNo(memberNo);
+	}
+
+	@Override
+	public String getMemNick(int memberNo) {
+		return mtBoardDao.getNickByMemberNo(memberNo);
+	}
 	
 	
+	// 멘토지원
+	@Override
+	public void applyMt(ApplyMt applyMt) {
+		mtBoardDao.applyMt(applyMt);
+	}
+
+	// 멘토링신청 - 결제
+	@Override
+	public void applyMnt(Map<String, Object> mnt) {
+		 mtBoardDao.applyMnt(mnt);
+	}
+
+	@Override
+	public void writeReview(MtReview review) {
+		mtBoardDao.writeReview(review);
+	}
 	
-	
-	
-	
-//	@Override
-//	public void applyMt(ApplyMt applyMt) {
-//		mtBoardDao.applyMt(applyMt);
-//	}
-//
-//	@Override
-//	public void applyMnt(ApplyMnt applyMnt) {
-//		mtBoardDao.applyMnt(applyMnt);
-//	}
+	@Override
+	public List<HashMap<String, Object>> getReviewList(int mtboardNo) {
+		return mtBoardDao.getReviewList(mtboardNo);
+	}
+
+	@Override
+	public int isBuyer(Map<String, Object> reviewAuthMap) {
+		return mtBoardDao.isBuyer(reviewAuthMap);
+	}
+
+	@Override
+	public void updateReview(MtReview review) {
+		mtBoardDao.updateReview(review);
+	}
+
+	@Override
+	public int iswrite(Map<String, Object> map) {
+		return mtBoardDao.isWrite(map);
+	}
+
+	@Override
+	public void deleteReview(int reviewNo) {
+		mtBoardDao.deleteReview(reviewNo);
+	}
 
 
+	@Override
+	public int getCntReview(int mtboardNo) {
+		int totalCount = mtBoardDao.CntReview(mtboardNo);
+		return totalCount;
+	}
 
-
-	 
-
+	@Override
+	public void mtBoardReview(int mtboardNo) {
+		mtBoardDao.mtBoardReview(mtboardNo);
+	}
+	
 }
+
+
+

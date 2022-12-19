@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<% Object objId = session.getAttribute("loginid");
+%>
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <title>정보확인｜결제</title>
 <c:import url="../layout/header.jsp" /> 
@@ -24,6 +27,10 @@
 .all_content {
     margin: 260px 150px 0px 150px;
     height: 1100px;
+}
+
+tbody{
+	font-size: 18px;
 }
 
 .pay_content {
@@ -75,8 +82,73 @@ a {
     text-decoration: none;
 }
 
-</style>
+.payBtnZip {
 
+	margin-top: 80px;
+}
+
+</style>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+function requestPay() {
+	var IMP = window.IMP;
+    IMP.init("imp20786357"); 
+    console.log(IMP)
+	var totalPrice = ${info.fee}
+	console.log('${applymnt}')
+
+	IMP.request_pay({ 
+        pg: "kakaopay",
+        pay_method: "kakaopay",
+        merchant_uid: 'merchant_' + new Date().getTime(),
+        name: "SkyCloud",
+        amount: 100,
+        buyer_email: '${email}',
+        buyer_name: '${name}',
+        buyer_tel: '${phone}'
+    }, function (rsp) { // callback
+    	console.log(rsp);
+    
+        if (rsp.success) {
+        	var msg = '결제가 완료되었습니다.';
+        	 msg += '고유ID : ' + rsp.imp_uid;
+             msg += '상점 거래ID : ' + rsp.merchant_uid;
+             msg += '결제 금액 : ' + rsp.paid_amount;
+             msg += '카드 승인번호 : ' + rsp.apply_num;
+             
+        	$.ajax({
+	  	        type : "post",
+	  	        url : "/mtboard/payMnt",
+	  	    	data : { 
+	  	    		mtboardNo : '${applymnt.mtboardNo}',
+	  	    		stTime: '${applymnt.stTime}',
+	  	    		edTime: '${applymnt.edTime}',
+	  	    		mntDate: '${applymnt.mntDate}',
+	  	    		mntContent: '${applymnt.mntContent}',
+	  	    		totalPrice: totalPrice,
+	  	    	}, success : function(data){
+	  	    		if(data === 'success'){
+	  	    			alert('결제가 완료되었습니다. \n결제 확인은 마이페이지에서 가능합니다.')
+	  	    			document.location.href="/mystudy";
+	  	    		}else {
+						alert('오류가 발생하였습니다.')	  	    			
+	  	    		}
+	  	      	}, error: function(e){
+	  	      		console.log(e)
+	  	      	}
+	  	    			
+  	    	}); 
+        }else {
+        		var msg = '결제에 실패하였습니다.';
+                msg += '에러내용 : ' + rsp.error_msg;
+        	}
+        	console.log(msg);
+            
+            
+        }); 
+} 
+</script>
 </head>
 <body>
 
@@ -90,32 +162,25 @@ a {
 </div>
 
 <main class="all_content">
-
 <div class="pay_content">
-
 <div class="refund_wrap">
-<h1 style="margin-bottom: 80px;">정보 확인</h1>
-
+<h2 style="margin-bottom: 80px;">✔️ 정보 확인</h2>
 <table class="info_table" style="line-height: 2.5">
 <tr>
-	<td class="info_name" scope="row" style="width: 20%">멘토</td>
-	<td>멘토아이디</td><%-- <td>${viewBoard.boardNo }</td> --%>
+	<td class="info_name" scope="row" style="width: 50%">🙋🏻‍♀️ 멘토</td>
+	<td>${info.mentorId} 님</td>
 </tr>
 <tr>
-	<td class="info_name" scope="row">멘티</td>
-	<td>멘티아이디</td><%-- <td>${viewBoard.writerId }</td> --%>
+	<td class="info_name" scope="row">📅 일정</td>
+	<td> ${applymnt.mntDate} / ${applymnt.stTime} ~ ${applyMnt.edTime}</td>
 </tr>
 <tr>
-	<td class="info_name" scope="row">일정</td>
-	<td>2022-11-05 (토), 15:00 ~ 16:00</td><%-- <td>${viewBoard.writerNick }</td> --%>
+	<td class="info_name" scope="row">⏲ 진행 시간</td>
+	<td id="time">${info.time}시간 </td>
 </tr>
 <tr>
-	<td class="info_name" scope="row">연락처</td>
-	<td>멘티연락처</td><%-- <td>${viewBoard.writerNick }</td> --%>
-</tr>
-<tr>
-	<td class="info_name" scope="row">이메일</td>
-	<td>멘티이메일</td><%-- <td>${viewBoard.writerNick }</td> --%>
+	<td class="info_name" scope="row">🗨️ 멘토에게 남길 메세지</td>
+	<td>${applymnt.mntContent }</td>
 </tr>
 </table>
 <br><br>
@@ -125,12 +190,15 @@ a {
 <br><br>
 
 <div class="total_price">
-<span>결제금액</span><span style="float: right">20,000 원</span>
-</div>
 
-<!-- 이전 클릭시 작성한 양식 그대로 남기고 띄우기 -->
-<a class="btn btn-primary" href="/mtboard/pay_info" type="button">결제</a>
-<a class="btn_back" href="/mtboard/applyMnt" type="button">이전</a>
+<span>결제금액</span>
+<span style="float: right">${info.fee} 원</span>
+</div>
+<span style="float: right">${info.price} * ${info.time}시간</span>
+<div class= "payBtnZip">
+<a class="btn btn-primary" type="button" onclick="requestPay()">결제하기</a>
+<a class="btn_back"type="button" >취소</a>
+</div>
 
 </div><!-- pay_content 끝 -->
 </div>

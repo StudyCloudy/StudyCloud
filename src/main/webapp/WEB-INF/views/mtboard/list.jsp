@@ -11,7 +11,7 @@
 <c:import url="../layout/header.jsp" /> 
 
 <!-- css연결 -->
-<link rel="stylesheet" href="/resources/css/mntBoardList.css?ver=2"> 
+<link rel="stylesheet" href="/resources/css/mntBoardList.css?ver=3"> 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -139,17 +139,17 @@
 <div class="mento_intro">
 	<div class="mento_intro_content">
 	
-			<p class="mentoring_txt">
-				☁️ 당신의 지식을 함께 공유해 볼 수 있어요 ☁️
-			</p>
-	
+			<strong class="mentoring_txt">
+				📚 당신의 지식을 함께 공유해 볼 수 있어요! 📚
+			</strong><br><br>
 		<a class="btn btn-primary" href ="/mtboard/mentoApply" type="button">멘토 지원하기</a>
 	</div>
 </div>
 
 <main class="all_content">
-
+<strong style=" margin-left: 211px; font-size: 20px; color: #aacde5;" >🔍 멘토찾기</strong>
 <div class="content-container">
+
 
 	<!-- 왼쪽 정렬 항목-->
 	<div class="left_sort">
@@ -224,7 +224,7 @@
   
 
 <div id="listPaging">
-<c:import url="/WEB-INF/views/mtboard/listPaging.jsp?ver=2" />
+<c:import url="/WEB-INF/views/mtboard/listPaging.jsp?ver=3" />
 </div>
 
 </div><!-- .글목록container -->

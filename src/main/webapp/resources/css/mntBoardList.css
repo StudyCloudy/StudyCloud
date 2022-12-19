@@ -9,15 +9,18 @@
 
 .mento_intro_content {
     position: relative;
-    padding: 65px 2rem 38px;
+    padding: 76px 2rem 38px;
     text-align: center;
 }
 
 
-.mentee_txt {
+.mentee_txt, .mentoring_txt {
     line-height: 1.47;
     font-size: 25px;
-    color: black;
+    line-height: 1.47;
+    font-size: 20px;
+    color: #fff;
+    
 }
 
 

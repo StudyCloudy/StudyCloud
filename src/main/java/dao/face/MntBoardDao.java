@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import dto.ApplyMnt;
 import dto.Commt;
 import dto.FileUpload;
 import dto.MntBoard;
@@ -103,6 +104,7 @@ public interface MntBoardDao {
 	 * @param mntBoard
 	 */
 	public void deleteMntBoard(MntBoard mntBoard);
+	public void deleteComtByMntBoardNo(MntBoard mntBoard);
 
 	
 	// 댓글
@@ -141,6 +143,13 @@ public interface MntBoardDao {
 	public List<HashMap<String, Object>> getSearchList(HashMap<String, Object> map);
 
 	public int cntSearchList(HashMap<String, Object> map);
+
+	
+	// 글쓰기 멤버 닉네임 불러오기
+	public String getNickByMemberNo(int memberNo);
+
+
+	
 
 
 

@@ -1,16 +1,16 @@
 package dao.face;
 
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
 import dto.ApplyMnt;
 import dto.ApplyMt;
 import dto.FileUpload;
-import dto.MntBoard;
 import dto.MtBoard;
 import dto.MtMark;
-import util.Paging;
+import dto.MtReview;
 import util.PagingVUp;
 
 public interface MtBoardDao {
@@ -46,8 +46,13 @@ public interface MtBoardDao {
 
 	public void updateMtBoard(MtBoard mtBoard);
 
+	
+	
+	// 게시글 삭제
+	public void deleteComtByMtBoardNo(MtBoard mtBoard);
+	public void deleteMarkByMtBoardNo(MtBoard mtBoard);
+	public void deleteApplyByMtBoardNo(MtBoard mtBoard);
 	public void deleteFile(MtBoard mtBoard);
-
 	public void deleteMtBoard(MtBoard mtBoard);
 
 	
@@ -61,7 +66,7 @@ public interface MtBoardDao {
 	public int getTotalCntMark(MtMark mtMark);
 
 	// 찜하기 수
-	public void mntBoardLike(MtBoard viewBoard);
+	public void mtBoardMark(MtBoard viewBoard);
 	
 	
 	
@@ -72,26 +77,52 @@ public interface MtBoardDao {
 	public int cntSearchList(HashMap<String, Object> map);
 
 	
+	
+	// 유저정보
+	public String getIdByMemberNo(int memberNo);
+
+	public String getEmailByMemberNo(int memberNo);
+
+	public String getNameByMemberNo(int memberNo);
+
+	public String getPhoneByMemberNo(int memberNo);
+
+	public String getNickByMemberNo(int memberNo);
+	
+	
+	// 멘토지원
+	public void applyMt(ApplyMt applyMt);
+
+	// 멘토링 신청
+	public void applyMnt(Map<String, Object> mnt);
 
 	
-	
-	
-//	// 멘토지원
-//	public void applyMt(ApplyMt applyMt);
-//	/* public void applyMt(MtBoard mtBoard); */
-//
-//	// 멘토링신청
-//	public void applyMnt(ApplyMnt applyMnt);
-//	/* public void applyMnt(MtBoard mtBoard); */
+	// 리뷰쓰기
+	public void writeReview(MtReview mtReivew);
+
+	public int isBuyer(Map<String, Object> reviewAuthMap);
+
+	public List<HashMap<String, Object>> getReviewList(int mtboardNo);
+
+	public void updateReview(MtReview review);
+
+	public int isWrite(Map<String, Object> map);
+
+	public void deleteReview(int reviewNo);
 
 	
-	// 리뷰
-	//public int CntReview(int mtboardNo);
+	// 리뷰개수 CntCommt
+	public int CntReview(int mtboardNo);
+
+	public void mtBoardReview(int mtboardNo);
+
+
+
+
+
+
+
 	
-	//public List<HashMap<String, Object>> reviewList(HashMap<String, Object> map);
-
-
-	//public void mtBoardRvw(int mtboardNo);
 	
 	
 }

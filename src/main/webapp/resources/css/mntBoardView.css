@@ -140,9 +140,10 @@ textarea::placeholder {
 }
 
 
-#btnList, #btnUpdate, #btnDelete {
+#MntbtnList, #MntbtnUpdate, #MntbtnDelete {
 	font-size: 15px;
 	margin-top: 15px;
+	
 }
 
   
@@ -253,7 +254,7 @@ textarea::placeholder {
 
 .btn-wrap {
 	margin-top: 50px;
-	text-align: right;
+	text-align: center;
 }
 
 #page_btn {
