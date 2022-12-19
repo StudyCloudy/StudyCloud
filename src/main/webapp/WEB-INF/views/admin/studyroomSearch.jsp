@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>admin studyroom</title>
+<title>admin studyroom search</title>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -154,12 +154,12 @@ $(document).ready(function() {
 			</thead>
 			<tbody>
 			
-			<c:forEach items="${list }" var="studyroom">
+			<c:forEach items="${searchlist }" var="studyroom">
 				<tr>
-					<td style="text-align:center;">${studyroom.sRoomNo }</td>
-					<td><a href="/admin/studyroom/view?sRoomNo=${studyroom.sRoomNo }">${studyroom.sRoomName }</a></td>
-					<td>${studyroom.sRoomIntro }</td>
-					<td style="text-align:center;">${studyroom.sRoomPrice } 원/시간</td>
+					<td style="text-align:center;">${studyroom.SROOM_NO }</td>
+					<td><a href="/admin/studyroom/view?sRoomNo=${studyroom.SROOM_NO }">${studyroom.SROOM_NAME }</a></td>
+					<td>${studyroom.SROOM_INTRO }</td>
+					<td style="text-align:center;">${studyroom.SROOM_PRICE } 원/시간</td>
 				</tr>
 			</c:forEach>
 

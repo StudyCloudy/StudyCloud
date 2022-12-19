@@ -25,8 +25,17 @@ $(document).ready(function() {
 
 <style type="text/css">
 
+/* 메인 타이틀 */
+ .pagetitle > h1 { 
+   font-size: 24px; 
+   margin-bottom: 20px;
+   font-weight: bold;
+   display: inline-block;
+}
+
 table {
-	border: 1px solid #ccc;
+	border: 1px solid #aacde5;
+	padding: 10px;
 }
 
 th {
@@ -45,9 +54,6 @@ th {
 
 </style>
 
-
-
-
 </head>
 <body>
 
@@ -65,7 +71,7 @@ th {
      	<!-- 예약 테이블 -->
        	<div class="col-lg-12">
 				
-		    <div class="table-responsive px-2">
+		    <div class="table-responsive">
 		    
                 <table class="table">
                 <c:forEach items="${view }" var="view">

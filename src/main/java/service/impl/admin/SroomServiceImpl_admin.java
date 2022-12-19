@@ -48,6 +48,11 @@ public class SroomServiceImpl_admin implements SroomService_admin {
 		return sRoomDao_admin.selectList(paging);
 	}
 
+	//스터디룸 검색
+	@Override
+	public List<HashMap<String, Object>> searchName(HashMap<String, Object> param) {
+		return sRoomDao_admin.searchName(param);
+	}
 	
 	@Override
 	public StudyRoom view(StudyRoom studyroom) {
@@ -178,6 +183,15 @@ public class SroomServiceImpl_admin implements SroomService_admin {
 	@Override
 	public void delete(StudyRoom studyroom) {
 		
+		//QnA 삭제
+		sRoomDao_admin.deleteQna(studyroom);
+		
+		//예약 정보 삭제
+		sRoomDao_admin.deleteReserve(studyroom);
+		
+		//리뷰 삭제
+		sRoomDao_admin.deleteReview(studyroom);
+		
 		//첨부파일 삭제
 		sRoomDao_admin.deleteFile(studyroom);
 		
@@ -188,6 +202,18 @@ public class SroomServiceImpl_admin implements SroomService_admin {
 
 	
 	//QnA 리스트
+	@Override
+	public Paging getQnAPaging(int curPage) {
+		
+		//총 게시글 수 조회;
+		int totalCount = sRoomDao_admin.selectCntQna();
+		
+		//페이징 계산
+		Paging paging = new Paging(totalCount, curPage);
+		
+		return paging;
+	}
+
 	@Override
 	public List<HashMap<String, Object>> qnaList(Paging paging) {
 		
@@ -215,6 +241,8 @@ public class SroomServiceImpl_admin implements SroomService_admin {
 		
 		return sRoomDao_admin.selectMap();
 	}
+
+
 
 
 

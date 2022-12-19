@@ -112,6 +112,7 @@ $(document).ready(function() {
 	})
 })
 
+
 </script>
 
 </head>
@@ -159,25 +160,25 @@ $(document).ready(function() {
 	                        </tr>
 	                    </thead>
 	                    <tbody>
-	                    <c:forEach items="${list }" var="member">
+						<c:forEach items="${searchlist }" var="member">
 	                        <tr>
-	                            <td>${member.memberNo }</td>
-	                            <td>${member.memberId }</td>
-	                            <td>${member.memberNick }</td>
-	                            <td>${member.memberName }</td>
-	                            <td>${member.memberEmail }</td>
-	                            <td>${member.memberPhone }</td>
+	                            <td>${member.MEMBER_NO }</td>
+	                            <td>${member.MEMBER_ID }</td>
+	                            <td>${member.MEMBER_NICK }</td>
+	                            <td>${member.MEMBER_NAME }</td>
+	                            <td>${member.MEMBER_EMAIL }</td>
+	                            <td>${member.MEMBER_PHONE }</td>
 	                            <td>
 	                            	<c:choose>
-									<c:when test="${member.authority eq 1}">
+									<c:when test="${member.AUTHORITY eq 1}">
 										일반
 									</c:when>
 									
-									<c:when test="${member.authority eq 2}">
+									<c:when test="${member.AUTHORITY eq 2}">
 										스터디장
 									</c:when>
 									
-									<c:when test="${member.authority eq 3}">
+									<c:when test="${member.AUTHORITY eq 3}">
 										멘토
 									</c:when>
 									</c:choose>
