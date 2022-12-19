@@ -144,7 +144,7 @@ function handleFileSelect(e) {
 
 		<div class="text-center">
 			<button class="button">수정</button>
-			<button id="cancel" class="button">취소</button>
+			<button id="cancel" type="button" class="button" onclick="location.href='/freeBoard/list'">취소</button>
 		</div>
 	</form>
 </div>
