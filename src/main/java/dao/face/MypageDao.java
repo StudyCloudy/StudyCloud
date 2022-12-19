@@ -1,5 +1,6 @@
 package dao.face;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -80,7 +81,41 @@ public interface MypageDao {
 	 * 
 	 * @return
 	 */
-	public List<Reservation> reservationlist(String id);
+	public List<HashMap<String, Object>> reservationlist(String id);
+	
+	/**
+	 * 쪽지함 조회
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public List<HashMap<String, Object>> messagelist(String id);
+	
+	
+	/**
+	 * 위시리스트 조회
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public List<HashMap<String, Object>> wishlist(String id);
+	
+	
+	/**
+	 * 마이스터디 조회
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public List<HashMap<String, Object>> mystudy(String id);
+
+
+	
+	
+	
+	
+	
+
 
 	
 	

@@ -67,9 +67,9 @@ public class LoginController {
 			session.setAttribute("login", loginResult);
 			session.setAttribute("loginid", member.getMemberId());
 			session.setAttribute("member_no", member.getMemberNo());
-//			session.setAttribute("member_nick", member.getMemberNick());
+			session.setAttribute("member_nick", member.getMemberNick());
 //            session.setAttribute("member_email", member.getMemberEmail() );
-//            session.setAttribute("authority", member.getAuthority() );
+            session.setAttribute("authority", member.getAuthority() );
 //            session.setAttribute("member_name", member.getMemberName() );
 //            session.setAttribute("member_phone", member.getMemberPhone() );
 			

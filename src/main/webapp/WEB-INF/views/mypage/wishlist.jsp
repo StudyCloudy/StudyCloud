@@ -165,21 +165,31 @@ table.shoping-cart-table tr td:last-child {
                 <div class="ibox-content">
                     <div class="table-responsive">
                         <table class="table shoping-cart-table">
+                          <c:forEach var="studywish" items="${study}" varStatus="status">
                             <tbody>
-                            <tr>
-        					    <td width="90">
-                                <img src="https://img.icons8.com/dusk/512/laptop.png" alt="..." class="cart-product-imitation">
-                                </td>                                    
+                            <tr>         
+                             <td width="90">
+        					     <c:if test="${studywish.FILEUPLOAD_STOR ne null}">
+									<img class="rounded-circle mt-5"
+										src="${pageContext.request.contextPath}/resources/${studywish.FILEUPLOAD_STOR}" width="90"><br>
+								</c:if>
+								<c:if test="${studywish.FILEUPLOAD_STOR eq null}">
+									<img class="rounded-circle mt-5"
+										src="https://img.icons8.com/color/512/test-account.png" alt="..." class="cart-product-imitation"><br>
+								</c:if>  
+        					    
+                                </td>                          
                                 <td class="desc">
                                     <div class="text-navy" >
-                                    <h3>자바감자들</h3>
+                                    
+                                    <h3>${studywish.STUDY_TITLE} </h3>
                                     </div><br>
                                     <p class="small">
- 									자바감자들 모여서 같이 공부해요
+ 									${studywish.STUDY_CONTENT }
                                     </p>
                                     <dl class="small m-b-none">
-                                        <dt>스터디장</dt>
-                                        <dd>아이디 : gamjadori</dd>
+                                        <dt>스터디 과목</dt>
+                                        <dd>${studywish.STUDY_TAG }</dd>
                                     </dl>
                                 </td>
                                 <td>
@@ -190,6 +200,7 @@ table.shoping-cart-table tr td:last-child {
                                 <td></td>
                             </tr>
                             </tbody>
+                            </c:forEach>
                         </table>
                     </div>
                     </div>
@@ -198,23 +209,31 @@ table.shoping-cart-table tr td:last-child {
                 <div class="ibox-content">
                     <div class="table-responsive">
                         <table class="table shoping-cart-table">
+                          <c:forEach var="mentowish" items="${mento}" varStatus="status">
                             <tbody>
                             <tr>
         					    <td width="90">
-                                <img src="https://img.icons8.com/color/512/test-account.png" alt="..." class="cart-product-imitation">
+        					     <c:if test="${mentowish.FILEUPLOAD_STOR ne null}">
+									<img class="rounded-circle mt-5"
+										src="${pageContext.request.contextPath}/resources/${mentowish.FILEUPLOAD_STOR}" width="90"><br>
+								</c:if>
+								<c:if test="${mentowish.FILEUPLOAD_STOR eq null}">
+									<img class="rounded-circle mt-5"
+										src="https://img.icons8.com/color/512/test-account.png" alt="..." class="cart-product-imitation"><br>
+								</c:if>  
+        					    
                                 </td>                                    
                                 <td class="desc">
                                     <div class="text-navy" >
-                                    <h3>개발자 취업 멘토링</h3>
+                                    <h3>${mentowish.MTBOARD_TITLE }</h3>
                                     </div><br>
                                     
                                     <p class="small">
- 									개발자 취업준비생분들~ 제가 도와드릴게요! <br>
- 									(네이버 근무 경력자)
+ 									${mentowish.MTBOARD_CONTENT }
                                     </p>
                                     <dl class="small m-b-none">
-                                        <dt>멘토명</dt>
-                                        <dd>아이디 : gaebalgaebal</dd>
+                                        <dt>분야</dt>
+                                        <dd>${mentowish.FIELD }</dd>
                                     </dl>
                                 </td>
                                 <td>
@@ -225,6 +244,7 @@ table.shoping-cart-table tr td:last-child {
                                 <td></td>
                             </tr>
                             </tbody>
+                            </c:forEach>
                         </table>
                     </div>
                     </div>
@@ -234,6 +254,7 @@ table.shoping-cart-table tr td:last-child {
                 <div class="ibox-content">
                     <div class="table-responsive">
                         <table class="table shoping-cart-table">
+                         <c:forEach var="sroomwish" items="${sroom}" varStatus="status">
                             <tbody>
                             <tr>
         					    <td width="90">
@@ -241,16 +262,14 @@ table.shoping-cart-table tr td:last-child {
                                 </td>                                    
                                 <td class="desc">
                                     <div class="text-navy" >
-                                    <h3>옐로스톤 스터디룸</h3>
+                                    <h3>${sroomwish.SROOM_NAME }</h3>
                                     </div><br>
                                     
                                     <p class="small">
- 									서울 강남구 강남대로94길 21 <br>
- 									02-554-8777
+ 									${sroomwish.SROOM_ADDR }
                                     </p>
                                     <dl class="small m-b-none">
-                                        <dt>링크</dt>
-                                        <dd>http://www.yellowstudy.com/</dd>
+                                        <dd>${sroomwish.SROOM_INFO }</dd>
                                     </dl>
                                 </td>
                                 <td>
@@ -261,6 +280,7 @@ table.shoping-cart-table tr td:last-child {
                                 <td></td>
                             </tr>
                             </tbody>
+                            </c:forEach>
                         </table>
                     </div>
                     </div>

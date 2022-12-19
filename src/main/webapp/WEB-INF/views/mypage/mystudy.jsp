@@ -67,22 +67,28 @@
 					<div class="container mt-5">
 						<div class="row">
 							<div class="col-md-4">
-								<div class="card p-3">
-									<div class="d-flex flex-row mb-3">
-										<img src="https://i.imgur.com/ccMhxvC.png" width="70">
-										<div class="d-flex flex-column ml-2">
-											<div class="text-1">
-											<span>자스고수</span><br><span class="text-black-50">분야 : JavaScript</span><span class="ratings"><i class="fa fa-star"></i></div>
-											<i class="fa fa-star"></i><i class="fa fa-star"></i>
-											<i class="fa fa-star"></i></span>
+								<c:forEach var="mymento" items="${mymento}" varStatus="status">
+									<div class="card p-3">
+										<div class="d-flex flex-row mb-3">
+											<img src="https://i.imgur.com/ccMhxvC.png" width="70">
+											<div class="d-flex flex-column ml-2">
+												<div class="text-1">
+													<span>${mymento.MTBOARD_TITLE }</span><br>
+													<span class="text-black-50">분야 : ${mymento.FIELD }</span>
+													<span class="ratings"><i class="fa fa-star"></i></span>
+												</div>
+												<i class="fa fa-star"></i><i class="fa fa-star"></i> <i
+													class="fa fa-star"></i></span>
+											</div>
+										</div>
+										<h6>${mymento.MTBOARD_CONTENT }</h6>
+										<div class="d-flex justify-content-between install mt-3">
+											<span class="text-primary">View&nbsp;<i
+												class="fa fa-angle-right"></i></span>
 										</div>
 									</div>
-									<h6>어렵기만 한 자바스크립트? 쉽게 가르쳐 드립니다.</h6>
-									<div class="d-flex justify-content-between install mt-3">
-										<span>Installed 172 times</span><span class="text-primary">View&nbsp;<i
-											class="fa fa-angle-right"></i></span>
-									</div>
-								</div>
+
+								</c:forEach>
 							</div>
 							<div class="col-md-4">
 								<div class="card p-3">
@@ -90,12 +96,16 @@
 										<img src="https://i.imgur.com/IpKQiNu.png" width="70">
 										<div class="d-flex flex-column ml-2">
 											<div class="text-1">
-											<span>남궁섬</span><span class="text-black-50"><br>분야 : Java</span><span class="ratings"><i class="fa fa-star"></i></div>
-											<i class="fa fa-star"></i><i class="fa fa-star"></i>
-											<i class="fa fa-star"></i></span>
+												<span>남궁섬</span><span class="text-black-50"><br>분야
+													: Java</span><span class="ratings"><i class="fa fa-star"></i>
+											</div>
+											<i class="fa fa-star"></i><i class="fa fa-star"></i> <i
+												class="fa fa-star"></i></span>
 										</div>
 									</div>
-									<h6>자바의 아버지.<br>기초부터 탄탄하게</h6>
+									<h6>
+										자바의 아버지.<br>기초부터 탄탄하게
+									</h6>
 									<div class="d-flex justify-content-between install mt-3">
 										<span>Installed 1234 times</span><span class="text-primary">View&nbsp;<i
 											class="fa fa-angle-right"></i></span>
@@ -103,17 +113,23 @@
 								</div>
 							</div>
 							<div class="col-md-4">
+							
 								<div class="card p-3">
 									<div class="d-flex flex-row mb-3">
-										<img src="https://img.icons8.com/color/512/test-account.png" width="70">
+										<img src="https://img.icons8.com/color/512/test-account.png"
+											width="70">
 										<div class="d-flex flex-column ml-2">
-										<div class="text-1">
-											<span>얌너두너두</span><span class="text-black-50"><br>분야 : 영어회화</span><span class="ratings"><i class="fa fa-star"></i></div><i
-												class="fa fa-star"></i><i class="fa fa-star"></i><i
+											<div class="text-1">
+												<span>얌너두너두</span><span class="text-black-50"><br>분야
+													: 영어회화</span><span class="ratings"><i class="fa fa-star"></i>
+											</div>
+											<i class="fa fa-star"></i><i class="fa fa-star"></i><i
 												class="fa fa-star"></i></span>
 										</div>
 									</div>
-									<h6>영어울렁증! <br> 같이 치료해봅시다!</h6>
+									<h6>
+										영어울렁증! <br> 같이 치료해봅시다!
+									</h6>
 									<div class="d-flex justify-content-between install mt-3">
 										<span>Installed 1234 times</span><span class="text-primary">View&nbsp;<i
 											class="fa fa-angle-right"></i></span>
@@ -121,29 +137,35 @@
 								</div>
 							</div>
 						</div>
-					</div><br><br><br>
+					</div>
+					<br><br><br>
 					
 					<h2>나의 스터디</h2>
 					<div class="container mt-5">
 						<div class="row">
+						<c:forEach var="mystudy" items="${mystudy}" varStatus="status">
+						
 							<div class="col-md-4">
 								<div class="card p-3">
 									<div class="d-flex flex-row mb-3">
 										<img src="https://img.icons8.com/dusk/512/conference-call.png" width="70">
 										<div class="d-flex flex-column ml-2">
 											<div class="text-1">
-											<span>SI 면접 뿌시기</span><br><span class="text-black-50">분야 : 취준 / 면접</span><span class="ratings"><i class="fa fa-star"></i></div>
+											<span>${mystudy.STUDY_TITLE }</span><br><span class="text-black-50">분야 : ${mystudy.STUDY_TAG }</span><span class="ratings"><i class="fa fa-star"></i></div>
 											<i class="fa fa-star"></i><i class="fa fa-star"></i>
 											<i class="fa fa-star"></i></span>
 										</div>
 									</div>
-									<h6>SI 취업 희망하시는 분들~ <br> 같이 면접 준비 해요!</h6>
+									<h6>${mystudy.STUDY_CONTENT}</h6>
 									<div class="d-flex justify-content-between install mt-3">
-										<span>Installed 172 times</span><span class="text-primary">View&nbsp;<i
+										<span class="text-primary">View&nbsp;<i
 											class="fa fa-angle-right"></i></span>
 									</div>
 								</div>
 							</div>
+							
+							</c:forEach>
+							
 							<div class="col-md-4">
 								<div class="card p-3">
 									<div class="d-flex flex-row mb-3">
@@ -165,29 +187,29 @@
 						</div>
 					</div><br><br><br>	
 					
-					<h2>나의 온라인스터디</h2>
-					<div class="container mt-5">
-						<div class="row">
-							<div class="col-md-4">
-								<div class="card p-3">
-									<div class="d-flex flex-row mb-3">
-										<img src="https://img.icons8.com/color/512/google-meet.png" width="70">
-										<div class="d-flex flex-column ml-2">
-											<div class="text-1">
-											<span>혼자 공부하면 딴짓 하는 사람들의 모임</span><span class="text-black-50"><br>분야 : 기타</span><span class="ratings"><i class="fa fa-star"></i></div>
-											<i class="fa fa-star"></i><i class="fa fa-star"></i>
-											<i class="fa fa-star"></i></span>
-										</div>
-									</div>
-									<h6>혼자 공부하면 딴 짓만 하시는 분?<br>인증하면서 같이 공부해요~</h6>
-									<div class="d-flex justify-content-between install mt-3">
-										<span>Installed 1234 times</span><span class="text-primary">View&nbsp;<i
-											class="fa fa-angle-right"></i></span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>	
+<!-- 					<h2>나의 온라인스터디</h2> -->
+<!-- 					<div class="container mt-5"> -->
+<!-- 						<div class="row"> -->
+<!-- 							<div class="col-md-4"> -->
+<!-- 								<div class="card p-3"> -->
+<!-- 									<div class="d-flex flex-row mb-3"> -->
+<!-- 										<img src="https://img.icons8.com/color/512/google-meet.png" width="70"> -->
+<!-- 										<div class="d-flex flex-column ml-2"> -->
+<!-- 											<div class="text-1"> -->
+<!-- 											<span>혼자 공부하면 딴짓 하는 사람들의 모임</span><span class="text-black-50"><br>분야 : 기타</span><span class="ratings"><i class="fa fa-star"></i></div> -->
+<!-- 											<i class="fa fa-star"></i><i class="fa fa-star"></i> -->
+<!-- 											<i class="fa fa-star"></i></span> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 									<h6>혼자 공부하면 딴 짓만 하시는 분?<br>인증하면서 같이 공부해요~</h6> -->
+<!-- 									<div class="d-flex justify-content-between install mt-3"> -->
+<!-- 										<span>Installed 1234 times</span><span class="text-primary">View&nbsp;<i -->
+<!-- 											class="fa fa-angle-right"></i></span> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div>	 -->
 				</div>
 			</div>
 		</div>

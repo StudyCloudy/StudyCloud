@@ -1,5 +1,6 @@
 package service.face;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -46,17 +47,80 @@ public interface MypageService {
 	 */
 	public int passCheck(Member member);
 	
+	
+	/**
+	 * 프로필사진 출력
+	 * 
+	 * @param memberNo
+	 * @return
+	 */
 	public FileUpload selectProfile(int memberNo);
 	
+	
+	/**
+	 * 프로필사진 변경
+	 * 
+	 * @param file
+	 */
 	public void updateProfile(FileUpload file);
 
+	
+	/**
+	 * 예약목록
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public List<HashMap<String, Object>> reservationlist(String id);
+	
+	
+	/**
+	 * 쪽지함
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public List<HashMap<String, Object>> messagelist(String id);
 
-	public static Reservation selectList(Reservation reservationlist) {
-		return null;
-	}
+
+	//--- 위시리스트 ---
+	
+	/**
+	 * 찜한 스터디
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public List<HashMap<String, Object>> studywish(String id);
 
 
-	public List<Reservation> reservationlist(String id);
+	/**
+	 * 찜한 멘토
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public List<HashMap<String, Object>> mentowish(String id);
+
+
+	/**
+	 * 찜한 스터디룸
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public List<HashMap<String, Object>> sroomwish(String id);
+
+	
+	
+	//---- 마이스터디 ----
+	
+	
+	public List<HashMap<String, Object>> mymento(String id);
+	public List<HashMap<String, Object>> mystudy(String id);
+	
+	
+
 	
 	
 }
