@@ -11,7 +11,8 @@
 }
 
 /* active 버튼 컬러  */
-.active >.page-link, .page-link.active {
+
+.page-item.active .page-link {
     background-color: #6cc4dc;
     border-color: #6cc4dc;
 }

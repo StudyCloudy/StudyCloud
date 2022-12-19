@@ -114,7 +114,7 @@ a:hover {
                 <div class="card-body text-center">
                     <div class="card-img pt-2 pb-3"> <img src="https://img.icons8.com/dusk/512/circled-user-male-skin-type-3.png" alt=""> </div>
                     <div class="name h5">회원 프로필</div><br>
-                   <a href="/edit" class="testimonial">회원 정보 수정</a><br><br>
+                   <a href="/mypage/edit" class="testimonial">회원 정보 수정</a><br><br>
                    <a href="/message" class="testimonial">내 쪽지함</a><br><br>
                    <a href="/withdrawal" class="testimonial">회원 탈퇴</a>
                     

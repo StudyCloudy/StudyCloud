@@ -35,8 +35,8 @@ public class ReserveServiceImpl_admin implements ReserveService_admin {
 
 	//검색
 	@Override
-	public List<HashMap<String, Object>> searchName(String keyword) {
-		return reserveDao_admin.searchName(keyword);
+	public List<HashMap<String, Object>> searchName(HashMap<String,Object> param) {
+		return reserveDao_admin.searchName(param);
 	}
 
 	//상세보기

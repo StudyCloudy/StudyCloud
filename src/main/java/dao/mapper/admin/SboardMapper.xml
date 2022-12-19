@@ -53,13 +53,13 @@
 				ORDER BY study_no DESC
 			) S
 		) STUDYBOARD
-<!-- 		WHERE rnum BETWEEN #{startNo } AND #{endNo } -->
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
 	</select>
 	
 	<select id="updateStudyMember" parameterType="Member">
 		UPDATE member
-		SET authority = 2
-		WHERE authority = 1
+		SET authority = 3
+		WHERE authority = 1 <!-- 멘토, 스터디장인 회원의 게시글만 보이게 설정 -->
 		AND member_no = #{memberNo }
 	</select>
 	

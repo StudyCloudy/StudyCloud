@@ -196,7 +196,7 @@ body {
 <body>
 	<div class="container rounded bg-white mt-5">
        <c:if test="${not empty login }">
-		<form class="card" action="/edit" method="post" enctype="multipart/form-data">
+		<form class="card" action="/mypage/edit" method="post" enctype="multipart/form-data">
 			<div class="col-md-4 border-right">
 				<div class="d-flex flex-column align-items-center text-center p-3 py-5" >
 					 <c:if test="${picture.fileUploadStor ne null}">

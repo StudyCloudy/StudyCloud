@@ -1,5 +1,6 @@
 package service.impl.admin;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -38,20 +39,22 @@ public class MemberServiceImpl_admin implements MemberService_admin {
 
 	//로그인
 	@Override
-	public boolean login(Member member) {
-		int loginChk = memberDao_admin.selectCntMember(member);
-		logger.info("loginChk : {}", loginChk);
-		
-		if( loginChk > 0 ) return true;
-		return false;
+	public String loginMember(Member member) {
+		return memberDao_admin.login(member);
+	}
+	
+	@Override
+	public Member memberInfo(Member member) {
+		return memberDao_admin.getMemberById(member.getMemberId());
 	}
 
+	
+	//검색 기능
 	@Override
-	public Member info(String loginid) {
-		logger.info("info() loginid : {}", loginid);
-		
-		return memberDao_admin.selectLoginById(loginid);
+	public List<HashMap<String, Object>> searchMember(HashMap<String,Object> param) {
+		return memberDao_admin.searchMember(param);
 	}
+
 
 
 }

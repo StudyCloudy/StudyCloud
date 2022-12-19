@@ -73,11 +73,19 @@
    padding-left: 10px;
 }
 
+#memberNick { /* 회원 닉네임 */
+   padding-top: 8px; /* 로고랑 위치 정렬 */
+   padding-left: 8px;
+   margin: 0 auto;
+   font-size: 14px;
+   font-weight: 600;
+   color: #0000008C;
+}
+
 
 #btnMenu { /* 로그인/회원가입/마이페이지 */
    font-size: 14px;
    color: #6cc4dc;
-/*    font-weight: 500; */
    padding: 0;
    margin: 0 auto;
 }
@@ -146,7 +154,7 @@
                           
                           <!-- 로그인 상태 -->
                           <c:if test="${not empty login }">
-                          <li class="nav-item">${memberNick } 님</li>
+                          <li class="nav-item"><p id="memberNick">${member_nick } 님, 환영합니다.</p></li>
                           <li class="nav-item"><a class="nav-link" href="/mypage">마이페이지</a></li>
                           <li class="nav-item"><a class="nav-link" href="/login/logout">로그아웃</a></li>
                           </c:if>

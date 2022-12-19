@@ -23,7 +23,21 @@
 				ORDER BY sroom_no DESC
 			) S
 		) STUDYROOM
-<!-- 		WHERE rnum BETWEEN #{startNo } AND #{endNo } -->
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select>
+	
+	<!-- 게시글 검색 -->
+	<select id="searchName" resultType="hashmap" parameterType="hashmap">
+		SELECT *
+		FROM studyroom
+		
+		WHERE 1=1
+		<choose>
+			<when test="category != null and category.equals('sroom_name')">
+				AND sroom_name LIKE '%' || #{keyword } || '%'
+			</when>
+		</choose>
+		ORDER BY sroom_no DESC		
 	</select>
 
     <!-- 게시글 등록 -->
@@ -69,6 +83,24 @@
     	WHERE sroom_no = #{sRoomNo }
     </update>
     
+    <!-- QnA 삭제 -->
+    <delete id="deleteQna" parameterType="StudyRoom">
+		DELETE studyroomqna
+		WHERE sroom_no = #{sRoomNo }	
+	</delete>
+    
+    <!-- 예약정보 삭제 -->
+    <delete id="deleteReserve" parameterType="StudyRoom">
+		DELETE reservation
+		WHERE sroom_no = #{sRoomNo }	
+	</delete>
+    
+    <!-- 리뷰 삭제 -->
+    <delete id="deleteReview" parameterType="StudyRoom">
+    	DELETE sroomreview
+    	WHERE sroom_no = #{sRoomNo }
+    </delete>
+    
     <!-- 첨부파일 삭제 -->
     <delete id="deleteFile" parameterType="StudyRoom">
 		DELETE fileupload
@@ -81,34 +113,34 @@
 		WHERE sroom_no = #{sRoomNo }
 	</delete>
 	
-	<!-- 스터디룸 QnA 리스트 -->
-<!-- 	<select id="qnaList" resultType="hashmap" parameterType="Paging"> -->
-<!-- 		SELECT * FROM ( -->
-<!-- 			SELECT rownum rnum, B.* FROM ( -->
-<!-- 				SELECT -->
-<!-- 					S.sroom_no, S.sroom_name -->
-<!-- 					, M.member_no, M.member_nick -->
-<!-- 					, Q.sroomqna_no, Q.sroomqna_title, Q.sroomqna_content, Q.sroomqna_date -->
-<!-- 				FROM studyroomqna Q -->
-<!-- 				JOIN studyroom S -->
-<!-- 				ON ( S.sroom_no = Q.sroom_no ) -->
-<!-- 				JOIN member M -->
-<!-- 				ON ( Q.member_no = M.member_no ) -->
-<!-- 			) B -->
-<!-- 		) studyroomqna -->
-<!-- 		WHERE rnum BETWEEN #{startNo }  AND #{endNo } -->
-<!-- 	</select> -->
-
-	<select id="qnaList" resultType="hashmap" parameterType="Paging">
-		SELECT S.*, M.*, Q.*
-		FROM studyroom S
-		JOIN studyroomqna Q
-		ON S.sroom_no = Q.sroom_no
-		JOIN member M
-		ON Q.member_no = M.member_no
-		ORDER BY sroomqna_grpno, sroomqna_grpord, Q.sroomqna_no
+	
+	<!-- ========== QnA ========== -->
+	
+	<!-- 페이징 -->
+	<select id="selectCntQna" resultType="int">
+		SELECT count(*) FROM studyroomqna
 	</select>
 	
+	<!-- 스터디룸 QnA 리스트 -->
+	<select id="qnaList" resultType="hashmap" parameterType="util.Paging">
+		SELECT * FROM (
+			SELECT rownum rnum, B.* FROM (
+				SELECT
+					Q.sroomqna_no, Q.sroomqna_title, Q.sroomqna_content, Q.sroomqna_date
+					, Q.sroomqna_grpno, Q.sroomqna_grpord, Q.sroomqna_step
+					, S.sroom_no, S.sroom_name
+					, M.member_no, M.member_nick, M.member_id
+				FROM studyroomqna Q
+				JOIN studyroom S
+				ON Q.sroom_no = S.sroom_no
+				JOIN member M
+				ON Q.member_no = M.member_no
+				ORDER BY sroomqna_grpno, sroomqna_grpord, sroomqna_no
+			) B
+		) studyroomqna
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select>
+
 	<!-- QnA 상세보기 -->
 	<select id="selectQnaView" resultType="SroomQna" parameterType="SroomQna">
 		SELECT *

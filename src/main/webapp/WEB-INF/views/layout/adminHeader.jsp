@@ -12,6 +12,10 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
 
+<!-- 파비콘 적용 -->
+<link rel="icon" type="image/png" sizes="32x32" href="/resources/img/favicon-32x32.png">
+<link rel="/manifest" href="/site.webmanifest">
+
 <style type="text/css">
 
 /* 전체 폰트 적용 */
@@ -281,7 +285,7 @@ $(document).ready(function() {
                 <div class="collapse navbar-collapse" id="menu-wrap">
                     <ul class="navbar-nav me-auto mb-lg-0">
                         <li class="nav-item" id="welcome">
-                        	${info.memberNick }관리자 님 안녕하세요
+                        	${member_nick } 님 안녕하세요
                         </li>
                     </ul>
                     

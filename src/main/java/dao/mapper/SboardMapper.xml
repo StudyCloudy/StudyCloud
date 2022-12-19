@@ -16,7 +16,7 @@
 				SELECT s.study_no, s.member_no, s.study_title, s.study_people, s.study_address, s.study_tag, s.study_date, s.study_time
 						,s.study_content, s.study_notify, s.enrollstudy_date, s.sboard_markcnt
 						,m.member_id, m.member_nick
-				FROM studyboard s
+				FROM studyboard s 
 				JOIN member m ON ( s.member_no = m.member_no ) ORDER BY s.study_no DESC 
 			) B
 		) STUDYMBOARD
@@ -41,8 +41,8 @@
 	
 	<update id="update" parameterType="dto.StudyBoard">
 		UPDATE studyboard
-		SET study_title = #{studyTitle }
-			study_content = #{studyContent }
+		SET study_title = #{studyTitle }, study_content = #{studyContent }, study_tag = #{studyTag }, study_people = #{studyPeople }
+			, study_address = #{studyAddress }, study_date = #{studyDate }, study_time = #{studyTime }, study_notify = #{studyNotify }
 		WHERE study_no = #{studyNo }
 	</update>
 	
@@ -68,6 +68,68 @@
 			AND study_tag LIKE CONCAT('%', #{keyword }, '%')
 		</when>
 	</choose>
-	
 	</select>
+	
+	<select id="markcount" parameterType="dto.StudyMark" resultType="int">
+	 	SELECT count(*) FROM studymark
+	 	WHERE member_no = #{memberNo }
+	 	AND study_no = #{studyNo }
+	</select>
+	
+	<select id="insertMark" parameterType="dto.StudyMark">
+		INSERT INTO studymark 
+		VALUES ( studyMark_seq.nextval, #{studyNo }, #{memberNo } )
+	</select>
+	
+	<select id="cancelMark" parameterType="dto.StudyMark">
+		DELETE studymark 
+		WHERE study_no = #{studyNo }
+		AND member_no = #{memberNo }
+	</select>
+	
+	<insert id="apply" parameterType="dto.ApplyStudy">
+		<selectKey order="BEFORE" resultType="int" keyProperty="applystudyNo">
+			SELECT applystudy_seq.nextval FROM dual
+		</selectKey>
+		INSERT INTO applystudy ( applystudy_no, member_name, member_no, member_age, member_address, member_intro, applystudy_date)
+		VALUES( ${applystudyNo }, #{memberName }, #{memberNo }, #{memberAge }, #{memberAddress }, #{memberIntro }, #{applystudyDate } )
+	</insert>
+	
+	<select id="cntSearchList" resultType="int">
+		SELECT count(*) 
+		FROM studyboard s
+		JOIN  member m ON (s.member_no = m.member_no)
+		WHERE
+		<foreach collection="slist" item="slist" separator="AND">
+			<choose>
+				<when test="slist == 'studyTag'.toString()">
+					s.study_tag like '%'||#{keyword}||'%'
+				</when>
+				<when test="slist == 'studyTitle'.toString()">
+					s.study_title like '%'||#{keyword}||'%'
+				</when>				
+			</choose>
+		</foreach>
+	</select>
+	
+	<select id="searchByTagList" resultType="int">
+		SELECT count(*) 
+		FROM studyboard s
+		JOIN  member m ON (s.member_no = m.member_no)
+		WHERE
+		<foreach collection="slist" item="slist" separator="AND">
+			<choose>
+				<when test="slist == 'studyTag'.toString()">
+					s.study_tag like '%'||#{keyword}||'%'
+				</when>
+				<when test="slist == 'studyTitle'.toString()">
+					s.study_title like '%'||#{keyword}||'%'
+				</when>				
+			</choose>
+		</foreach>
+		ORDER BY study_no desc ) B
+		) studyboard
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select>
+	
 	</mapper>

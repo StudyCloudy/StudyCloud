@@ -76,6 +76,18 @@ public interface SroomService_admin {
 
 	
 	//===== QnA =====
+
+	/**
+	 * 게시글 목록을 위한 페이징 객체를 생성한다
+	 * 
+	 * 파라미터 curPage (현재 페이지)
+	 * DB에서 조회한 totalCount(총 게시글 수)
+	 * 두 가지 데이터를 활용하여 페이징 객체를 생성하여 반환한다
+	 * 
+	 * @param curPage - 요청 페이지 번호
+	 * @return 계산이 완료된 Paging 객체
+	 */
+	public Paging getQnAPaging(int curPage);
 	
 	/**
 	 * 게시글 정보로 QnA를 함께 조회한다
@@ -107,5 +119,16 @@ public interface SroomService_admin {
 	 * @return QnA 게시글 목록
 	 */
 	public List<HashMap<String, Object>> previewQna();
+
+	
+	/**
+	 * 스터디룸 검색
+	 * 
+	 * @param param
+	 * @return
+	 */
+	public List<HashMap<String, Object>> searchName(HashMap<String, Object> param);
+
+
 
 }

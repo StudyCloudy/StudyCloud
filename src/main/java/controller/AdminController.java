@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -53,22 +54,34 @@ public class AdminController {
 	public String loginPorc(Member member, HttpSession session) {
 		logger.info("{}", member);
 		
-		boolean isLogin = memberService_admin.login(member);
-		logger.info("loginResult: {}", isLogin);
+		String loginResult = memberService_admin.loginMember(member);
+		logger.info("loginResult: {}", loginResult);
 		
-		if( isLogin ) {
+		if( loginResult == null ) {
+			
+			//로그인 실패
+			session.invalidate();
+
+			return "redirect:/login/admin";
+
+		} else if(loginResult.equals("N")) {
+			
 			logger.info("로그인 성공");
 			
-			session.setAttribute("login", isLogin);
-			session.setAttribute("loginid", member.getMemberId());
+			member = memberService_admin.memberInfo(member);
+			logger.info("{}", member);
 			
-			//로그인 성공시 관리자 메인페이지로 이동
+			session.setAttribute("login", loginResult);
+			session.setAttribute("loginid", member.getMemberId());
+			session.setAttribute("member_no", member.getMemberNo());
+			session.setAttribute("member_nick", member.getMemberNick());
+			session.setAttribute("authority", member.getAuthority());
+			
 			return "redirect:/admin/main";
-
+			
 		} else {
 			logger.info("로그인 실패");
 			
-			//세션 삭제
 			session.invalidate();
 			
 			return "redirect:/login/admin";
@@ -90,15 +103,6 @@ public class AdminController {
 	@GetMapping("/admin/main")
 	public void admin(ApplyMt applyMt, StudyBoard studyBoard, HttpSession session, Model model) {
 		logger.info("/admin/main [GET]");
-		
-		//로그인 정보
-		String loginid = (String) session.getAttribute("loginid");
-		logger.info("/admin/main loginid : {}", loginid);
-		
-		Member info = memberService_admin.info(loginid);
-		logger.info("info : {}", info);
-		
-		model.addAttribute("info", info);
 		
 		//투데이 어플라이
 		int todayMentoApply = applyMtService_admin.todayApply(applyMt);
@@ -122,16 +126,15 @@ public class AdminController {
 		
 	}
 	
-	//멘토 등록
+	
+	//==================== 멘토 신청 등록 ====================
+	//멘토 신청 목록
 	@GetMapping("/admin/mento")
 	public void mento(
 			@RequestParam(defaultValue = "0" ) int curPage, HttpSession session
 			, Model model ) {
 		
 		logger.info("/admin/mento [GET]");
-		
-//		int member_no = (int) session.getAttribute("member_no");
-//		model.addAttribute("member_no", member_no);
 		
 		Paging paging = applyMtService_admin.getPaging(curPage);
 		logger.debug("{}", paging);
@@ -154,7 +157,9 @@ public class AdminController {
 		return "redirect:/admin/mento";
 	}
 	
-	//스터디 등록
+	
+	//==================== 스터디 신청 등록 ====================
+	//스터디 신청 목록
 	@GetMapping("/admin/study")
 	public void study(
 			@RequestParam(defaultValue = "0" ) int curPage
@@ -172,6 +177,7 @@ public class AdminController {
 		
 	}
 	
+	//스터디장 회원 등급 변경
 	@PostMapping("/admin/study")
 	public String study(Member member) {
 		logger.info("/admin/study [POST]");
@@ -184,7 +190,8 @@ public class AdminController {
 	}
 	
 
-	//스터디룸 등록
+	//==================== 스터디룸 등록 ====================
+	//스터디룸 목록
 	@GetMapping("/admin/studyroom")
 	public void studyroom(
 			@RequestParam(defaultValue = "0" ) int curPage
@@ -202,6 +209,20 @@ public class AdminController {
 		
 	}
 	
+	//스터디룸 검색
+	@GetMapping("/admin/studyroom/search")
+	public String studyroomSearch(@RequestParam HashMap<String, Object> param, Model model) {
+		
+		List<HashMap<String, Object>> searchlist = sRoomService_admin.searchName(param);
+		
+		logger.debug("{}", searchlist);
+		
+		model.addAttribute("searchlist", searchlist);
+		
+		return"/admin/studyroomSearch";
+	}
+	
+	//스터디룸 작성
 	@GetMapping("/admin/studyroom/write")
 	public String insert() {
 		logger.info("/admin/studyroom/write [GET]");
@@ -224,6 +245,7 @@ public class AdminController {
 		return "redirect:/admin/studyroom";
 	}
 	
+	//스터디룸 상세보기
 	@GetMapping("/admin/studyroom/view")
 	public String view(StudyRoom studyroom, Model model) {
 		logger.debug("{}", studyroom);
@@ -247,6 +269,7 @@ public class AdminController {
 		return "/admin/sRoomView";
 	}
 	
+	//스터디룸 게시글 수정
 	@GetMapping("/admin/studyroom/update")
 	public String update(StudyRoom studyroom, Model model) {
 		logger.debug("{}", studyroom);
@@ -261,7 +284,7 @@ public class AdminController {
 		logger.debug("조회된 게시글 {}", studyroom);
 		
 		//모델값 전달
-		model.addAttribute("updateStudyroom", studyroom);
+		model.addAttribute("studyroom", studyroom);
 		
 		//첨부파일 모델값 전달
 		FileUpload sRoomFile = sRoomService_admin.getAttachFile(studyroom);
@@ -269,6 +292,7 @@ public class AdminController {
 		
 		return "/admin/sRoomUpdate";
 	}
+	
 	
 	@PostMapping("/admin/studyroom/update")
 	public String updatePorc(StudyRoom studyroom, MultipartFile file) {
@@ -280,6 +304,7 @@ public class AdminController {
 		return "redirect:/admin/studyroom/view?sRoomNo="+studyroom.getsRoomNo();
 	}
 	
+	//스터디룸 게시글 삭제
 	@RequestMapping("/admin/studyroom/delete")
 	public String delete(StudyRoom studyroom) {
 		
@@ -287,8 +312,10 @@ public class AdminController {
 		
 		return "redirect:/admin/studyroom";
 	}
+
 	
-	//스터디룸 QnA
+	//==================== QnA 관리 ====================
+	//스터디룸 QnA 목록
 	@RequestMapping("/admin/qna")
 	public void qna(
 			@RequestParam(defaultValue = "0" ) int curPage
@@ -296,7 +323,7 @@ public class AdminController {
 		
 		logger.info("/admin/qna [GET]");
 		
-		Paging paging = sRoomService_admin.getPaging(curPage);
+		Paging paging = sRoomService_admin.getQnAPaging(curPage);
 		model.addAttribute("paging", paging);
 		
 		List<HashMap<String, Object>> qna = sRoomService_admin.qnaList(paging);
@@ -305,7 +332,8 @@ public class AdminController {
 		
 	}
 	
-	@GetMapping("/admin/qna/view") //QnA 상세보기
+	//QnA 상세보기
+	@GetMapping("/admin/qna/view") 
 	public String qnaView(SroomQna qnaView, Model model) {
 		
 		//잘못된 게시글 번호 처리
@@ -323,7 +351,8 @@ public class AdminController {
 		return "/admin/qnaView";
 	}
 	
-	@PostMapping("/admin/qna/view") //QnA 답변 등록
+	//QnA 답변 등록
+	@PostMapping("/admin/qna/view") 
 	public String insertqna(SroomQna sroomQna, Member member, HttpSession session, Model model ) {
 		
 		logger.info("/admin/qna/view [POST]");
@@ -339,7 +368,9 @@ public class AdminController {
 		return "redirect:/admin/qna";
 	}
 	
-	//예약 관리
+	
+	//==================== 예약 관리 ====================
+	//예약 목록
 	@GetMapping("/admin/reserve")
 	public void reserve(
 			@RequestParam(defaultValue = "0" ) int curPage
@@ -359,19 +390,21 @@ public class AdminController {
 		
 	}
 	
-	@GetMapping("/admin/reserve/search") //예약 검색
-	public String search(@RequestParam(value="keyword") String keyword, Model model) {
+	//예약 검색
+	@GetMapping("/admin/reserve/search") 
+	public String search(@RequestParam HashMap<String, Object> param, Model model) {
 		
-		List<HashMap<String, Object>> search = reserveService_admin.searchName(keyword);
+		List<HashMap<String, Object>> searchlist = reserveService_admin.searchName(param);
 		
-		logger.debug("search : {}", search);
+		logger.debug("{}", searchlist);
 		
-		model.addAttribute("search", search);
+		model.addAttribute("searchlist", searchlist);
 		
 		return "/admin/reserveSearch";
 	}
 	
-	@RequestMapping("admin/reserve/view") //예약 상세보기
+	//예약 상세보기
+	@RequestMapping("admin/reserve/view")
 	public String view(Reservation res, Model model) {
 		
 		logger.info("/admin/reserve/view [GET]");
@@ -381,12 +414,13 @@ public class AdminController {
 		
 		model.addAttribute("view", view);
 		
-		return "admin/reserveView";
+		return "/admin/reserveView";
 	}
 
 	
-	//회원 정보
-	@GetMapping("admin/member")
+	//==================== 회원 관리 ====================
+	//회원 목록
+	@GetMapping("/admin/member")
 	public void memberList(
 			@RequestParam(defaultValue = "0" ) int curPage
 			, Model model) {
@@ -403,8 +437,21 @@ public class AdminController {
 		
 	}
 	
-	@RequestMapping("admin/memberview")
-	public void memberView() {
+	//회원 검색
+	@RequestMapping("/admin/member/search")
+	public String memberSearch(@RequestParam HashMap<String, Object> param, Model model) {
+		
+		logger.info("/admin/member/search");
+		logger.info("검색 값{}", param);
+		
+		//조회결과 list 반환
+		//전달 파라미터명 : category, keyword
+		
+		List<HashMap<String, Object>> searchlist = memberService_admin.searchMember(param);
+		
+		model.addAttribute("searchlist", searchlist);
+		
+		return "/admin/memberSearch";
 		
 	}
 	
