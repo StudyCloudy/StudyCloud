@@ -274,11 +274,11 @@ font-size: 9pt;
 }
 
 #idMsg {
-margin-left: -11%;
+/* margin-left: 20px; */
 }
 
 #pwMsg {
-margin-left: -7%;
+/* margin-left: -7%; */
 
 }
 .fw-400 {
@@ -368,16 +368,16 @@ margin-left: -7%;
 	width: 10%;
 	padding: 6px;
 	display: inline;
-	margin-left: 500px;
-	margin-top: -65px;
+	margin-left: 450px;
+	margin-top: -75px;
 }
 
 #pwchk {
 	width: 11%;
 	padding: 6px;
 	display: inline;
-	margin-left: 420px;
-	margin-top: -65px;
+	margin-left: 450px;
+	margin-top: -75px;
 }
 
 .btn-primary {
