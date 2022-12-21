@@ -18,7 +18,6 @@
 
 
 
-
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable">
@@ -60,7 +59,6 @@
 		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
  		멘토 지원하기
 		</button>
-		<!-- <a class="btn btn-primary" href ="/mtboard/applyMt" type="button">멘토 지원하기</a> -->
 	</div>
 </div>
 

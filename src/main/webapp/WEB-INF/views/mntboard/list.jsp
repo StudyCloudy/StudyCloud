@@ -165,24 +165,32 @@
 	<label class="btn btn-secondary" for="option1" >개발 · 프로그래밍</label>
 	</td>
 	</tr>
-	<tr>
-	<td>
-	<input type="radio" class="btn-check" name="options" id="option2" autocomplete="off" value="직무 · 마케팅" onclick="pageField(event)">
-	<label class="btn btn-secondary" for="option2">직무 · 마케팅</label>
+	
+    <tr> 
+  	<td>
+  	<input type="radio" class="btn-check" name="options" id="option2" autocomplete="off" value="어학 · 외국어"  onclick="pageField(event)">
+	<label class="btn btn-secondary" for="option2" >어학 · 외국어</label>
 	</td>
 	</tr>
 	
 	<tr>
 	<td>
-	<input type="radio" class="btn-check" name="options" id="option3" autocomplete="off" value="커리어" onclick="pageField(event)">
-	<label class="btn btn-secondary" for="option3">커리어</label>
+	<input type="radio" class="btn-check" name="options" id="option3" autocomplete="off" value="직무 · 마케팅" onclick="pageField(event)">
+	<label class="btn btn-secondary" for="option3">직무 · 마케팅</label>
 	</td>
 	</tr>
 	
 	<tr>
 	<td>
-  	<input type="radio" class="btn-check" name="options" id="option4" autocomplete="off" value="기타" onclick="pageField(event)">
-	<label class="btn btn-secondary" for="option4">기타</label>
+	<input type="radio" class="btn-check" name="options" id="option4" autocomplete="off" value="커리어" onclick="pageField(event)">
+	<label class="btn btn-secondary" for="option4">커리어</label>
+	</td>
+	</tr>
+	
+	<tr>
+	<td>
+  	<input type="radio" class="btn-check" name="options" id="option5" autocomplete="off" value="기타" onclick="pageField(event)">
+	<label class="btn btn-secondary" for="option5">기타</label>
 	</td>
 	</tr>
 	</table>
