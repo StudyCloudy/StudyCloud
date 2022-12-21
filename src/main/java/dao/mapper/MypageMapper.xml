@@ -122,18 +122,13 @@
 
 	<!-- 마이스터디 조회 -->
 	<select id='mystudy' resultType='hashmap' parameterType="String">
-	select m.member_no, m.member_id, mt.mtboard_no, mt.field, mt.mtboard_title, mt.mtboard_content
-        , s.study_no, sb.study_title, sb.study_content, sb.study_tag
-	FROM applyMnt a
-	JOIN member m
-	ON m.member_no = a.member_no
-	JOIN mtboard mt
-	ON mt.mtboard_no = a.mtboard_no
+	select m.member_no, s.study_no, sb.study_title, sb.study_content, sb.study_tag
+	from member m
 	JOIN applyStudy s
-	ON s.member_no = m.member_no
+	ON m.member_no = s.member_no
 	JOIN studyBoard sb
-	ON s.study_no = sb.study_no
-	WHERE m.member_id = #{id}
+	on s.study_no = sb.study_no
+	where m.member_id = #{id}
 	</select>
 	
 	
@@ -148,6 +143,16 @@
 		and f.mboard_no is null
 		and f.mntboard_no is null
 		order by m.member_no desc
+	</select>
+	
+	<select id="myMentoList" resultType="hashmap" parameterType="String">
+		SELECT m.member_no, m.member_id, mt.mtboard_no, mt.field, mt.mtboard_title, mt.mtboard_content    
+		FROM applyMnt a
+		JOIN member m
+		ON m.member_no = a.member_no
+		JOIN mtboard mt
+		ON mt.mtboard_no = a.mtboard_no
+		WHERE m.member_id = #{id}
 	</select>
 
 
