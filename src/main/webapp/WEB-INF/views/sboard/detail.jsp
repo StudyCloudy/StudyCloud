@@ -73,7 +73,7 @@ function check() {
 $(document).ready(function(){
 	$("#btnApply").click(function(){
 		alert("스터디 신청이 성공적으로 완료되었습니다! 마이페이지 -> 나의 스터디에서 신청내역을 확인하실 수 있습니다.");
-		$("form").submit();
+// 		$("form").submit();
 	})
 })
 
@@ -432,7 +432,7 @@ textarea:focus {
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" id="btnCancel" data-bs-dismiss="modal" style="border: none;">취소</button>
-				<input class="btn btn-primary" type="button" value="신청하기" id="btnApply" style="background-color: #6cc4dc; border: none;" data-bs-target="#exampleModalToggle2">
+				<input class="btn btn-primary" type="submit" value="신청하기" id="btnApply" style="background-color: #6cc4dc; border: none;" data-bs-target="#exampleModalToggle2">
 <!-- 				<button type="button" class="btn btn-primary" id="btnApply" style="background-color: #6cc4dc; border: none;">신청하기</button> -->
 			</div>
 				</form>
@@ -440,7 +440,7 @@ textarea:focus {
 	</div>
 </div><!-- 첫번째 모달 끝 -->
 
-<!-- <!-- 두번째 모달 --> -->
+<!-- <!-- 두번째 모달 -->
 <!-- <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1"> -->
 <!--   <div class="modal-dialog modal-dialog-centered"> -->
 <!--     <div class="modal-content"> -->
