@@ -169,7 +169,8 @@ textarea::placeholder {
 		.id_span{
 			padding: 0 15px 0 3px;
 			font-size: 15px;
-		    font-weight: bold;		
+		    font-weight: bold;	
+		    color: #3f92b7;	
 		}
 		.date_span{
 			padding: 0 15px 0;

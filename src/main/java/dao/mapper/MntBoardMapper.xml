@@ -148,12 +148,6 @@
 		WHERE mntboard_no = #{mntboardNo}
 	</update>
 	
-	<!-- 게시글 삭제 -->
-	<delete id="deleteMntBoard" parameterType="dto.MntBoard">
-		DELETE mntboard
-		WHERE mntboard_no = #{mntboardNo}
-	</delete>
-	
 	<delete id="deleteFile" parameterType="dto.MntBoard">
 		DELETE fileupload
 		WHERE mntboard_no = #{mntboardNo}
@@ -161,6 +155,17 @@
 	
 	<delete id="deleteComtByMntBoardNo" parameterType="dto.MntBoard">
 		DELETE Commt 
+		WHERE mntboard_no = #{mntboardNo}
+	</delete>
+	
+	<delete id="deleteLikeByMntBoardNo" parameterType="dto.MntBoard">
+		DELETE mntboardlike 
+		WHERE mntboard_no = #{mntboardNo}
+	</delete>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="deleteMntBoard" parameterType="dto.MntBoard">
+		DELETE mntboard
 		WHERE mntboard_no = #{mntboardNo}
 	</delete>
 	

@@ -189,6 +189,8 @@ public class MntBoardServiceImpl implements MntBoardService {
 		mntBoardDao.deleteFile(mntBoard);
 		// 댓글 삭제
 		mntBoardDao.deleteComtByMntBoardNo(mntBoard);
+		// 좋아요 삭제
+		mntBoardDao.deleteLikeByMntBoardNo(mntBoard);
 				
 		//게시글 삭제
 		mntBoardDao.deleteMntBoard(mntBoard);
