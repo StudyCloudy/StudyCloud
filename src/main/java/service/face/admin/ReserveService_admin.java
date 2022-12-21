@@ -6,6 +6,7 @@ import java.util.Map;
 
 import dto.Reservation;
 import util.Paging;
+import util.PagingVUp;
 
 public interface ReserveService_admin {
 	
@@ -19,7 +20,7 @@ public interface ReserveService_admin {
 	 * @param curPage - 요청 페이지 번호
 	 * @return 계산이 완료된 Paging 객체
 	 */
-	public Paging getPaging(int curPage);
+	public PagingVUp getPaging(int curPage);
 	
 	/**
 	 * 게시글 상세보기

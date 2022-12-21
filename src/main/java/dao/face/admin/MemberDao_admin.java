@@ -5,6 +5,7 @@ import java.util.List;
 
 import dto.Member;
 import util.Paging;
+import util.PagingVUp;
 
 public interface MemberDao_admin {
 
@@ -21,7 +22,7 @@ public interface MemberDao_admin {
 	 * @param paging - 페이징 정보 객체
 	 * @return 페이징이 적용된 게시글 목록
 	 */
-	public List<Member> selectList(Paging paging);
+	public List<Member> selectList(PagingVUp paging);
 
 	
 	//로그인

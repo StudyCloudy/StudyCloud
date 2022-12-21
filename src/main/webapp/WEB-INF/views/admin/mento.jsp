@@ -26,7 +26,21 @@
    font-size: 24px; 
    margin-bottom: 0;
    font-weight: bold; 
-} 
+   display: inline;
+}
+
+/* 멘토 찾기 페이지 이동 */
+#mentoLink {
+	margin-top: 15px;
+	padding: 15px;
+	text-decoration: none;
+	color: #6cc4dc;
+	font-weight: bold;
+}
+
+#mentoLink:hover {
+	color: #3f92b7;
+}
 
 /* 테이블 */
 .table {
@@ -42,7 +56,7 @@
 .table thead th {
     padding: 10px;
     font-size: 16px;
-    font-weight: 400;
+    font-weight: bold;
     color: white;
 }
 
@@ -118,6 +132,7 @@ myModal.addEventListener('shown.bs.modal', () => {
   
     <div class="pagetitle">
     	<h1>멘토 신청 관리</h1>
+    	<a href="/mtboard/list" id="mentoLink">멘토 찾기 ></a>
     </div>
 
     <section class="adminMento">
@@ -130,13 +145,13 @@ myModal.addEventListener('shown.bs.modal', () => {
 				<table class="table">
 					<thead>
                         <tr>
-                            <th>No</th>
-                            <th>아이디</th>
-                            <th>닉네임</th>
-                            <th>이름</th>
-                            <th>회원등급</th>
-                            <th>관리</th>
-                            <th>신청서</th>
+                            <th scope="col">NO</th>
+                            <th scope="col">아이디</th>
+                            <th scope="col">닉네임</th>
+                            <th scope="col">이름</th>
+                            <th scope="col">회원등급</th>
+                            <th scope="col">관리</th>
+                            <th scope="col">신청서</th>
                         </tr>
                     </thead>
                     

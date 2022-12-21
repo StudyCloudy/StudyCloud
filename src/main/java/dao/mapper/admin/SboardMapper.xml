@@ -41,7 +41,7 @@
 		</association>
 	</resultMap>
 		
-	<select id="selectStudyList" resultMap="StudyBoardMap" parameterType="util.Paging">
+	<select id="selectStudyList" resultMap="StudyBoardMap" parameterType="PagingVUp">
 		SELECT * FROM (
 			SELECT rownum rnum, S.* FROM (
 				SELECT B.study_no, B.study_title, B.study_people, B.study_address, B.study_tag, B.study_date

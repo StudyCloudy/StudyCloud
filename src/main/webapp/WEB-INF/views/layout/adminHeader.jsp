@@ -227,6 +227,17 @@
 	padding-left: 100px;
 }
 
+
+/* 메인페이지 이동 링크 */
+#mainLink {
+	text-decoration: none;
+	color: #6cc4dc;
+}
+
+#mainLink:hover {
+	color: #3f92b7;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -291,6 +302,7 @@ $(document).ready(function() {
                     
                     <div>
                        <ul class="navbar-nav me-auto" id="btnMenu">
+                          <li class="nav-item"><a class="nav-link" href="/mainpage" id="mainLink">메인페이지로 > </a></li>
                           <li class="nav-item"><a class="nav-link" href="/admin/logout">로그아웃</a></li>
                        </ul>
                     </div>
@@ -332,7 +344,7 @@ $(document).ready(function() {
 			
 			<li class="nav-item" id="sidebarMenu">
 				<a id="btnQna" class="nav-link collapsed" data-bs-toggle="collapse">
-				  <span>qna 관리</span>
+				  <span>QnA 관리</span>
 				</a>
 			</li>
 

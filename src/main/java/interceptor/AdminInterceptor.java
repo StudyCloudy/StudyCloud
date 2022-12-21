@@ -21,8 +21,9 @@ public class AdminInterceptor implements HandlerInterceptor {
 		//세션 객체
 		HttpSession session = request.getSession();
 		
-		if( session.getAttribute("login") == null ||
-				(int)session.getAttribute("authority") != 4 ) { //비로그인 상태, 관리자 등급이 아니면 접근 불가
+		if( session.getAttribute("login") == null 
+//				|| (int)session.getAttribute("authority") != 4
+				) { //비로그인 상태, 관리자 등급이 아니면 접근 불가
 			logger.info(" >> 접속 불가");
 			
 			response.sendRedirect("/login/admin");
