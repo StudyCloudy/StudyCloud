@@ -3,22 +3,22 @@ package dto;
 public class MboardLike {
 	
 	private int mlikeNo;
-	private int mboardNo;
+	private int mBoardNo;
 	private int memberNo;
 	
 	public MboardLike() {}
 	
-	public MboardLike(int mlikNo, int mboardNo, int memberNo) {
+	public MboardLike(int mlikNo, int mBoardNo, int memberNo) {
 		
 		super();
 		this.mlikeNo = mlikeNo;
-		this.mboardNo = mboardNo;
+		this.mBoardNo = mBoardNo;
 		this.memberNo = memberNo;
 	}
 
 	@Override
 	public String toString() {
-		return "MboardLike [mlikeNo=" + mlikeNo + ", mboardNo=" + mboardNo + ", memberNo=" + memberNo + "]";
+		return "MboardLike [mlikeNo=" + mlikeNo + ", mBoardNo=" + mBoardNo + ", memberNo=" + memberNo + "]";
 	}
 
 	public int getMlikeNo() {
@@ -29,12 +29,12 @@ public class MboardLike {
 		this.mlikeNo = mlikeNo;
 	}
 
-	public int getMboardNo() {
-		return mboardNo;
+	public int getMBoardNo() {
+		return mBoardNo;
 	}
 
-	public void setMboardNo(int mboardNo) {
-		this.mboardNo = mboardNo;
+	public void setMBoardNo(int mBoardNo) {
+		this.mBoardNo = mBoardNo;
 	}
 
 	public int getMemberNo() {

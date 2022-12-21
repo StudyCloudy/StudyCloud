@@ -211,7 +211,6 @@ function check() {
 		<button type="button" id="btnConfirm" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="background-color: #6cc4dc; border: none;">등록하기</button> 
 		</div>
 		
-	</form>	 
  <!-- 스터디 등록 완료 알림 모달  -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -231,8 +230,9 @@ function check() {
   </div>
 </div>
 		
+<!-- 	</form>	  -->
 	</div>
-<!-- 		</form> -->
+		</form>
 <!-- </div> -->
 
 <br><br><br><br><br>

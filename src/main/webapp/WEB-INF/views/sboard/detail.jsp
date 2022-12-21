@@ -152,6 +152,7 @@ $(document).ready(function() {
 			, type : "POST"
 			, data : { "studyNo" : no }
 			, success : function(res) {
+				console.log("찜하기 완");
 				heart.prop("name", res);
 				if(res==1) {
 					$("#sMark").attr("src", "/resources/se2/img/heart-regular.svg");
