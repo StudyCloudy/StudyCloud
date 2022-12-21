@@ -73,8 +73,8 @@
 		<selectKey order="BEFORE" resultType="int" keyProperty="applystudyNo">
 			SELECT applystudy_seq.nextval FROM dual
 		</selectKey>
-		INSERT INTO applystudy ( applystudy_no, member_no, member_name, member_age, member_job, member_address, member_intro, applystudy_date)
-		VALUES( ${applystudyNo }, #{memberNo }, #{memberName }, #{memberAge }, #{memberJob }, #{memberAddress }, #{memberIntro }, sysdate )
+		INSERT INTO applystudy ( applystudy_no, member_no, member_name, member_age, member_job, member_address, member_intro, applystudy_date, study_no)
+		VALUES( ${applystudyNo }, #{memberNo }, #{memberName }, #{memberAge }, #{memberJob }, #{memberAddress }, #{memberIntro }, sysdate, #{studyNo} )
 	</insert>
 	
 	<select id="searchByKeyword" resultType="hashmap" parameterType="hashmap">
