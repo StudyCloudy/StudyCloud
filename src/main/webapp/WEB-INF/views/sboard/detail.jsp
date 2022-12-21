@@ -127,7 +127,7 @@ $(document).ready(function() {
 <script type="text/javascript">
 $(document).ready(function() {
 	
-// 	좋아요 여부 확인
+// 	//좋아요 여부 확인
 // 	var markcase = ${markCnt };
 	
 // 	if( markcase > 0) {
@@ -155,10 +155,10 @@ $(document).ready(function() {
 				console.log("찜하기 완");
 				heart.prop("name", res);
 				if(res==1) {
-					$("#sMark").attr("src", "/resources/se2/img/heart-regular.svg");
-				} else {
 					$("#sMark").attr("src", "/resources/se2/img/heart-solid.svg");
-					alert("스터디 찜하기가 완료되었습니다!")
+					alert("스터디 찜하기가 완료되었습니다!");
+				} else {
+					$("#sMark").attr("src", "/resources/se2/img/heart-regular.svg");
 				}
 			}
 			
@@ -351,11 +351,12 @@ textarea:focus {
 				</div>
 				
 				<div class="button-bar">
-				
+					<form action="insertMark" method="post">
 					<div class="button" type="button" id="sMarkbtn" style="float: left; padding-top: 3px;">
 						<img id="sMark" src="/resources/se2/img/heart-regular.svg" style="width: 20px; height: 20px">
 						<span class="con-detail-2" style="font-size:14px;">찜하기</span>
 					</div>
+					</form>
 					
 					<div class="button" style="float: left;">
 						<button type="button" class="btn btn-primary" 
