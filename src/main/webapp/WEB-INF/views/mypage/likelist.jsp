@@ -172,7 +172,7 @@ a {
                     <div class="table-responsive">
        					<table class="table shoping-cart-table">
                             <tbody>
-                        		<c:forEach var="mlikelist" items="${mlikelist}" varStatus="status">
+                        		<c:forEach var="mlikelist" items="${mboard}" varStatus="status">
                             
                             <tr>
         					    <td width="45px">
@@ -182,7 +182,7 @@ a {
 								</c:if>
 								<c:if test="${mlikelist.FILEUPLOAD_STOR eq null}">
 									<img class="rounded-circle mt-5"
-										src="https://img.icons8.com/color/512/test-account.png" width="25px" alt="..." class="cart-product-imitation"><br>
+										src="https://img.icons8.com/color/512/test-account.png" width="90px" alt="..." class="cart-product-imitation"><br>
 								</c:if>  
                                 </td>                                    
                                 <td class="desc">
@@ -220,7 +220,7 @@ a {
                     <div class="table-responsive">
                         <table class="table shoping-cart-table">
                             <tbody>
-                                <c:forEach var="mntikelist" items="${mntikelist}" varStatus="status">
+                                <c:forEach var="mntikelist" items="${mntboard}" varStatus="status">
                             <tr>
         					    <td width="45px">
 	   						  <c:if test="${mntikelist.FILEUPLOAD_STOR ne null}">
