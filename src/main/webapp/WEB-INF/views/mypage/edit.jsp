@@ -245,6 +245,12 @@ body {
 	border: 0;
 }
 
+.image-text {
+	font-size: 10pt;
+	font-color: #999999;
+	margin-left: -5%;
+}
+
 
 
 
@@ -275,8 +281,10 @@ body {
 					<div class="filebox">
 						<input class="upload-name" value="프로필사진 변경" placeholder="프로필사진 변경">
 						<label for="file">파일찾기</label>
-						<input type="file" id="file" name="file" onchange="readURL(this);">
-  				  <img style="width: 200px;" id="image_container"/>
+						<input type="file" id="file" name="file" onchange="readURL(this);"><br><br>
+						<div class="image-text"> 변경 할 사진 미리보기 📷
+  					  <img style="width: 200px;" id="image_container"/>
+						</div>
 					</div>
 				</div>
 			</div>

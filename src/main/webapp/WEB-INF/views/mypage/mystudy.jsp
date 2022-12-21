@@ -75,7 +75,7 @@ a {
 							<div class="col-md-4">
 									<div class="card p-3">
 										<div class="d-flex flex-row mb-3">
-											<img src="https://i.imgur.com/ccMhxvC.png" width="70">
+											<img src="https://img.icons8.com/color/512/test-account.png" width="70">
 											<div class="d-flex flex-column ml-2">
 												<div class="text-1">
 													 <a href="/mtboard/detail?mtboardNo=${mymento.MTBOARD_NO }"><span>${mymento.MTBOARD_TITLE }</span></a><br>
