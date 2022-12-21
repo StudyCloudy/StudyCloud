@@ -163,18 +163,22 @@
 
 	<!-- QnA 게시글 목록 미리보기 -->
 	<select id="previewQna" resultType="hashmap">
-		SELECT
-			Q.sroomqna_no, Q.sroomqna_title, Q.sroomqna_content, Q.sroomqna_date
-			, Q.sroomqna_grpno, Q.sroomqna_grpord, Q.sroomqna_step
-			, S.sroom_no, S.sroom_name
-			, M.member_no, M.member_nick, M.member_id
-		FROM studyroomqna Q
-		JOIN studyroom S
-		ON Q.sroom_no = S.sroom_no
-		JOIN member M
-		ON Q.member_no = M.member_no
-		<![CDATA[WHERE rownum <= 5]]> 
-		ORDER BY sroomqna_grpno DESC, sroomqna_grpord ASC, sroomqna_no DESC
+		SELECT * FROM (
+		SELECT rownum rnum, B.* FROM (
+			SELECT
+				Q.sroomqna_no, Q.sroomqna_title, Q.sroomqna_content, Q.sroomqna_date
+				, Q.sroomqna_grpno, Q.sroomqna_grpord, Q.sroomqna_step
+				, S.sroom_no, S.sroom_name
+				, M.member_no, M.member_nick, M.member_id
+			FROM studyroomqna Q
+			JOIN studyroom S
+			ON Q.sroom_no = S.sroom_no
+			JOIN member M
+			ON Q.member_no = M.member_no
+			ORDER BY sroomqna_grpno DESC, sroomqna_grpord ASC, sroomqna_no DESC
+			) B
+		) STUDYROOMQNA
+		<![CDATA[WHERE rnum <= 5]]> 
 	</select>
 	
 	<!-- ========== 메인페이지 ========== -->

@@ -78,6 +78,11 @@
 	vertical-align: middle;
 }
 
+.table-hover>tbody>tr:hover>* {
+	background-color: #e3eff9; 
+    box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+}
+
 .table thead {
     background-color: #aacde5;
 }
@@ -148,7 +153,7 @@ $(document).ready(function() {
        	<div class="col-lg-12">
       	<div class="row">
 		    <div class="table-responsive">
-                <table class="table">
+                <table class="table table-hover">
                     <thead>
                         <tr>
                             <th scope="col">NO</th>
