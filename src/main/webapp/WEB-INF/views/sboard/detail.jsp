@@ -428,13 +428,14 @@ textarea:focus {
 						<textarea class="form-control" id="memberIntro" name="memberIntro" style="height: 100px;"></textarea>
 						<label for="floatingTextarea2">스터디에 참여하고 싶은 이유와 한 줄 포부를 작성해주세요.</label>
 					</div>
-
+					
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" id="btnCancel" data-bs-dismiss="modal" style="border: none;">취소</button>
 				<input class="btn btn-primary" type="submit" value="신청하기" id="btnApply" style="background-color: #6cc4dc; border: none;" data-bs-target="#exampleModalToggle2">
 <!-- 				<button type="button" class="btn btn-primary" id="btnApply" style="background-color: #6cc4dc; border: none;">신청하기</button> -->
 			</div>
+				<input type="hidden" name="studyNo" value="${detailSboard.STUDY_NO }">
 				</form>
 		</div>
 	</div>
