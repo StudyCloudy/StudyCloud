@@ -172,26 +172,25 @@ a {
                     <div class="table-responsive">
        					<table class="table shoping-cart-table">
                             <tbody>
-                        		<c:forEach var="mlikelist" items="${mboard}" varStatus="status">
+                        		
                             
                             <tr>
         					    <td width="45px">
-    							 <c:if test="${mlikelist.FILEUPLOAD_STOR ne null}">
+    							 
 									<img class="rounded-circle mt-5"
-										src="${pageContext.request.contextPath}/resources/${mlikelist.FILEUPLOAD_STOR}" width="90px"><br>
-								</c:if>
-								<c:if test="${mlikelist.FILEUPLOAD_STOR eq null}">
-									<img class="rounded-circle mt-5"
-										src="https://img.icons8.com/color/512/test-account.png" width="90px" alt="..." class="cart-product-imitation"><br>
-								</c:if>  
+                  							src="https://img.icons8.com/color/512/test-account.png" width="90" id="profile"><br>
+								
+								
+									
+							 
                                 </td>                                    
                                 <td class="desc">
                                     <div class="text-navy" >
-                                     <h3>제목</h3>  <a href="/mboard/detail?mboardNo=${mlikelist.MBOARD_NO }">${mlikelist.MBOARD_TITLE }</a>
+                                     <h3>제목</h3>  <a href="/mboard/detail?mboardNo=${mlikelist.MBOARD_NO }">12/26-01/10 정처기 벼락치기 할 사람?</a>
                                     </div><br>
                                     <dl class="small m-b-none">
                                     	<dt>내용</dt>
-                                        <dd>${mlikelist.MBOARD_CONTENT }</dd>
+                                        <dd>발등이 뜨거워</dd>
                                     </dl>
                                 </td>
                               </tr>
@@ -209,7 +208,7 @@ a {
 <!--                                     </dl> -->
 <!--                                 </td> -->
 <!--                             </tr> -->
-								</c:forEach>
+								
                             </tbody>
                         </table>
                     </div>
