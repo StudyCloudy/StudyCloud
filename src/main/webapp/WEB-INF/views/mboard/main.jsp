@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
-<title>StudyCloud☁️</title>
+<title>StudyCloud</title>
 <c:import url="../layout/header.jsp" />
 
 <!-- jQuery 2.2.4 -->
@@ -230,6 +230,7 @@ a:hover {
 	    		<option value="mboard_title">제목</option>
 	    		<option value="mboard_content">내용</option>
 	    		<option value="mboard_date">날짜</option>
+	    		<option value="member_nick">작성자</option>
 			</select>
 			</div>
 			

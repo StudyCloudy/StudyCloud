@@ -78,7 +78,8 @@
 	</insert>
 	
 	<select id="searchByKeyword" resultType="hashmap" parameterType="hashmap">
-		SELECT * FROM studyboard
+		SELECT s.*, m.*
+		FROM studyboard s, member m
 		WHERE 1=1
 		<choose>
 			<when test="category != null and category.equals('study_tag')">
@@ -88,8 +89,13 @@
 			<when test="category != null and category.equals('study_title')">
 				AND study_title LIKE '%' || #{keyword } || '%'
 			</when>
-
-		</choose>	
+			
+			<when test="category != null and category.equals('member_nick')">
+				AND member_nick LIKE '%' || #{keyword } || '%'
+			</when>
+		</choose>
+		AND s.member_no = m.member_no
+		ORDER BY study_no DESC
 	</select>
 	
 	</mapper>

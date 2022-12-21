@@ -9,7 +9,7 @@
 <head profile="http://www.w3.org/2005/10/profile">
 <link rel="icon" type="image/png" href="http://example.com/myicon.png"> 
 <meta charset="UTF-8"  name="viewport" content="width=device-width, initial-scale=1">
-<title>StudyCloud☁️</title>
+<title>StudyCloud</title>
 <c:import url="../layout/header.jsp" />
 
 <!-- 부트스트랩 5.2  -->
