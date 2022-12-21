@@ -183,7 +183,7 @@ public class MboardServiceImpl implements MboardService{
 		MboardLike mboardLike = new MboardLike();
 		
 		mboardLike.setMemberNo(memberNo);
-		mboardLike.setMboardNo(mBoardNo);
+		mboardLike.setMBoardNo(mBoardNo);
 		
 		int likecnt = mboardDao.likecount(mboardLike);
 		
@@ -204,7 +204,7 @@ public class MboardServiceImpl implements MboardService{
 		MboardLike mboardLike = new MboardLike();
 		
 		mboardLike.setMemberNo(memberNo);
-		mboardLike.setMboardNo(mBoardNo);
+		mboardLike.setMBoardNo(mBoardNo);
 		
 		int likecnt = mboardDao.likecount(mboardLike);
 		

@@ -58,11 +58,11 @@ $(document).ready(function() {
 </script>
 
 
-<!-- 좋아요 기능 js -->
+<!-- 좋아요 -->
 <script type="text/javascript">
 $(document).ready(function() {
 	
-// 	좋아요 여부 확인
+// //	좋아요 여부 확인
 // 	var markcase = ${likecnt };
 	
 // 	if( markcase > 0) {
@@ -74,7 +74,7 @@ $(document).ready(function() {
 // 	}
 	
 	$("#mLikebtn").on("click", function() {
-		var heart = $("#mLikebtn");
+		var like = $("#mLikebtn");
 		var no = ${detailMboard.MBOARD_NO };
 		
 		if(${empty login}) {
@@ -82,21 +82,24 @@ $(document).ready(function() {
 			return false;
 		}
 	
-		$.ajax({
-			url: "/mboard/mboardLike"
-			, type : "POST"
-			, data : { "mboardNo" : no }
-			, success : function(res) {
-				heart.prop("name", res);
+// 		$.ajax({
+// 			url: "/mboard/mboardLike"
+// 			, type : "POST"
+// 			, data : { "mBoardNo" : no }
+// 			, success : 
+$(document).ready(	function(res) {
+				console.log("좋아요 완");
+				like.prop("name", res);
 				if(res==1) {
 					$("#mLike").attr("src", "/resources/se2/img/thumbs-up-regular.svg");
 				} else {
 					$("#mLike").attr("src", "/resources/se2/img/thumbs-up-solid.svg");
 					alert("번개 게시글 좋아요 등록 완료!")
 				}
-			}
+// 			}
 			
 		})
+// 		)
 	})
 })
 
@@ -277,8 +280,8 @@ textarea:focus {
 			<div class="nav-info-detail" style="border-right: none;">like ${detailMboard.MBOARD_LIKECNT }</div>
 			
 			<div class="thumbs_icon">
-				<div class="button" type="button" id="mLikebtn" name="mLikebtn">
-					<img src="/resources/se2/img/thumbs-up-regular.svg" id="mLike" name="mlike" style="width: 25px; height: 25px;float: right; margin-right: 12px;">
+				<div class="button" type="button" id="mLikebtn" style="float: right; padding-top: 3px;">
+					<img id="mLike" name="mLike" src="/resources/se2/img/thumbs-up-regular.svg" style="width: 20px; height: 20px">
 				</div>
 			</div>
 		</div>
