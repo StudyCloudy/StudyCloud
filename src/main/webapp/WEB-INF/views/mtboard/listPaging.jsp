@@ -22,7 +22,7 @@ $(document).ready(function() {
 		<th scope="col" style="width: 20%;">직무</th>
 		<th scope="col" style="width: 20%;">경력</th>
 		<th scope="col" style="width: 10%;">조회수</th>
-		<th scope="col" style="width: 10%;">🤍</th>
+		<th scope="col" style="width: 10%;">❤️</th>
 		<th scope="col" style="width: 15%;">작성일</th>
 	</tr>
 </thead>
@@ -49,7 +49,6 @@ $(document).ready(function() {
 </tbody>
 </table>
 
-<!-- 현재 권한등급이 잘못되어있음 (수정요청함) 권한 2 -> 멘토여야됨 -->
 <c:if test="${authority eq 2 }">
 <div><button id="btnWrite" class="btn btn-primary pull-right">글쓰기</button></div>
 </c:if>

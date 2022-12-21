@@ -44,6 +44,12 @@ h3 {
 
 .text-navy {
     color: #3F92B7;
+    
+}
+
+a {
+    color: #3F92B7;
+	text-decoration-line: none; 
 }
 
 .cart-product-imitation {
@@ -182,7 +188,7 @@ table.shoping-cart-table tr td:last-child {
                                 <td class="desc">
                                     <div class="text-navy" >
                                     
-                                    <h3>${studywish.STUDY_TITLE} </h3>
+                                    <a href="/sboard/detail?sboardNo=${studywish.STUDY_NO }"><h3>${studywish.STUDY_TITLE }  </h3></a>
                                     </div><br>
                                     <p class="small">
  									${studywish.STUDY_CONTENT }
@@ -193,9 +199,9 @@ table.shoping-cart-table tr td:last-child {
                                     </dl>
                                 </td>
                                 <td>
-								<button class="btn btn-primary delete-button" type="button">
-								삭제
-								</button>                               
+<!-- 								<button class="btn btn-primary delete-button" type="button"> -->
+<!-- 								삭제 -->
+<!-- 								</button>                                -->
 								</td>
                                 <td></td>
                             </tr>
@@ -225,7 +231,7 @@ table.shoping-cart-table tr td:last-child {
                                 </td>                                    
                                 <td class="desc">
                                     <div class="text-navy" >
-                                    <h3>${mentowish.MTBOARD_TITLE }</h3>
+                                      <a href="/mtboard/detail?mtboardNo=${mentowish.MTBOARD_NO }"><h3>${mentowish.MTBOARD_TITLE }</h3></a>
                                     </div><br>
                                     
                                     <p class="small">
@@ -237,9 +243,9 @@ table.shoping-cart-table tr td:last-child {
                                     </dl>
                                 </td>
                                 <td>
-								<button class="btn btn-primary delete-button" type="button">
-								삭제
-								</button>                               
+<!-- 								<button class="btn btn-primary delete-button" type="button"> -->
+<!-- 								삭제 -->
+<!-- 								</button>                                -->
 								</td>
                                 <td></td>
                             </tr>
@@ -262,7 +268,7 @@ table.shoping-cart-table tr td:last-child {
                                 </td>                                    
                                 <td class="desc">
                                     <div class="text-navy" >
-                                    <h3>${sroomwish.SROOM_NAME }</h3>
+                                     <a href="/sroom/detail?sroomNo=${sroomwish.SROOM_NO }"> <h3>${sroomwish.SROOM_NAME }</h3></a>
                                     </div><br>
                                     
                                     <p class="small">
@@ -273,9 +279,9 @@ table.shoping-cart-table tr td:last-child {
                                     </dl>
                                 </td>
                                 <td>
-								<button class="btn btn-primary delete-button" type="button">
-								삭제
-								</button>                               
+<!-- 								<button class="btn btn-primary delete-button" type="button"> -->
+<!-- 								삭제 -->
+<!-- 								</button>                                -->
 								</td>
                                 <td></td>
                             </tr>

@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Mboard {
 	
-	private int mboardNo; //게시글 번호
+	private int mBoardNo; //게시글 번호
 	private int memberNo; //회원번호
 	private String mboardTitle; //게시글 제목
 	private String mboardContent; //게시글 내용
@@ -16,10 +16,10 @@ public class Mboard {
 	
 	public Mboard() {}
 	
-	public Mboard(int mboardNo, int memberNo, String mboardTitle, String mboardContent, Date mboardDate,
+	public Mboard(int mBoardNo, int memberNo, String mboardTitle, String mboardContent, Date mboardDate,
 			int mboardHit, int mboardCmtcnt, int mboardLikecnt, Member member) {
 		super();
-		this.mboardNo = mboardNo;
+		this.mBoardNo = mBoardNo;
 		this.memberNo = memberNo;
 		this.mboardTitle = mboardTitle;
 		this.mboardContent = mboardContent;
@@ -33,17 +33,17 @@ public class Mboard {
 
 	@Override
 	public String toString() {
-		return "Mboard [mboardNo=" + mboardNo + ", memberNo=" + memberNo + ", mboardTitle=" + mboardTitle
+		return "Mboard [mBoardNo=" + mBoardNo + ", memberNo=" + memberNo + ", mboardTitle=" + mboardTitle
 				+ ", mboardContent=" + mboardContent + ", mboardDate=" + mboardDate + ", mboardHit=" + mboardHit
 				+ ", mboardCmtcnt=" + mboardCmtcnt + ", mboardLikecnt=" + mboardLikecnt + ", member=" + member + "]";
 	}
 
-	public int getMboardNo() {
-		return mboardNo;
+	public int getMBoardNo() {
+		return mBoardNo;
 	}
 
-	public void setMboardNo(int mboardNo) {
-		this.mboardNo = mboardNo;
+	public void setMBoardNo(int mBoardNo) {
+		this.mBoardNo = mBoardNo;
 	}
 
 	public int getMemberNo() {

@@ -101,7 +101,7 @@ $(document).ready(function() {
 		
 		<div class="mb-3">
   			<label for="formFileSm" class="form-label"></label>
- 			<input class="form-control form-control-sm" id="file" type="file">
+ 			<input class="form-control form-control-sm" id="file" name="file" type="file">
 		</div>
 		
 		<div class="button">
@@ -125,7 +125,7 @@ $(document).ready(function() {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        번개스터디 글 등록이 완료되었습니다.
+        번개게시글 등록이 완료되었습니다.
       </div>
       <div class="modal-footer">
         <button type="button" id="btnWrite" class="btn btn-primary" style="background-color: #6cc4dc;">확인</button>
