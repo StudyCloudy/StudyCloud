@@ -81,6 +81,8 @@ public class MtBoardServiceImpl implements MtBoardService {
 		
 		//파일이 저장될 경로
 		String storedPath = context.getRealPath("upload");
+		
+		System.out.println("storedPath {} " +storedPath);
 		File storedFolder = new File( storedPath );
 		if( !storedFolder.exists() ) {
 			storedFolder.mkdir();
@@ -91,7 +93,7 @@ public class MtBoardServiceImpl implements MtBoardService {
 		String storedName = originName + UUID.randomUUID().toString().split("-")[4];
 		
 		//저장할 파일의 정보 객체
-		File dest = new File( storedFolder, storedName );
+		File dest = new File( storedFolder, originName );
 		
 		try {
 			file.transferTo(dest);
