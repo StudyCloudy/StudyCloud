@@ -181,7 +181,7 @@ table.shoping-cart-table tr td:last-child {
 								</c:if>
 								<c:if test="${studywish.FILEUPLOAD_STOR eq null}">
 									<img class="rounded-circle mt-5"
-										src="https://img.icons8.com/color/512/test-account.png" alt="..." class="cart-product-imitation"><br>
+										src="https://img.icons8.com/color/512/test-account.png" width="90" alt="..." class="cart-product-imitation"><br>
 								</c:if>  
         					    
                                 </td>                          
@@ -225,7 +225,7 @@ table.shoping-cart-table tr td:last-child {
 								</c:if>
 								<c:if test="${mentowish.FILEUPLOAD_STOR eq null}">
 									<img class="rounded-circle mt-5"
-										src="https://img.icons8.com/color/512/test-account.png" alt="..." class="cart-product-imitation"><br>
+										src="https://img.icons8.com/color/512/test-account.png" alt="..." width="90" class="cart-product-imitation"><br>
 								</c:if>  
         					    
                                 </td>                                    
@@ -264,7 +264,7 @@ table.shoping-cart-table tr td:last-child {
                             <tbody>
                             <tr>
         					    <td width="90">
-                                <img src="https://ldb-phinf.pstatic.net/20150901_244/14410338887412ja3X_JPEG/SUBMIT_1416958175779_35966443.jpg" alt="..." class="cart-product-imitation">
+                                <img src="https://ldb-phinf.pstatic.net/20150901_244/14410338887412ja3X_JPEG/SUBMIT_1416958175779_35966443.jpg" width="90" alt="..." class="cart-product-imitation">
                                 </td>                                    
                                 <td class="desc">
                                     <div class="text-navy" >
