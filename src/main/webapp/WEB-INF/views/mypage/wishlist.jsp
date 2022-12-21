@@ -188,7 +188,7 @@ table.shoping-cart-table tr td:last-child {
                                 <td class="desc">
                                     <div class="text-navy" >
                                     
-                                    <a href="/sboard/detail?sboardNo=${studywish.STUDY_NO }"><h3>${studywish.STUDY_TITLE }  </h3></a>
+                                    <a href="/sboard/detail?studyNo=${studywish.STUDY_NO }"><h3>${studywish.STUDY_TITLE }  </h3></a>
                                     </div><br>
                                     <p class="small">
  									${studywish.STUDY_CONTENT }
