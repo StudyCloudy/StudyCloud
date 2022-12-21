@@ -169,7 +169,7 @@ $(document).ready(function() {
 			
 			<!-- 페이징 -->
 			<span class="totalCnt">total : ${paging.totalCount }</span>
-			<button id="btnWrite" class="btn">글쓰기</button>
+			<button id="btnWrite" class="btn" type="button">글쓰기</button>
 			<div class="clearfix"></div>
 			
 			<c:import url="/WEB-INF/views/admin/studyroomPaging.jsp" />

@@ -123,12 +123,13 @@ function updateContents() {
 
 		<div id="originFile">
 			<a href="/mtboard/download?fileUploadNo=${fileUpload.fileUploadNo }">${fileUpload.fileUploadOri }</a>
-			<span id="deleteFile">x</span>
+			<img id="img_container" style="width:200px"/>
 		</div>
 
 		<div id="newFile">
 			<label for="file">새 첨부파일</label><br>
-			<input type="file" id="file" name="file">
+			<input type="file" id="file" name="file" onchange="readURL(this)">
+			<img id="img_container" style="width:0px"/>
 		</div>
 
 	</div>
@@ -155,6 +156,19 @@ nhn.husky.EZCreator.createInIFrame({
 	sSkinURI: "/resources/se2/SmartEditor2Skin.html",
 	fCreator: "createSEditor2"
 })
+
+
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById('img_container').src = e.target.result;
+    };
+    reader.readAsDataURL(input.files[0]);
+  } else {
+    document.getElementById('img_container').src = "";
+  }
+}
 
 </script>
 
