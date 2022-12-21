@@ -75,10 +75,10 @@ a {
 							<div class="col-md-4">
 									<div class="card p-3">
 										<div class="d-flex flex-row mb-3">
-											<img src="https://i.imgur.com/ccMhxvC.png" width="70">
+											<img src="https://img.icons8.com/color/512/test-account.png" width="70">
 											<div class="d-flex flex-column ml-2">
 												<div class="text-1">
-													 <a href="/mtboard/detail?mtboardNo=${mymento._NO }"><span>${mymento.MTBOARD_TITLE }</span></a><br>
+													 <a href="/mtboard/detail?mtboardNo=${mymento.MTBOARD_NO }"><span>${mymento.MTBOARD_TITLE }</span></a><br>
 													<span class="text-black-50">분야 : ${mymento.FIELD }</span>
 													<span class="ratings"><i class="fa fa-star"></i></span>
 												</div>
@@ -155,7 +155,7 @@ a {
 										<img src="https://img.icons8.com/dusk/512/conference-call.png" width="70">
 										<div class="d-flex flex-column ml-2">
 											<div class="text-1">
-											 <a href="/sboard/detail?sboardNo=${mystudy.STUDY_NO }"><span>${mystudy.STUDY_TITLE }</span></a><br>
+											 <a href="/sboard/detail?studyNo=${mystudy.STUDY_NO }"><span>${mystudy.STUDY_TITLE }</span></a><br>
 											 <span class="text-black-50">분야 : ${mystudy.STUDY_TAG }</span>
 											 <span class="ratings"><i class="fa fa-star"></i></div>
 											<i class="fa fa-star"></i><i class="fa fa-star"></i>

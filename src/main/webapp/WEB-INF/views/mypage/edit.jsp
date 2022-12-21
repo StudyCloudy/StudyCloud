@@ -11,6 +11,23 @@
 
 <script type="text/javascript">
 
+function readURL(event) {
+	console.log(event)
+	console.log(event.files)
+	if (event.files && event.files[0]) {
+	    var reader = new FileReader();
+	    reader.onload = function(e) {
+	    	console.log("e", e)
+	      document.getElementById('image_container').src = e.target.result;
+	    };
+	    reader.readAsDataURL(event.files[0]);
+	  } else {
+		  
+	    document.getElementById('image_container').src = "";
+	  }
+  }
+  
+  
 $(document).ready(function() {
 
 //파일이름 변경 
@@ -24,7 +41,7 @@ $("#file").on('change',function(){
 
 //프로필사진 출력
 
-function readURL(input) {
+/* function readURL(input) {
   if (input.files && input.files[0]) {
     var reader = new FileReader();
     reader.onload = function(e) {
@@ -34,7 +51,7 @@ function readURL(input) {
   } else {
     document.getElementById('profile').src = "";
   }
-}
+} */
 
 
 //버튼 클릭시 이동
@@ -228,6 +245,12 @@ body {
 	border: 0;
 }
 
+.image-text {
+	font-size: 10pt;
+	font-color: #999999;
+	margin-left: -5%;
+}
+
 
 
 
@@ -257,7 +280,11 @@ body {
 						class="text-black-50">${member.memberEmail}</span><br>
 					<div class="filebox">
 						<input class="upload-name" value="프로필사진 변경" placeholder="프로필사진 변경">
-						<label for="file">파일찾기</label> <input type="file" id="file" name="file" onchange="readURL(this);">
+						<label for="file">파일찾기</label>
+						<input type="file" id="file" name="file" onchange="readURL(this);"><br><br>
+						<div class="image-text"> 변경 할 사진 미리보기 📷
+  					  <img style="width: 200px;" id="image_container"/>
+						</div>
 					</div>
 				</div>
 			</div>
