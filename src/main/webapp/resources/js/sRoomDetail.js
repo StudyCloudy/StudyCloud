@@ -18,7 +18,7 @@ $(document).ready(function() {
   	  $('#sTimepicker').timepicker({
     	 timeFormat: 'H:00', // 분을 빼고 00으로 설정
     	 interval: 60, // 1시간 간격
-    	 startTime: '9:00am',
+    	 startTime: '7:00am',
     	 minTime: new Date(), //// 최소 시작시간을 현재시간으로 설정
     	 maxTime: '22:00pm',
     	 dynamic: false,

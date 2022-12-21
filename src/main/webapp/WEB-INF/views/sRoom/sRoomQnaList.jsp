@@ -142,7 +142,7 @@ function moreAndHide() {
 								</c:otherwise>
 							</c:choose>
 								<c:choose>
-									<c:when test="${qnaList.AUTHORITY == 3}"> <!-- 관리자 답변일 때 -->
+									<c:when test="${qnaList.AUTHORITY == 4}"> <!-- 관리자 답변일 때 -->
 										<p class="write_name" style="color: red;"> &nbsp;&nbsp;&nbsp;ㄴ&nbsp;[관리자 답변] ${qnaList.MEMBER_NICK }</p>
 									</c:when>
 									<c:otherwise>

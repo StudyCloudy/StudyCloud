@@ -41,7 +41,7 @@
 <!-- 카카오 sdk -->
 
 <link rel="stylesheet" href="../resources/css/sRoomDetail.css?ver=2">
-<script defer src="../resources/js/sRoomDetail.js?ver=2"></script>
+<script defer src="../resources/js/sRoomDetail.js?ver=1"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {

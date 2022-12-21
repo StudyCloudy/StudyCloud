@@ -122,12 +122,13 @@
 
 	<!-- 마이스터디 조회 -->
 	<select id='mystudy' resultType='hashmap' parameterType="String">
-        SELECT distinct m.member_no, ml.mboard_no, mb.mboard_title, mb.mboard_content, f.fileupload_stor
-		FROM mboardlike ml
-		left outer join member m on m.member_no = ml.member_no
-		left outer join mboard mb on ml.mboard_no = mb.mboard_no
-        left outer join fileupload f on mb.member_no = f.member_no
-		where m.member_id = #{id}
+      select m.member_no, s.study_no, sb.study_title, sb.study_content, sb.study_tag
+	from member m
+	JOIN applyStudy s
+	ON m.member_no = s.member_no
+	JOIN studyBoard sb
+	on s.study_no = sb.study_no
+	where m.member_id = #{id}
 	</select>
 	
 	<select id="myMentoList" resultType="hashmap" parameterType="String">
