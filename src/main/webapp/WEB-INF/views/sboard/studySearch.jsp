@@ -236,7 +236,7 @@ h4, h6 {
 		
 			<br>
 			
-			<c:forEach items="${slist }" var="studyboard">
+			<c:forEach items="${searchResult }" var="studyboard">
 			<ul class="sboard-list">
 				<li class="study" style="list-style-type:none;">
 					<div class="shadow p-3 mb-5 bg-body rounded" style="padding: 5px;">

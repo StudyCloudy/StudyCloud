@@ -53,6 +53,11 @@
 	margin-left: 20px;
 }
 
+a {
+    color: #3F92B7;
+	text-decoration-line: none; 
+}
+
 </style>
 </head>
 
@@ -66,14 +71,14 @@
 					<h2>나의 멘토</h2>
 					<div class="container mt-5">
 						<div class="row">
-							<div class="col-md-4">
 								<c:forEach var="mymento" items="${mymento}" varStatus="status">
+							<div class="col-md-4">
 									<div class="card p-3">
 										<div class="d-flex flex-row mb-3">
 											<img src="https://i.imgur.com/ccMhxvC.png" width="70">
 											<div class="d-flex flex-column ml-2">
 												<div class="text-1">
-													<span>${mymento.MTBOARD_TITLE }</span><br>
+													 <a href="/mtboard/detail?mtboardNo=${mymento._NO }"><span>${mymento.MTBOARD_TITLE }</span></a><br>
 													<span class="text-black-50">분야 : ${mymento.FIELD }</span>
 													<span class="ratings"><i class="fa fa-star"></i></span>
 												</div>
@@ -87,55 +92,54 @@
 												class="fa fa-angle-right"></i></span>
 										</div>
 									</div>
-
+							</div>
 								</c:forEach>
-							</div>
-							<div class="col-md-4">
-								<div class="card p-3">
-									<div class="d-flex flex-row mb-3">
-										<img src="https://i.imgur.com/IpKQiNu.png" width="70">
-										<div class="d-flex flex-column ml-2">
-											<div class="text-1">
-												<span>남궁섬</span><span class="text-black-50"><br>분야
-													: Java</span><span class="ratings"><i class="fa fa-star"></i>
-											</div>
-											<i class="fa fa-star"></i><i class="fa fa-star"></i> <i
-												class="fa fa-star"></i></span>
-										</div>
-									</div>
-									<h6>
-										자바의 아버지.<br>기초부터 탄탄하게
-									</h6>
-									<div class="d-flex justify-content-between install mt-3">
-										<span>Installed 1234 times</span><span class="text-primary">View&nbsp;<i
-											class="fa fa-angle-right"></i></span>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4">
+<!-- 							<div class="col-md-4"> -->
+<!-- 								<div class="card p-3"> -->
+<!-- 									<div class="d-flex flex-row mb-3"> -->
+<!-- 										<img src="https://i.imgur.com/IpKQiNu.png" width="70"> -->
+<!-- 										<div class="d-flex flex-column ml-2"> -->
+<!-- 											<div class="text-1"> -->
+<!-- 												<span>남궁섬</span><span class="text-black-50"><br>분야 -->
+<!-- 													: Java</span><span class="ratings"><i class="fa fa-star"></i> -->
+<!-- 											</div> -->
+<!-- 											<i class="fa fa-star"></i><i class="fa fa-star"></i> <i -->
+<!-- 												class="fa fa-star"></i></span> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 									<h6> -->
+<!-- 										자바의 아버지.<br>기초부터 탄탄하게 -->
+<!-- 									</h6> -->
+<!-- 									<div class="d-flex justify-content-between install mt-3"> -->
+<!-- 										<span>Installed 1234 times</span><span class="text-primary">View&nbsp;<i -->
+<!-- 											class="fa fa-angle-right"></i></span> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="col-md-4"> -->
 							
-								<div class="card p-3">
-									<div class="d-flex flex-row mb-3">
-										<img src="https://img.icons8.com/color/512/test-account.png"
-											width="70">
-										<div class="d-flex flex-column ml-2">
-											<div class="text-1">
-												<span>얌너두너두</span><span class="text-black-50"><br>분야
-													: 영어회화</span><span class="ratings"><i class="fa fa-star"></i>
-											</div>
-											<i class="fa fa-star"></i><i class="fa fa-star"></i><i
-												class="fa fa-star"></i></span>
-										</div>
-									</div>
-									<h6>
-										영어울렁증! <br> 같이 치료해봅시다!
-									</h6>
-									<div class="d-flex justify-content-between install mt-3">
-										<span>Installed 1234 times</span><span class="text-primary">View&nbsp;<i
-											class="fa fa-angle-right"></i></span>
-									</div>
-								</div>
-							</div>
+<!-- 								<div class="card p-3"> -->
+<!-- 									<div class="d-flex flex-row mb-3"> -->
+<!-- 										<img src="https://img.icons8.com/color/512/test-account.png" -->
+<!-- 											width="70"> -->
+<!-- 										<div class="d-flex flex-column ml-2"> -->
+<!-- 											<div class="text-1"> -->
+<!-- 												<span>얌너두너두</span><span class="text-black-50"><br>분야 -->
+<!-- 													: 영어회화</span><span class="ratings"><i class="fa fa-star"></i> -->
+<!-- 											</div> -->
+<!-- 											<i class="fa fa-star"></i><i class="fa fa-star"></i><i -->
+<!-- 												class="fa fa-star"></i></span> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 									<h6> -->
+<!-- 										영어울렁증! <br> 같이 치료해봅시다! -->
+<!-- 									</h6> -->
+<!-- 									<div class="d-flex justify-content-between install mt-3"> -->
+<!-- 										<span>Installed 1234 times</span><span class="text-primary">View&nbsp;<i -->
+<!-- 											class="fa fa-angle-right"></i></span> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
 						</div>
 					</div>
 					<br><br><br>
@@ -151,7 +155,9 @@
 										<img src="https://img.icons8.com/dusk/512/conference-call.png" width="70">
 										<div class="d-flex flex-column ml-2">
 											<div class="text-1">
-											<span>${mystudy.STUDY_TITLE }</span><br><span class="text-black-50">분야 : ${mystudy.STUDY_TAG }</span><span class="ratings"><i class="fa fa-star"></i></div>
+											 <a href="/sboard/detail?sboardNo=${mystudy.STUDY_NO }"><span>${mystudy.STUDY_TITLE }</span></a><br>
+											 <span class="text-black-50">분야 : ${mystudy.STUDY_TAG }</span>
+											 <span class="ratings"><i class="fa fa-star"></i></div>
 											<i class="fa fa-star"></i><i class="fa fa-star"></i>
 											<i class="fa fa-star"></i></span>
 										</div>
@@ -166,24 +172,24 @@
 							
 							</c:forEach>
 							
-							<div class="col-md-4">
-								<div class="card p-3">
-									<div class="d-flex flex-row mb-3">
-										<img src="https://img.icons8.com/dusk/512/conference-call.png" width="70">
-										<div class="d-flex flex-column ml-2">
-											<div class="text-1">
-											<span>영어로 재잘재잘</span><span class="text-black-50"><br>분야 : 영어 / 회화</span><span class="ratings"><i class="fa fa-star"></i></div>
-											<i class="fa fa-star"></i><i class="fa fa-star"></i>
-											<i class="fa fa-star"></i></span>
-										</div>
-									</div>
-									<h6>편하게 영어로 대화하며 회화공부해요!</h6>
-									<div class="d-flex justify-content-between install mt-3">
-										<span>Installed 1234 times</span><span class="text-primary">View&nbsp;<i
-											class="fa fa-angle-right"></i></span>
-									</div>
-								</div>
-							</div>
+<!-- 							<div class="col-md-4"> -->
+<!-- 								<div class="card p-3"> -->
+<!-- 									<div class="d-flex flex-row mb-3"> -->
+<!-- 										<img src="https://img.icons8.com/dusk/512/conference-call.png" width="70"> -->
+<!-- 										<div class="d-flex flex-column ml-2"> -->
+<!-- 											<div class="text-1"> -->
+<!-- 											<span>영어로 재잘재잘</span><span class="text-black-50"><br>분야 : 영어 / 회화</span><span class="ratings"><i class="fa fa-star"></i></div> -->
+<!-- 											<i class="fa fa-star"></i><i class="fa fa-star"></i> -->
+<!-- 											<i class="fa fa-star"></i></span> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 									<h6>편하게 영어로 대화하며 회화공부해요!</h6> -->
+<!-- 									<div class="d-flex justify-content-between install mt-3"> -->
+<!-- 										<span>Installed 1234 times</span><span class="text-primary">View&nbsp;<i -->
+<!-- 											class="fa fa-angle-right"></i></span> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
 						</div>
 					</div><br><br><br>	
 					

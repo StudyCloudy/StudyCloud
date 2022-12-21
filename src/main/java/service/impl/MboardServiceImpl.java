@@ -20,6 +20,7 @@ import dto.FileUpload;
 import dto.Mboard;
 import dto.MboardLike;
 import dto.Member;
+import dto.StudyMark;
 import service.face.MboardService;
 import util.Paging;
 
@@ -52,13 +53,13 @@ public class MboardServiceImpl implements MboardService{
 	}
 
 	@Override
-	public HashMap<String, Object> detail(int mboardNo) {
+	public HashMap<String, Object> detail(Mboard mboard) {
 		
 		//조회수 증가
-		mboardDao.updateHit(mboardNo);
+		mboardDao.updateHit(mboard);
 		
 		//상세보기 조회 결과 리턴
-		return mboardDao.detailPageByMboardNo(mboardNo);
+		return mboardDao.detailPageByMboardNo(mboard);
 		
 		//좋아요 삽입
 //		mboardDao.insertlike(mboardNo);
@@ -69,17 +70,12 @@ public class MboardServiceImpl implements MboardService{
 	@Override
 	public void write(Mboard mboard, MultipartFile file) {
 		
-		//게시글 처리
-		if("".equals( mboard.getMboardTitle())) {
-			mboard.setMboardTitle("(제목없음)");
-		}
-		
 		mboardDao.insert(mboard);
 		
 //		//빈 파일인 경우
-//		if( file.getSize() <= 0 ) {
-//			return;
-//		}
+		if( file.getSize() <= 0 ) {
+			return;
+		}
 		
 		//파일 저장 될 경로
 		String storedPath = context.getRealPath("upload");
@@ -104,7 +100,7 @@ public class MboardServiceImpl implements MboardService{
 		
 		//첨부파일 정보 DB 기록
 		FileUpload fileUpload = new FileUpload();
-		fileUpload.setmBoardNo( mboard.getMboardNo() );
+		fileUpload.setmBoardNo( mboard.getMBoardNo() );
 		fileUpload.setFileUploadOri(fileUploadOri);
 		fileUpload.setFileUploadStor(fileUploadStor);
 		
@@ -114,8 +110,8 @@ public class MboardServiceImpl implements MboardService{
 	}
 
 	@Override
-	public List<HashMap<String, Object>> getAttachFile(int mboardNo) {
-		return mboardDao.selectMboardFileByMboardNo(mboardNo);
+	public FileUpload getAttachFile(Mboard mboard) {
+		return mboardDao.selectMboardFileByMboardNo(mboard);
 	}
 	
 	@Override
@@ -126,11 +122,6 @@ public class MboardServiceImpl implements MboardService{
 
 	@Override
 	public void update(Mboard mboard, MultipartFile file) {
-		
-		//게시글 처리
-		if("".equals( mboard.getMboardTitle())) {
-			mboard.setMboardTitle("(제목없음)");
-		}
 				
 		mboardDao.update(mboard);
 				
@@ -146,11 +137,11 @@ public class MboardServiceImpl implements MboardService{
 			storedFolder.mkdir();
 		}
 		//파일 저장 될 이름
-		String fileUploadOri = file.getOriginalFilename();
-		String fileUploadStor = fileUploadOri + UUID.randomUUID().toString().split("-")[4];
+		String originName = file.getOriginalFilename();
+		String storedName = originName + UUID.randomUUID().toString().split("-")[4];
 				
 		//저장할 파일의 정보 객체
-		File dest = new File( storedFolder, fileUploadStor );
+		File dest = new File( storedFolder, storedName );
 				
 		try {
 			file.transferTo(dest);
@@ -162,9 +153,9 @@ public class MboardServiceImpl implements MboardService{
 				
 		//첨부파일 정보 DB 기록
 		FileUpload fileUpload = new FileUpload();
-		fileUpload.setmBoardNo( mboard.getMboardNo() );
-		fileUpload.setFileUploadOri(fileUploadOri);
-		fileUpload.setFileUploadStor(fileUploadStor);
+		fileUpload.setmBoardNo( mboard.getMBoardNo() );
+		fileUpload.setFileUploadOri(originName);
+		fileUpload.setFileUploadStor(storedName);
 		
 		//기존 게시글에 연결된 첨부파일을 삭제한다
 		mboardDao.deleteFile(mboard);
@@ -179,24 +170,58 @@ public class MboardServiceImpl implements MboardService{
 		//첨부파일 삭제
 		mboardDao.deleteFile(mboard);
 		
+		mboardDao.deleteByMboardNo(mboard);
+		
 		//게시글 삭제
 		mboardDao.delete(mboard);
+	}
+
+	
+	@Override
+	public int insertLike(int mBoardNo, int memberNo) {
+		
+		MboardLike mboardLike = new MboardLike();
+		
+		mboardLike.setMemberNo(memberNo);
+		mboardLike.setMboardNo(mBoardNo);
+		
+		int likecnt = mboardDao.likecount(mboardLike);
+		
+		if ( likecnt == 0) {
+			mboardDao.insertLike(mboardLike);
+			likecnt = 1;
+		} else {
+			mboardDao.cancelLike(mboardLike);
+			likecnt = 0;
+		}
+		
+		return likecnt;
+	}
+
+	@Override
+	public int getLike(int memberNo, int mBoardNo) {
+		
+		MboardLike mboardLike = new MboardLike();
+		
+		mboardLike.setMemberNo(memberNo);
+		mboardLike.setMboardNo(mBoardNo);
+		
+		int likecnt = mboardDao.likecount(mboardLike);
+		
+		return likecnt;
+	}
+
+	@Override
+	public List<HashMap<String, Object>> searchKeyword(HashMap<String, Object> param) {
+		
+		return mboardDao.searchByKeyword(param);
 	}
 
 	
 
 
 
-//	@Override
-//	public void setMboardLike(MboardLike mboardLike) {
-//		
-//	}
-//
-//	@Override
-//	public Object getmboardlike(Member member) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+
 	
 	
 

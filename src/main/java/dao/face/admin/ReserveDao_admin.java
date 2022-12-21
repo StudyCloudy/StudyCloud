@@ -6,6 +6,7 @@ import java.util.Map;
 
 import dto.Reservation;
 import util.Paging;
+import util.PagingVUp;
 
 public interface ReserveDao_admin {
 
@@ -22,7 +23,7 @@ public interface ReserveDao_admin {
 	 * @param paging - 페이징 정보 객체
 	 * @return 페이징이 적용된 게시글 목록
 	 */
-	public List<HashMap<String, Object>> selectHash(Paging paging);
+	public List<HashMap<String, Object>> selectHash(PagingVUp paging);
 
 	/**
 	 * 게시글 번호를 이용하여 게시글을 조회한다

@@ -13,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,7 +29,7 @@ import service.face.admin.MemberService_admin;
 import service.face.admin.ReserveService_admin;
 import service.face.admin.SboardService_admin;
 import service.face.admin.SroomService_admin;
-import util.Paging;
+import util.PagingVUp;
 
 @Controller
 public class AdminController {
@@ -136,7 +135,7 @@ public class AdminController {
 		
 		logger.info("/admin/mento [GET]");
 		
-		Paging paging = applyMtService_admin.getPaging(curPage);
+		PagingVUp paging = applyMtService_admin.getPaging(curPage);
 		logger.debug("{}", paging);
 		model.addAttribute("paging", paging);
 		
@@ -167,7 +166,7 @@ public class AdminController {
 		
 		logger.info("/admin/study [GET]");
 		
-		Paging paging = sBoardService_admin.getPaging(curPage);
+		PagingVUp paging = sBoardService_admin.getPaging(curPage);
 		logger.debug("{}", paging);
 		model.addAttribute("paging", paging);
 		
@@ -199,7 +198,7 @@ public class AdminController {
 		
 		logger.info("/admin/studyroom [GET]");
 
-		Paging paging = sRoomService_admin.getPaging(curPage);
+		PagingVUp paging = sRoomService_admin.getPaging(curPage);
 		logger.info("{}", paging);
 		model.addAttribute("paging", paging);
 		
@@ -211,7 +210,8 @@ public class AdminController {
 	
 	//스터디룸 검색
 	@GetMapping("/admin/studyroom/search")
-	public String studyroomSearch(@RequestParam HashMap<String, Object> param, Model model) {
+	public String studyroomSearch(
+			@RequestParam HashMap<String, Object> param, Model model) {
 		
 		List<HashMap<String, Object>> searchlist = sRoomService_admin.searchName(param);
 		
@@ -323,7 +323,7 @@ public class AdminController {
 		
 		logger.info("/admin/qna [GET]");
 		
-		Paging paging = sRoomService_admin.getQnAPaging(curPage);
+		PagingVUp paging = sRoomService_admin.getQnAPaging(curPage);
 		model.addAttribute("paging", paging);
 		
 		List<HashMap<String, Object>> qna = sRoomService_admin.qnaList(paging);
@@ -378,7 +378,7 @@ public class AdminController {
 		
 		logger.info("/admin/reserve [GET]");
 		
-		Paging paging = reserveService_admin.getPaging(curPage);
+		PagingVUp paging = reserveService_admin.getPaging(curPage);
 		logger.debug("{}", paging);
 		model.addAttribute("paging", paging);
 		
@@ -427,7 +427,7 @@ public class AdminController {
 		
 		logger.info("/admin/member [GET]");
 		
-		Paging paging = memberService_admin.getPaging(curPage);
+		PagingVUp paging = memberService_admin.getPaging(curPage);
 		logger.debug("{}", paging);
 		model.addAttribute("paging", paging);
 		

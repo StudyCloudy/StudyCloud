@@ -21,7 +21,7 @@ $(document).ready(function() {
 		<th scope="col" style="width: 40%;">제목</th>
 		<th scope="col" style="width: 15%;">작성자</th>
 		<th scope="col" style="width: 10%;">조회수</th>
-		<th scope="col" style="width: 10%;">🤍</th>
+		<th scope="col" style="width: 10%;">❤️</th>
 		<th scope="col" style="width: 15%;">작성일</th>
 	</tr>
 </thead>

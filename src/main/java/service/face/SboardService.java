@@ -59,6 +59,10 @@ public interface SboardService {
 	//스터디 신청
 	public void applystudy(ApplyStudy applystudy);
 
+	//검색
+	public List<HashMap<String, Object>> searchKeyword(HashMap<String, Object> param);
+
+
 
 
 

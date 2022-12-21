@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.xml.crypto.Data;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,6 +29,7 @@ import dto.Mboard;
 import dto.MboardLike;
 import dto.Member;
 import service.face.MboardService;
+import service.face.SboardService;
 import util.Paging;
 
 @Controller
@@ -60,39 +63,40 @@ public class MboardController {
 	@RequestMapping("/mboard/detail")
 	public void mboarddetail(
 			
-			String memberId
-			,int mboardNo
+			Mboard mboard
 			,Model model
 //			,ModelAndView mav
 			
 			) {
 		
-		logger.debug("{}", mboardNo);
+		logger.debug("{}", mboard);
 		
 		//게시글 조회
-		HashMap<String, Object > Mboarddetail= mboardService.detail(mboardNo);
+		HashMap<String, Object > Mboarddetail= mboardService.detail(mboard);
 		logger.debug("조회된 게시글 {}", Mboarddetail);
-		
+	
 		//모델값 전달
 		model.addAttribute("detailMboard", Mboarddetail);
 		
 		//첨부파일 모델값 전달
-		List<HashMap<String, Object>> fileUpload = mboardService.getAttachFile(mboardNo);
+		FileUpload fileUpload = mboardService.getAttachFile(mboard);
+//		List<HashMap<String, Object>> fileUpload = mboardService.getAttachFile(mboardNo);
 		model.addAttribute("fileUpload", fileUpload);
 		
-		//좋아요 여부 데이터 가져오기
-//		model.addAttribute("like", mboardService.findmboardlike(mboardNo, memberId);
-//		model.addAttribute("getLike", mboardService.getmboardlike(mboardNo));
 		
 		return;
 		
 	}
 	
 	@GetMapping("/mboard/write")
-	public void write() {}
+	public void write(HttpSession session) {
+		
+		int memberNo = (int)session.getAttribute("member_no");
+	}
 	
 	@PostMapping("/mboard/write")
 	public String writeProcess(
+			
 			Mboard mboard,
 			MultipartFile file,
 			HttpSession session
@@ -102,12 +106,10 @@ public class MboardController {
 		logger.debug("{}", mboard);
 		logger.debug("{}", file);
 
-		//작성자 정보
-		int member_no = (int) session.getAttribute("member_no");
-		mboard.setMemberNo(member_no);
+		mboard.setMemberNo((int) session.getAttribute("member_no"));
 		logger.debug("{}", mboard);
 		
-		//게시글, 첨부파일 처리
+		//게시글 첨부파일 처리
 		mboardService.write(mboard, file);
 		
 		//번개게시판 메인으로 리다이렉트
@@ -119,22 +121,22 @@ public class MboardController {
 	@GetMapping("/mboard/update")
 	public void update(
 			
-			int mboardNo
+			Mboard mboard
 			,Model model
 			
 			) {
 		
-		logger.info("{}" , mboardNo);
+		logger.info("{}" , mboard);
 		//게시글 조회
-		HashMap<String, Object> Mboarddetail = mboardService.detail(mboardNo);
-		logger.debug("조회된 게시글 {}", Mboarddetail);
+		HashMap<String, Object> mboardDetail = mboardService.detail(mboard);
+		logger.debug("조회된 게시글 : {}" , mboardDetail);
 		
-		//모델값 전달
-		model.addAttribute("updateMboard", Mboarddetail);
+		model.addAttribute("updateMboard", mboardDetail);
 		
 		//첨부파일 모델값 전달
-		List<HashMap<String, Object>> fileupload = mboardService.getAttachFile(mboardNo);
-		model.addAttribute("fileupload", fileupload);
+		FileUpload fileupload = mboardService.getAttachFile(mboard);
+		model.addAttribute("fileUpload", fileupload);
+		
 		
 		
 	}
@@ -148,14 +150,10 @@ public class MboardController {
 			
 			) {
 		logger.debug("{}", mboard);
-		logger.debug("{}", file);
-		
-		//작성자 정보
-		mboard.setMemberNo( (int)session. getAttribute("member_no"));
 		
 		mboardService.update(mboard, file);
 		
-		return "redirect:/mboard/detail";
+		return "redirect:/mboard/detail?mBoardNo=" + mboard.getMBoardNo();
 		
 		
 	}
@@ -170,7 +168,7 @@ public class MboardController {
 		
 		//첨부파일 정보 객체
 		fileUpload = mboardService.getFile(fileUpload);
-		logger.debug("{}", fileUpload);
+		logger.info("fileUpload : {}", fileUpload);
 		
 		//모델값 전달
 		model.addAttribute("downFile", fileUpload);
@@ -195,54 +193,58 @@ public class MboardController {
 	
 	//------------------------------------------------------------------------
 	
-	//좋아요 등록
-//	@Transactional(rollbackFor = Exception.class)
-//	@PostMapping("/mboard/detail")
-//	public ResponseEntity<String> mboardLike (
-//			
-//			@RequestBody MboardLike mboardLike
-//			
-//			) {
-//		ResponseEntity<String> entity = null;
-//		logger.info("좋아요");
-//		
-//		try {
-//			mboardService.setMboardLike(mboardLike);
-//			entity = new ResponseEntity<String>("success", HttpStatus.OK);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			entity = new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
-//		}
-//		
-//		return entity;
-//		
-//	}
-//	
-	//좋아요 취소
-//	@Transactional(rollbackFor = Exception.class)
-//	@DeleteMapping("/mboard/detail")
-//	public ResponseEntity<String> mboardLikeCancel (
-//			
-//			MboardLike mboardLike
-//			
-//			) {
-//		
-//		ResponseEntity<String> entity = null;
-//		logger.info("좋아요 취소");
-//		
-//		try {
-//			mboardService.setMboardLike(mboardLike);
-//			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			entity = new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
-//		}
-//		
-//		return entity;
-//		
-//	}
-//	
+	@RequestMapping("/mboard/mboardLike")
+	public @ResponseBody int res (
+			
+			int mBoardNo
+			,HttpSession session 
+			
+			) {
+		//작성자 정보
+		int memberNo = (int) session.getAttribute("member_no");
+		
+		int res = mboardService.insertLike(mBoardNo, memberNo);
+		logger.info("{}", res);
+		
+		return res;
+	}
+	
+	//-------------------------------------------------------------------------
+	
+	@GetMapping("/mboard/search")
+	public String mboardSearch(
+			
+			@RequestParam HashMap<String, Object> param
+			, Model model
+			
+			) {
+		
+		List<HashMap<String,Object>> searchResult = mboardService.searchKeyword(param);
+		logger.debug("{}", searchResult);
+		model.addAttribute("searchResult", searchResult);
+		
+		return "/mboard/mboardSearch";
+	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

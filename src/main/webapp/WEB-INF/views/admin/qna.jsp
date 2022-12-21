@@ -92,7 +92,7 @@ a {
 				<table class="table">
 					<thead>
                         <tr>
-                            <th scope="col">No</th>
+                            <th scope="col">NO</th>
                             <th scope="col">스터디룸 명</th>
                             <th scope="col">제목</th>
                             <th scope="col">아이디</th>
@@ -106,23 +106,23 @@ a {
                    	<c:choose>
                        <c:when test="${qna.SROOMQNA_STEP eq 0 }"> <!-- 문의글일 경우 -->
                        <tr>
-                           	<td>${qna.SROOMQNA_NO }</td>
+                           	<td class="text-center">${qna.SROOMQNA_NO }</td>
                            	<td><a href="/sRoom/detail?sRoomNo=${qna.SROOM_NO }">${qna.SROOM_NAME }</a></td>
 							<td><a href="/admin/qna/view?sRoomQnaNo=${qna.SROOMQNA_NO }&sRoomNo=${qna.SROOM_NO }">${qna.SROOMQNA_TITLE }</a></td>
-							<td>${qna.MEMBER_ID }</td>
-							<td>${qna.MEMBER_NICK }</td>
-							<td><fmt:formatDate value="${qna.SROOMQNA_DATE }" pattern="yy-MM-dd" /></td>
+							<td class="text-center">${qna.MEMBER_ID }</td>
+							<td class="text-center">${qna.MEMBER_NICK }</td>
+							<td class="text-center"><fmt:formatDate value="${qna.SROOMQNA_DATE }" pattern="yy-MM-dd" /></td>
 		               </tr>
 		               </c:when>
                        <c:when test="${qna.SROOMQNA_STEP ne 0 }"> <!-- 답변글일 경우 -->
                        <tr>
-                           	<td>${qna.SROOMQNA_NO }</td>
+                           	<td class="text-center">${qna.SROOMQNA_NO }</td>
                            	<td><a href="/sRoom/detail?sRoomNo=${qna.SROOM_NO }">${qna.SROOM_NAME }</a></td>
 							<td><a href="/admin/qna/view?sRoomQnaNo=${qna.SROOMQNA_NO }&sRoomNo=${qna.SROOM_NO }">
 									<i class="fa-solid fa-reply fa-rotate-180"></i>RE : ${qna.SROOMQNA_TITLE }</a></td>
-							<td>${qna.MEMBER_ID }</td>
-							<td>${qna.MEMBER_NICK }</td>
-							<td><fmt:formatDate value="${qna.SROOMQNA_DATE }" pattern="yy-MM-dd" /></td>
+							<td class="text-center">${qna.MEMBER_ID }</td>
+							<td class="text-center">${qna.MEMBER_NICK }</td>
+							<td class="text-center"><fmt:formatDate value="${qna.SROOMQNA_DATE }" pattern="yy-MM-dd" /></td>
 		               </tr>
 		               </c:when>
                    	</c:choose>

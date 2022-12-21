@@ -108,6 +108,15 @@ public interface MypageDao {
 	 * @return
 	 */
 	public List<HashMap<String, Object>> mystudy(String id);
+	
+	
+	/**
+	 * 좋아요리스트 조회
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public List<HashMap<String, Object>> likelist(String id);
 
 
 	

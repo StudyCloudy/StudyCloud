@@ -13,6 +13,7 @@ import dto.Member;
 import dto.StudyBoard;
 import service.face.admin.SboardService_admin;
 import util.Paging;
+import util.PagingVUp;
 
 @Service
 public class SboardServiceImpl_admin implements SboardService_admin {
@@ -28,20 +29,20 @@ public class SboardServiceImpl_admin implements SboardService_admin {
 	}
 
 	@Override
-	public Paging getPaging(int curPage) {
+	public PagingVUp getPaging(int curPage) {
 		
 		//총 게시글 수 조회
 		int totalCount = sBoardDao_admin.selectCntAll();
 		
 		//페이징 계산
-		Paging paging = new Paging(totalCount, curPage);
+		PagingVUp paging = new PagingVUp(totalCount, curPage);
 		
 		return paging;
 	}
 
 	//스터디 등록 조회
 	@Override
-	public List<StudyBoard> list(Paging paging) {
+	public List<StudyBoard> list(PagingVUp paging) {
 		return sBoardDao_admin.selectStudyList(paging);
 	}
 

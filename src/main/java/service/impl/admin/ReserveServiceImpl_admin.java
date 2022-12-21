@@ -2,7 +2,6 @@ package service.impl.admin;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Service;
 import dao.face.admin.ReserveDao_admin;
 import dto.Reservation;
 import service.face.admin.ReserveService_admin;
-import util.Paging;
+import util.PagingVUp;
 
 @Service
 public class ReserveServiceImpl_admin implements ReserveService_admin {
@@ -22,13 +21,13 @@ public class ReserveServiceImpl_admin implements ReserveService_admin {
 	@Autowired  ReserveDao_admin reserveDao_admin;
 	
 	@Override
-	public Paging getPaging(int curPage) {
+	public PagingVUp getPaging(int curPage) {
 		
 		//총 게시글 수 조회;
 		int totalCount = reserveDao_admin.selectCntAll();
 		
 		//페이징 계산
-		Paging paging = new Paging(totalCount, curPage);
+		PagingVUp paging = new PagingVUp(totalCount, curPage);
 		
 		return paging;
 	}

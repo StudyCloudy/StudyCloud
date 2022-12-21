@@ -10,6 +10,7 @@ import dto.FileUpload;
 import dto.SroomQna;
 import dto.StudyRoom;
 import util.Paging;
+import util.PagingVUp;
 
 public interface SroomService_admin {
 
@@ -23,7 +24,7 @@ public interface SroomService_admin {
 	 * @param curPage - 요청 페이지 번호
 	 * @return 계산이 완료된 Paging 객체
 	 */
-	public Paging getPaging(int curPage);
+	public PagingVUp getPaging(int curPage);
 
 	/**
 	 * 페이징이 적용된 게시글 목록 조회
@@ -31,7 +32,7 @@ public interface SroomService_admin {
 	 * @param paging - 페이징 정보 객체
 	 * @return 페이징이 적용된 게시글 목록
 	 */
-	public List<StudyRoom> list(Paging paging);
+	public List<StudyRoom> list(PagingVUp paging);
 	
 	/**
 	 * 게시글 정보와 첨부파일을 함께 처리한다
@@ -87,7 +88,7 @@ public interface SroomService_admin {
 	 * @param curPage - 요청 페이지 번호
 	 * @return 계산이 완료된 Paging 객체
 	 */
-	public Paging getQnAPaging(int curPage);
+	public PagingVUp getQnAPaging(int curPage);
 	
 	/**
 	 * 게시글 정보로 QnA를 함께 조회한다
@@ -95,7 +96,7 @@ public interface SroomService_admin {
 	 * 
 	 * @return QnA 리스트
 	 */
-	public List<HashMap<String, Object>> qnaList(Paging paging);
+	public List<HashMap<String, Object>> qnaList(PagingVUp paging);
 
 	/**
 	 * 게시글 상세보기

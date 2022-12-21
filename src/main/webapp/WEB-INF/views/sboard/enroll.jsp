@@ -208,7 +208,7 @@ function check() {
 		<div class="enrollbtn" style="text-align: center;">
 <!-- 		<input class="btn btn-primary" type="submit" value="신청하기" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="background-color: #6cc4dc; border: none;"> -->
 <!-- 		 <button class="btn btn-primary" type="submit" data-bs-target="staticBackdrop" data-bs-toggle="modal" style="background-color: #6cc4dc; border: none;">신청하기</button> -->
-		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="background-color: #6cc4dc; border: none;">등록하기</button> 
+		<button type="button" id="btnEnroll" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="background-color: #6cc4dc; border: none;">등록하기</button> 
 		</div>
 		
 		 

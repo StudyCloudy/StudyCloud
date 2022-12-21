@@ -5,6 +5,7 @@ import java.util.List;
 
 import dto.Member;
 import util.Paging;
+import util.PagingVUp;
 
 public interface MemberService_admin {
 
@@ -18,7 +19,7 @@ public interface MemberService_admin {
 	 * @param curPage - 요청 페이지 번호
 	 * @return 계산이 완료된 Paging 객체
 	 */
-	public Paging getPaging(int curPage);
+	public PagingVUp getPaging(int curPage);
 
 	/**
 	 * 페이징이 적용된 게시글 목록 조회
@@ -26,7 +27,7 @@ public interface MemberService_admin {
 	 * @param paging - 페이징 정보 객체
 	 * @return 페이징이 적용된 게시글 목록
 	 */
-	public List<Member> list(Paging paging);
+	public List<Member> list(PagingVUp paging);
 
 	//로그인
 	

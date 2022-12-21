@@ -8,6 +8,7 @@ import dto.FileUpload;
 import dto.SroomQna;
 import dto.StudyRoom;
 import util.Paging;
+import util.PagingVUp;
 
 public interface SroomDao_admin {
 	
@@ -24,7 +25,7 @@ public interface SroomDao_admin {
 	 * @param paging - 페이징 정보 객체
 	 * @return 페이징이 적용된 게시글 목록
 	 */
-	public List<StudyRoom> selectList(Paging paging);
+	public List<StudyRoom> selectList(PagingVUp paging);
 	
 	/**
 	 * 스터디룸 검색
@@ -128,7 +129,7 @@ public interface SroomDao_admin {
 	 * @param studyroom - 게시글 번호
 	 * @return QnA 리스트
 	 */
-	public List<HashMap<String, Object>> qnaList(Paging paging);
+	public List<HashMap<String, Object>> qnaList(PagingVUp paging);
 
 	/**
 	 * 게시글 번호를 이용하여 게시글을 조회한다

@@ -12,6 +12,7 @@ import dto.ApplyMt;
 import dto.Member;
 import service.face.admin.ApplyMtService_admin;
 import util.Paging;
+import util.PagingVUp;
 
 @Service
 public class ApplyMtServiceImpl_admin implements ApplyMtService_admin {
@@ -27,20 +28,20 @@ public class ApplyMtServiceImpl_admin implements ApplyMtService_admin {
 	}
 
 	@Override
-	public Paging getPaging(int curPage) {
+	public PagingVUp getPaging(int curPage) {
 		
 		//총 게시글 수 조회
 		int totalCount = applyMtDao_admin.selectCntAll();
 		
 		//페이징 계산
-		Paging paging = new Paging(totalCount, curPage);
+		PagingVUp paging = new PagingVUp(totalCount, curPage);
 		
 		return paging;
 	}
 
 	//멘토 등록 조회
 	@Override
-	public List<ApplyMt> list(Paging paging) {
+	public List<ApplyMt> list(PagingVUp paging) {
 		return applyMtDao_admin.selectApplyList(paging);
 	}
 

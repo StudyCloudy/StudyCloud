@@ -56,6 +56,9 @@ public interface SboardDao {
 	//스터디 신청
 	public void apply(ApplyStudy applystudy);
 
+	//검색
+	public List<HashMap<String, Object>> searchByKeyword(HashMap<String, Object> param);
+
 
 
 

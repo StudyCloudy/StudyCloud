@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/JavaScript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-<link rel="stylesheet" href="/resources/css/mntBoardView.css?ver=3"> 
+<link rel="stylesheet" href="/resources/css/mntBoardView.css?ver=4"> 
 <script src="../resources/js/mntBoardView.js?ver=1"></script>
 
 <script type="text/javascript">
@@ -58,6 +58,7 @@ $(document).ready(function() {
 			location.href = "/mntboard/update?mntboardNo=${mntViewBoard.MNTBOARD_NO}"
 	 })
 	$("#MntbtnDelete").click(function() {
+		alert('게시글을 삭제하였습니다.')
 		location.href = "/mntboard/delete?mntboardNo=${mntViewBoard.MNTBOARD_NO}"
 	}) 
 	

@@ -12,7 +12,7 @@
 	</select>
 	
 	<!-- 예약 리스트 조회 -->
-	<select id="selectHash" resultType="hashmap" parameterType="util.Paging">
+	<select id="selectHash" resultType="hashmap" parameterType="PagingVUp">
 		SELECT * FROM (
 			SELECT rownum rnum, B.* FROM (
 				SELECT m.member_no, m.member_name, m.member_phone

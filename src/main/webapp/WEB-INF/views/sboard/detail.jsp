@@ -44,31 +44,38 @@ function check() {
 	
 	var form = document.userInfo;
 	
-	if (!form.username.value){
+	if (!form.memberName.value){
 		alert("이름을 입력하세요.")
 		return false;
 	}
 		
-	if (!form.userage.value){
+	if (!form.memberAge.value){
 		alert("나이를 입력하세요.")
 		return false;
 	}
 	
-	if (!form.usershelter.value){
+	if (!form.memberAddress.value){
 		alert("거주하는 지역을 입력하세요.")
 		return false;
 	}
 	
-	if (!form.userjob.value){
+	if (!form.memberJob.value){
 		alert("직업을 입력하세요")
 		return false;
 	}
 	
-	if (!form.usermotto.value){
+	if (!form.memberIntro.value){
 		alert("스터디에 참여하고 싶은 이유와 한 줄 포부를 입력하세요.")
 		return false;
 	}
 }
+
+$(document).ready(function(){
+	$("#btnApply").click(function(){
+		alert("스터디 신청이 성공적으로 완료되었습니다! 마이페이지 -> 나의 스터디에서 신청내역을 확인하실 수 있습니다.");
+		$("form").submit();
+	})
+})
 
 	
 // 		$(document).ready(function() {
@@ -110,6 +117,7 @@ $(document).ready(function() {
 	})
 	
 	$("#btnDelete").click(function() {
+		alert("스터디를 삭제하시겠습니까?")
 		location.href = "/sboard/delete?studyNo=${detailSboard.STUDY_NO }"
 	})
 })
@@ -157,20 +165,6 @@ $(document).ready(function() {
 	})
 })
 
-</script>
-
-<script type="text/javascript">
-$(document).ready(function(){
-	$("#btnApply").click(function(){
-		$("form").submit();
-	})
-})
-
-$(document).ready(function(){
-	$("#btnGoMypage").click(function(){
-		$("form").submit();
-	})
-})
 </script>
 
 
@@ -391,35 +385,35 @@ textarea:focus {
 	<div class="modal-dialog modal-lg modal-dialog-centered">
 			<div class="modal-content">
 			<div class="modal-header">
-				<h1 class="modal-title fs-5" id="exampleModalLabel">스터디 신청을 환영합니다!</h1>
+				<h1 class="modal-title fs-5" id="exampleModalLabel">${detailSboard.STUDY_TITLE }</h1>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
-				<form action="/sboard/applyStudy" method="post" class="applyform" name="userInfo" onsubmit="return check()">
+				<form action="/sboard/applyStudy" method="post" class="applyform" name="userInfo" enctype="multipart/form-data" onsubmit="return check()">
 			<div class="modal-body">
 					<div class="input-group mb-3">
 						<span class="input-group-text">✔️</span>
 						<div class="form-floating">
-							<input type="text" class="form-control" id="username" placeholder="성함을 입력해주세요"> 
+							<input type="text" class="form-control" id="memberName" name="memberName" placeholder="성함을 입력해주세요"> 
 							<label for="floatingInputGroup1">성함을 입력해주세요.</label>
 						</div>
 					</div>
 					<div class="input-group mb-3">
 						<span class="input-group-text">❓</span>
 						<div class="form-floating">
-							<input type="text" class="form-control" id="userage" placeholder="나이를 입력해주세요"> 
+							<input type="text" class="form-control" id="memberAge" name="memberAge" placeholder="나이를 입력해주세요"> 
 							<label for="floatingInputGroup1">나이를 입력해주세요.</label>
 						</div>
 					</div>
 					<div class="input-group mb-3">
 						<span class="input-group-text">🏠</span>
 						<div class="form-floating">
-							<input type="text" class="form-control" id="usershelter" placeholder="거주하는 지역을 입력해주세요"> 
+							<input type="text" class="form-control" id="memberAddress" name="memberAddress" placeholder="거주하는 지역을 입력해주세요"> 
 							<label for="floatingInputGroup1">거주하는 지역을 입력해주세요.</label>
 						</div>
 					</div>
 					<div class="input-group mb-3">
 						<label class="input-group-text" for="inputGroupSelect01">👨</label>
-						<select class="form-select" id="userjob" style="background-color: #F2F2F2; height: 60px; border: none;">
+						<select class="form-select" id="memberJob" name="memberJob" style="background-color: #F2F2F2; height: 60px; border: none;">
 							<option selected>어떤 일을 하시나요?</option>
 							<option value="1">학생</option>
 							<option value="2">취준생</option>
@@ -431,41 +425,39 @@ textarea:focus {
 					</div>
 					<br>
 					<div class="form-floating">
-						<textarea class="form-control" id="usermotto" style="height: 100px;"></textarea>
+						<textarea class="form-control" id="memberIntro" name="memberIntro" style="height: 100px;"></textarea>
 						<label for="floatingTextarea2">스터디에 참여하고 싶은 이유와 한 줄 포부를 작성해주세요.</label>
 					</div>
 
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" id="btnCancel" data-bs-dismiss="modal" style="border: none;">취소</button>
-				<input class="btn btn-primary" type="submit" value="신청하기" id="btnApply" style="background-color: #6cc4dc; border: none;" data-bs-target="#exampleModalToggle2">
+				<input class="btn btn-primary" type="button" value="신청하기" id="btnApply" style="background-color: #6cc4dc; border: none;" data-bs-target="#exampleModalToggle2">
 <!-- 				<button type="button" class="btn btn-primary" id="btnApply" style="background-color: #6cc4dc; border: none;">신청하기</button> -->
 			</div>
 				</form>
-<!-- 			</form> -->
 		</div>
 	</div>
 </div><!-- 첫번째 모달 끝 -->
 
-<!-- 두번째 모달 -->
-<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Success!</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      	스터디 신청이 성공적으로 완료되었습니다.
-      	'마이페이지 ➡️ 나의 스터디' 로 이동하여 스터디 신청내역을 확인하실 수 있습니다.
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-primary" type="submit" id="btnGoMypage" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">확인</button>
-      </div>
-    </div>
-  </div>
-</div>
-
+<!-- <!-- 두번째 모달 --> -->
+<!-- <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1"> -->
+<!--   <div class="modal-dialog modal-dialog-centered"> -->
+<!--     <div class="modal-content"> -->
+<!--       <div class="modal-header"> -->
+<!--         <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Success!</h1> -->
+<!--         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+<!--       </div> -->
+<!--       <div class="modal-body"> -->
+<!--       	스터디 신청이 성공적으로 완료되었습니다. -->
+<!--       	'마이페이지 ➡️ 나의 스터디' 로 이동하여 스터디 신청내역을 확인하실 수 있습니다. -->
+<!--       </div> -->
+<!--       <div class="modal-footer"> -->
+<!--         <button class="btn btn-primary" type="submit" id="btnGoMypage" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">확인</button> -->
+<!--       </div> -->
+<!--     </div> -->
+<!--   </div> -->
+<!-- </div> -->
 
 
 
@@ -474,7 +466,6 @@ textarea:focus {
 
 				</div>
 			</div>
-		</div>
 </section>
 		
 <!-- 				<div class="whole2"> -->

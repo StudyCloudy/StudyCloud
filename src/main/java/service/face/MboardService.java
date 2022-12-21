@@ -29,19 +29,26 @@ public interface MboardService {
 	 */
 	public List<HashMap<String, Object>> selectMboardHash(Paging paging);
 	
+//	/**
+//	 * 사용자 정보 불러오기
+//	 * @param memberNo
+//	 * @return
+//	 */
+//	public String getUserNick(int memberNo);
+//	
 	/**
 	 * 게시글 상세 조회
 	 * @param mboardNo - 게시글 번호로 상세 조회
 	 * @return
 	 */
-	public HashMap<String, Object> detail(int mboardNo);
+	public HashMap<String, Object> detail(Mboard mboard);
 	
 	/**
 	 * 게시글 번호로 파일 첨부하기
 	 * @param mboardNo
 	 * @return
 	 */
-	public List<HashMap<String, Object>> getAttachFile(int mboardNo);
+	public FileUpload getAttachFile(Mboard mboard);
 
 	/**
 	 * 게시글 작성
@@ -70,19 +77,24 @@ public interface MboardService {
 	 * @param mboard
 	 */
 	public void delete(Mboard mboard);
-//
-//	/**
-//	 * 좋아요
-//	 * @param mboardLike
-//	 */
-//	public void setMboardLike(MboardLike mboardLike);
-//	
-//	/**
-//	 * 찜 여부 확인
-//	 * @param member
-//	 * @return
-//	 */
-//	public Object getmboardlike(Member member);
+
+	/**
+	 * 좋아요
+	 * @param mboardNo
+	 * @param memberNo
+	 * @return
+	 */
+	public int insertLike(int mBoardNo, int memberNo);
+	
+	public int getLike(int memberNo, int mBoardNo);
+
+	/**
+	 * 검색
+	 * @param param
+	 * @return
+	 */
+	public List<HashMap<String, Object>> searchKeyword(HashMap<String, Object> param);
+
 	
 	
 

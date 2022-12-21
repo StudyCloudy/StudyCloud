@@ -62,7 +62,7 @@
 		<select id='messagelist' resultType='hashmap'>
 		select *
 		from message s
-		join member m on s.member_no = m.member_no and m.withdrawal = 'N'
+		join member m on s.member_no = m.member_no 
 		join fileupload f on s.member_no = f.member_no
 		where m.member_id = #{id} 
 		and f.fboard_no is null 
@@ -77,7 +77,7 @@
    		<select id='wishlist' resultType='hashmap'>
 		select *
 		from studymark sm
-		join member m on sm.member_no = m.member_no and m.withdrawal = 'N'
+		join member m on sm.member_no = m.member_no
         left join reservation r on m.member_no = r.member_no
         left join studyroom sr on r.sroom_no = sr.sroom_no
 		left join fileupload f on sr.sroom_no = f.sroom_no
@@ -94,18 +94,29 @@
 	<!-- 마이스터디 조회 -->
 	<select id='mystudy' resultType='hashmap'>
 		select *
-        from member m
-		left join applymnt a on m.member_no = a.member_no
+        from applymnt a
 		left join fileupload f on a.member_no = f.member_no
 		left join mtboard mt on a.member_no = mt.member_no
 		left  join studyboard sb on a.member_no = sb.member_no
-		 where m.withdrawal = 'N'
 		and f.fboard_no is null
 		and f.mtboard_no is null
 		and f.mntboard_no is null and f.mboard_no is null and f.sroom_no is null
 		order by a.member_no desc
 	</select>
-   		
+	
+	
+	<!-- 좋아요리스트 조회 -->
+	<select id='likelist' resultType='hashmap'>
+		select *
+		from mboard m
+		left join fileupload f on m.member_no = f.member_no
+		left join mboardlike ml on m.member_no = ml.member_no
+		left join mntboard nt on m.member_no = nt.member_no
+		left join mntboardlike nl on m.member_no = nl.member_no
+		and f.mboard_no is null
+		and f.mntboard_no is null
+		order by m.member_no desc
+	</select>
 
 
 </mapper>

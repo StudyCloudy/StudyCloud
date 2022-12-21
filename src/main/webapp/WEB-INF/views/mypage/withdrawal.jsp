@@ -29,7 +29,7 @@ $(document).ready(function(e){
 		
 		//입력한 패스워드가 같인지 체크
 		if($('#passwdCheck').val() != $('#memberPw').val()){
-		//	alert("패스워드가 일치하지 않습니다.");
+			alert("패스워드가 일치하지 않습니다.");
 			$('#passwdCheck').focus();
 			return;
 		}
@@ -47,7 +47,7 @@ $(document).ready(function(e){
 				success: function(data){
 					if(data=="success"){
 						alert("탈퇴되었습니다");
-						window.location.href = '/mainpage'
+						window.location.href = '/login/logout'
 					}else if (data == "disaccord"){
 						alert("입력하신 비밀번호와 회원정보가 일치하지 않습니다.");
 					} else {
@@ -82,6 +82,7 @@ body {
 	border: 0;
 	border-radius: 0px;
 	margin-bottom: 30px;
+	width: 50%;
 	-webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.03);
 	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.03);
 	-webkit-transition: .5s;
@@ -166,7 +167,7 @@ body {
 
 /* button css */
 
-#withdrawal {
+#withdrawalBtn {
 	width: 50%;
 	padding: 12px;
 	margin-bottom: 10px;
@@ -231,7 +232,7 @@ body {
 							<!-- 버튼 -->
 
 							<div class=buts>
-								<button class="btn btn-bold btn-primary" id="withdrawal">탈퇴하기</button>
+								<button class="btn btn-bold btn-primary" id="withdrawalBtn">탈퇴하기</button>
 							</div><br><br>
 						</div>
 					</form>
