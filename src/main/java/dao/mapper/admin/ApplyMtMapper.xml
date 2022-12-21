@@ -35,7 +35,7 @@
 		</association>
 	</resultMap>
 	
-	<select id="selectApplyList" resultMap="ApplyMtMap" parameterType="Paging">
+	<select id="selectApplyList" resultMap="ApplyMtMap" parameterType="PagingVUp">
 		SELECT * FROM (
 			SELECT rownum rnum, S.* FROM (
 				SELECT A.applymt_no, A.field, A.applymt_content, A.applymt_date

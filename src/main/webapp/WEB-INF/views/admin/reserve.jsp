@@ -151,13 +151,13 @@ $(document).ready(function() {
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>스터디룸 명</th>
-                            <th>예약자</th>
-                            <th>휴대폰 번호</th>
-                            <th>예약일시</th>
-                            <th>예약인원</th>
-                            <th>관리</th>
+                            <th scope="col">NO</th>
+                            <th scope="col">스터디룸 명</th>
+                            <th scope="col">예약자</th>
+                            <th scope="col">휴대폰 번호</th>
+                            <th scope="col">예약일시</th>
+                            <th scope="col">예약인원</th>
+                            <th scope="col">관리</th>
                         </tr>
                     </thead>
                     <tbody class="reserveList" id="reserveList">

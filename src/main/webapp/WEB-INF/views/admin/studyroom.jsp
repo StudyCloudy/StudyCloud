@@ -146,10 +146,10 @@ $(document).ready(function() {
                 
 			<thead>
 				<tr>
-					<th>글번호</th>
-					<th>스터디룸 명</th>
-					<th>한줄 소개</th>
-					<th>가격</th>
+					<th scope="col">NO</th>
+					<th scope="col">스터디룸 명</th>
+					<th scope="col">한줄 소개</th>
+					<th scope="col">가격</th>
 				</tr>
 			</thead>
 			<tbody>

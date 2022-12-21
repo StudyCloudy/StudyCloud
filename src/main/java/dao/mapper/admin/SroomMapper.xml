@@ -13,7 +13,7 @@
 	</select>
 	
 	<!-- 게시글 리스트 -->
-	<select id="selectList" resultType="StudyRoom" parameterType="Paging">
+	<select id="selectList" resultType="StudyRoom" parameterType="PagingVUp">
 		SELECT * FROM (
 			SELECT rownum rnum, S.* FROM (
 				SELECT
@@ -26,7 +26,7 @@
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
 	</select>
 	
-	<!-- 게시글 검색 -->
+ 	<!-- 게시글 검색 -->
 	<select id="searchName" resultType="hashmap" parameterType="hashmap">
 		SELECT *
 		FROM studyroom
@@ -122,7 +122,7 @@
 	</select>
 	
 	<!-- 스터디룸 QnA 리스트 -->
-	<select id="qnaList" resultType="hashmap" parameterType="util.Paging">
+	<select id="qnaList" resultType="hashmap" parameterType="PagingVUp">
 		SELECT * FROM (
 			SELECT rownum rnum, B.* FROM (
 				SELECT
@@ -135,7 +135,7 @@
 				ON Q.sroom_no = S.sroom_no
 				JOIN member M
 				ON Q.member_no = M.member_no
-				ORDER BY sroomqna_grpno, sroomqna_grpord, sroomqna_no
+				ORDER BY sroomqna_grpno DESC, sroomqna_grpord ASC, sroomqna_no DESC
 			) B
 		) studyroomqna
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
@@ -163,14 +163,18 @@
 
 	<!-- QnA 게시글 목록 미리보기 -->
 	<select id="previewQna" resultType="hashmap">
-		SELECT S.*, M.*, Q.*
-		FROM studyroom S
-		JOIN studyroomqna Q
-		ON S.sroom_no = Q.sroom_no
+		SELECT
+			Q.sroomqna_no, Q.sroomqna_title, Q.sroomqna_content, Q.sroomqna_date
+			, Q.sroomqna_grpno, Q.sroomqna_grpord, Q.sroomqna_step
+			, S.sroom_no, S.sroom_name
+			, M.member_no, M.member_nick, M.member_id
+		FROM studyroomqna Q
+		JOIN studyroom S
+		ON Q.sroom_no = S.sroom_no
 		JOIN member M
 		ON Q.member_no = M.member_no
 		<![CDATA[WHERE rownum <= 5]]> 
-		ORDER BY sroomqna_grpno, sroomqna_grpord, Q.sroomqna_no
+		ORDER BY sroomqna_grpno DESC, sroomqna_grpord ASC, sroomqna_no DESC
 	</select>
 	
 	<!-- ========== 메인페이지 ========== -->

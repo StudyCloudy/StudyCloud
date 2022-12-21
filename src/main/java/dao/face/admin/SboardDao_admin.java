@@ -7,6 +7,7 @@ import java.util.Map;
 import dto.Member;
 import dto.StudyBoard;
 import util.Paging;
+import util.PagingVUp;
 
 public interface SboardDao_admin {
 
@@ -31,7 +32,7 @@ public interface SboardDao_admin {
 	 * @param paging - 페이징 정보 객체
 	 * @return 페이징이 적용된 게시글 목록
 	 */
-	public List<StudyBoard> selectStudyList(Paging paging);
+	public List<StudyBoard> selectStudyList(PagingVUp paging);
 	
 	/**
 	 * 회원 번호를 이용해 회원 정보를 변경한다

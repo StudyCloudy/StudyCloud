@@ -122,6 +122,19 @@ body {
 	left: calc(50% - 50px)
 }
 
+/* 메인페이지 이동 링크 */
+.mainLink {
+	text-decoration: none;
+	font-size: 14px;
+	color: #6cc4dc;
+	float: right;
+	margin-top: 10px;
+}
+
+.mainLink:hover {
+	color: #3f92b7;
+}
+	
 </style>
 
 </head>
@@ -154,6 +167,10 @@ body {
 
 			<div class="d-flex justify-content-center">
               <button class="btn btn-lg btn-primary" id="btnLogin" type="submit">Sign in</button>
+			</div>
+			
+			<div class="d-flex">
+              <a href="/mainpage" class="mainLink">메인페이지로 ></a>
 			</div>
 			
           </div>

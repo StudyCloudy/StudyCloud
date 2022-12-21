@@ -20,7 +20,7 @@ import dto.FileUpload;
 import dto.SroomQna;
 import dto.StudyRoom;
 import service.face.admin.SroomService_admin;
-import util.Paging;
+import util.PagingVUp;
 
 @Service
 public class SroomServiceImpl_admin implements SroomService_admin {
@@ -32,19 +32,19 @@ public class SroomServiceImpl_admin implements SroomService_admin {
 	@Autowired ServletContext context; //파일 업로드
 
 	@Override
-	public Paging getPaging(int curPage) {
+	public PagingVUp getPaging(int curPage) {
 		
 		//총 게시글 수 조회;
 		int totalCount = sRoomDao_admin.selectCntAll();
 		
 		//페이징 계산
-		Paging paging = new Paging(totalCount, curPage);
+		PagingVUp paging = new PagingVUp(totalCount, curPage);
 		
 		return paging;
 	}
 
 	@Override
-	public List<StudyRoom> list(Paging paging) {
+	public List<StudyRoom> list(PagingVUp paging) {
 		return sRoomDao_admin.selectList(paging);
 	}
 
@@ -203,19 +203,19 @@ public class SroomServiceImpl_admin implements SroomService_admin {
 	
 	//QnA 리스트
 	@Override
-	public Paging getQnAPaging(int curPage) {
+	public PagingVUp getQnAPaging(int curPage) {
 		
 		//총 게시글 수 조회;
 		int totalCount = sRoomDao_admin.selectCntQna();
 		
 		//페이징 계산
-		Paging paging = new Paging(totalCount, curPage);
+		PagingVUp paging = new PagingVUp(totalCount, curPage);
 		
 		return paging;
 	}
 
 	@Override
-	public List<HashMap<String, Object>> qnaList(Paging paging) {
+	public List<HashMap<String, Object>> qnaList(PagingVUp paging) {
 		
 		return sRoomDao_admin.qnaList(paging);
 	}
@@ -241,11 +241,5 @@ public class SroomServiceImpl_admin implements SroomService_admin {
 		
 		return sRoomDao_admin.selectMap();
 	}
-
-
-
-
-
-
 
 }

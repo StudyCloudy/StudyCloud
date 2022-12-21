@@ -149,13 +149,13 @@ $(document).ready(function() {
 	                <table class="table">
 	                    <thead>
 	                        <tr>
-	                            <th>No</th>
-	                            <th>아이디</th>
-	                            <th>닉네임</th>
-	                            <th>이름</th>
-	                            <th>이메일</th>
-	                            <th>연락처</th>
-	                            <th>회원등급</th>
+	                            <th scope="col">NO</th>
+	                            <th scope="col">아이디</th>
+	                            <th scope="col">닉네임</th>
+	                            <th scope="col">이름</th>
+	                            <th scope="col">이메일</th>
+	                            <th scope="col">연락처</th>
+	                            <th scope="col">회원등급</th>
 	                        </tr>
 	                    </thead>
 	                    <tbody>

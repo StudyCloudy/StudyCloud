@@ -11,6 +11,9 @@
 <meta charset="UTF-8">
 <title>StudyCloud</title>
 
+<!-- 폰트 어썸 -->
+<script src="https://kit.fontawesome.com/b9a24d1314.js" crossorigin="anonymous"></script>
+
 <style type="text/css">
 
 /* 메인 바디 색상 */
@@ -56,7 +59,7 @@ body {
 .card-title {
   padding: 20px 0 15px 0;
   font-size: 18px;
-  font-weight: 500;
+  font-weight: bold;
   color: #012970;
 }
 
@@ -93,6 +96,30 @@ body {
 /*   } */
 }
 
+/* 투데이 어플라이 */
+.applyWrap {
+	align-items: center;
+}
+
+.applyCnt {
+	font-size: 48px;
+	color: black;
+	font-weight: 100;
+	text-align: center;
+	padding-top: 30px;
+}
+
+.applyText {
+	font-size: 16px;
+	color:  #3f92b7;
+	font-weight: bold;
+	text-align: right;
+}
+
+/* 테이블 */
+th {
+	text-align: center;
+}
 
 /* 캘린더 */
 .today {
@@ -166,13 +193,10 @@ body {
 	            <div class="col-xxl-6 col-md-6">
 	              	<div class="card">
 	                	<div class="card-body" style="height: 337px;">
-	                  		<h5 class="card-title">멘토신청<span>| Today</span></h5>
-	
-		                  	<div class="d-flex align-items-center">
-		                    	<div class="ps-3">
-		                      	<h1>${todayMentoApply }</h1>
-		                      	<span class="text-success small pt-1 fw-bold">&nbsp개의 신청 목록</span>
-		                    	</div>
+	                  		<h5 class="card-title">멘토 신청<span>| Today</span></h5>
+	                    	<div class="applyWrap">
+	                      		<p class="applyCnt">${todayMentoApply }</p>
+	                      		<p class="applyText">개의 신청 목록</p>
 		                  	</div>
 	                	</div>
 	              	</div>
@@ -182,14 +206,11 @@ body {
 	            <div class="col-xxl-6 col-md-6">
 					<div class="card">
 	                	<div class="card-body" style="height: 337px;">
-		                	<h5 class="card-title">스터디 신청 <span>| Today</span></h5>
-		
-		                  	<div class="d-flex align-items-center">
-		                    	<div class="ps-3">
-		                      	<h1>${todayStudyApply }</h1>
-		                      	<span class="text-success small pt-1 fw-bold">&nbsp개의 신청 목록</span>
-		                    	</div>
-		                  	</div>
+		                	<h5 class="card-title">스터디 개설 신청<span>| Today</span></h5>
+	                    	<div class="applyWrap">
+	                      		<p class="applyCnt">${todayStudyApply }</p>
+	                      		<p class="applyText">개의 신청 목록</p>
+	                    	</div>
 		                </div>
 	             	</div>
 	           	</div><!-- 스터디 신청 end -->
@@ -228,21 +249,33 @@ body {
 	            	    <div class="card-body">
 	                  	<h5 class="card-title">QnA 관리</h5>
 	
-	                  		 <table class="table table-borderless datatable">
+	                  		 <table class="table">
 						        <thead>
 						            <tr>
-						                <th scope="col">#</th>
-						                <th scope="col">제목</th>
-						                <th scope="col">작성자</th>
+						                <th scope="col" style="width: 15%">NO</th>
+						                <th scope="col" style="width: 65%">제목</th>
+						                <th scope="col" style="width: 20%">작성자</th>
 						   			 </tr>
 								</thead>
 								<tbody class="table-group-divider">
 								<c:forEach items="${preQna }" var="preview">
+								<c:choose>
+                       				<c:when test="${preview.SROOMQNA_STEP eq 0 }"> <!-- 문의글일 경우 -->
 								    <tr>
-								        <th>${preview.SROOMQNA_NO }</th> <!-- 게시글 번호 -->
-								        <td>${preview.SROOMQNA_TITLE }</td> <!-- 제목 -->
-								        <td>${preview.MEMBER_NICK }</td> <!-- 작성자 닉네임 -->
+								        <th>${preview.SROOMQNA_NO }</th>
+								        <td>${preview.SROOMQNA_TITLE }</td>
+								        <td class="text-center">${preview.MEMBER_NICK }</td>
 									</tr>
+									</c:when>
+						
+	            		           <c:when test="${preview.SROOMQNA_STEP ne 0 }"> <!-- 답변글일 경우 -->
+                       				<tr>
+			                           	<td class="text-center">${preview.SROOMQNA_NO }</td>
+										<i class="fa-solid fa-reply fa-rotate-180"></i>RE : ${preview.SROOMQNA_TITLE }</a></td>
+										<td class="text-center">${preview.MEMBER_NICK }</td>
+					               </tr>
+					               </c:when>
+			                   	</c:choose>
 								</c:forEach>
 						        </tbody>
 						    </table>
@@ -257,12 +290,12 @@ body {
 		                <div class="card-body">
 		                	<h5 class="card-title">예약 리스트</h5>
 		
-		                   <table class="table table-borderless datatable">
+		                   <table class="table">
 					        <thead>
 					            <tr>
-					                <th>#</th>
-					                <th>스터디룸</th>
-					                <th>예약자</th>
+					                <th scope="col" style="width: 15%">NO</th>
+					                <th scope="col" style="width: 65%">스터디룸</th>
+					                <th scope="col" style="width: 20%">예약자</th>
 					   			 </tr>
 							</thead>
 							<tbody class="table-group-divider">
@@ -270,7 +303,7 @@ body {
 							    <tr>
 							        <th>${preview.RESERVE_NO }</th> <!-- 게시글 번호 -->
 							        <td>${preview.SROOM_NAME }</td> <!-- 스터디룸명 -->
-							        <td>${preview.MEMBER_NAME }</td> <!-- 작성자 이름 -->
+							        <td class="text-center">${preview.MEMBER_NAME }</td> <!-- 작성자 이름 -->
 								</tr>
 					        </c:forEach>
 					        </tbody>

@@ -7,6 +7,7 @@ import java.util.Map;
 import dto.Member;
 import dto.StudyBoard;
 import util.Paging;
+import util.PagingVUp;
 
 public interface SboardService_admin {
 
@@ -20,7 +21,7 @@ public interface SboardService_admin {
 	 * @param curPage - 요청 페이지 번호
 	 * @return 계산이 완료된 Paging 객체
 	 */
-	public Paging getPaging(int curPage);
+	public PagingVUp getPaging(int curPage);
 	
 	/**
 	 * 페이징이 적용된 게시글 목록 조회
@@ -28,7 +29,7 @@ public interface SboardService_admin {
 	 * @param paging - 페이징 정보 객체
 	 * @return 페이징이 적용된 게시글 목록
 	 */
-	public List<StudyBoard> list(Paging paging);
+	public List<StudyBoard> list(PagingVUp paging);
 
 	/**
 	 * 선택한 회원의 정보 업데이트
