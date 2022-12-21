@@ -153,6 +153,32 @@ public interface MypageService {
 	public List<HashMap<String, Object>> mntboard(String id);
 
 	
+	/**
+	 * 찜한 스터디
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public List<HashMap<String, Object>> studyWish(int memberNo);
+
+
+	/**
+	 * 찜한 멘토
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public List<HashMap<String, Object>> mentoWish(int memberNo);
+
+
+
+	/**
+	 * 찜한 스터디룸
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public List<HashMap<String, Object>> studyroomWish(int memberNo);
 
 	
 	

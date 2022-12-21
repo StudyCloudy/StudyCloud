@@ -119,8 +119,23 @@ public interface MypageDao {
 	public List<HashMap<String, Object>> likelist(String id);
 
 
+	/**
+	 * 위시리스트 (멘토)
+	 * 
+	 */
+	public List<HashMap<String, Object>> mentorWish(int memberNo);
 	
+	/**
+	 * 위시리스트 (스터디룸)
+	 * 
+	 */
+	public List<HashMap<String, Object>> studyroomWish(int memberNo);
 	
+	/**
+	 * 위시리스트 (스터디)
+	 * 
+	 */
+	public List<HashMap<String, Object>> studyWish(int memberNo);
 	
 	
 	

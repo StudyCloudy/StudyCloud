@@ -166,30 +166,6 @@ import service.face.MypageService;
 
 
 	
-	//------- 위시리스트 -------
-	
-	//찜한 스터디
-	@Override
-	public List<HashMap<String, Object>> studywish(String id) {
-		return mypageDao.wishlist(id);
-	}
-
-
-	//찜한 멘토
-	@Override
-	public List<HashMap<String, Object>> mentowish(String id) {
-		return mypageDao.wishlist(id);
-
-	}
-
-
-	//찜한 스터디룸
-	@Override
-	public List<HashMap<String, Object>> sroomwish(String id) {
-		return mypageDao.wishlist(id);
-
-	}
-
 	
 	
 	//----- 마이스터디 -----
@@ -223,6 +199,54 @@ import service.face.MypageService;
 
 		return mypageDao.likelist(id);
 	}
+
+
+	//------- 위시리스트 -------
+	
+	//찜한 스터디
+	@Override
+	public List<HashMap<String, Object>> studyWish(int memberNo) {
+		return mypageDao.studyWish(memberNo);
+	}
+
+
+	//찜한 멘토
+	@Override
+	public List<HashMap<String, Object>> mentoWish(int memberNo) {
+		return mypageDao.mentorWish(memberNo);
+
+	}
+
+
+	//찜한 스터디룸
+	@Override
+	public List<HashMap<String, Object>> studyroomWish(int memberNo) {
+		return mypageDao.studyroomWish(memberNo);
+
+	}
+
+
+	@Override
+	public List<HashMap<String, Object>> studywish(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<HashMap<String, Object>> mentowish(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<HashMap<String, Object>> sroomwish(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 
 }
