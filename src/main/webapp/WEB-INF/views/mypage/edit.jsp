@@ -20,6 +20,22 @@ $("#file").on('change',function(){
 	  $(".upload-name").val(fileName);
 	  
 	});
+	
+
+//프로필사진 출력
+
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById('profile').src = e.target.result;
+    };
+    reader.readAsDataURL(input.files[0]);
+  } else {
+    document.getElementById('profile').src = "";
+  }
+}
+
 
 //버튼 클릭시 이동
 
@@ -27,16 +43,11 @@ $("#file").on('change',function(){
 // 	location.href="/mypage";
 // })
 
-$("#gotologin").on("click", function(){
-	location.href="/login";
-	})
 
-})
 
 
 //휴대폰 번호 자동 하이픈 추가 
  
-  $(document).ready(function() {
 	   $("#memberPhone").keydown(function(event) {   //입력창에 숫자 입력
 	       var key = event.charCode || event.keyCode || 0;
 	       $text = $(this); 
@@ -50,6 +61,25 @@ $("#gotologin").on("click", function(){
 	           }
 	       }
 	   })
+	   
+//비밀번호 일치 확인
+
+	$('#pwchk').click(function(e){
+		e.preventDefault()
+		// 비밀번호 입력 값 가져오기
+		var pw = $('#memberPw').val();
+		
+		// 비밀번호 확인 입력 값 가져오기
+		var confirmPw = $('#memberPwck').val();
+			
+		if(pw == confirmPw){
+			alert("비밀번호가 일치합니다.");
+		}else{
+			alert("비밀번호가 일치하지 않습니다");
+		}
+	})
+		
+	
   })
 </script>
 
@@ -75,6 +105,26 @@ body {
 	padding-top: 25px;
 	margin-left: 12%;
 }
+
+/* 버튼 css */
+
+#btn {
+	width: 50%;
+/* 	padding: 12px; */
+	margin-bottom: 10px;
+}
+
+#pwchk {
+	width: 11%;
+	background: #6CC4DC;
+	border: none;
+	display: inline;
+	height: 35px;
+	font-size: 12px;
+	margin-left: 30px;
+	margin-top: 13px;
+}
+
 
 .profile-button {
 	background: #6CC4DC;
@@ -142,6 +192,7 @@ body {
 }
 
 
+
 /* 프로필사진 input css */
 
 .filebox .upload-name {
@@ -178,15 +229,8 @@ body {
 }
 
 
-/* 로그인 하지 않았을 때 창 */
 
-#gotologin {
-	margin-left: 35%;
-}
 
-.loginment {
-	margin-top: 10%;
-}
 
 
 
@@ -195,25 +239,25 @@ body {
 
 <body>
 	<div class="container rounded bg-white mt-5">
-       <c:if test="${not empty login }">
 		<form class="card" action="/mypage/edit" method="post" enctype="multipart/form-data">
 			<div class="col-md-4 border-right">
 				<div class="d-flex flex-column align-items-center text-center p-3 py-5" >
 					 <c:if test="${picture.fileUploadStor ne null}">
 					<img class="rounded-circle mt-5"
-						src="${pageContext.request.contextPath}/resources/${picture.fileUploadStor}" width="90"><br>
+						src="${pageContext.request.contextPath}/resources/${picture.fileUploadStor}" width="90" id="profile"><br>
 					</c:if>
 					<c:if test="${picture.fileUploadStor eq null}">
 					<img class="rounded-circle mt-5"
-						src="https://img.icons8.com/color/512/test-account.png" width="90"><br>
+						src="https://img.icons8.com/color/512/test-account.png" width="90" id="profile"><br>
 					</c:if>  
 					
 					
-					<span class="font-weight-bold">${member.memberName}</span> <span
+					<span class="font-weight-bold">${member.memberName}</span> 
+					<span
 						class="text-black-50">${member.memberEmail}</span><br>
 					<div class="filebox">
 						<input class="upload-name" value="프로필사진 변경" placeholder="프로필사진 변경">
-						<label for="file">파일찾기</label> <input type="file" id="file" name="file">
+						<label for="file">파일찾기</label> <input type="file" id="file" name="file" onchange="readURL(this);">
 					</div>
 				</div>
 			</div>
@@ -227,6 +271,7 @@ body {
 					<div class="row mt-3 input-wrap">
 						<div class="form-name">비밀번호확인</div>
 						<input class="form-control" type="password" placeholder="" id="memberPwck"  name="memberPwck">
+						<button class="btn btn-bold btn-primary btnsm" id="pwchk" type="button" value="N">일치확인</button>
 					</div>
 					<div class="row mt-3 input-wrap">
 						<div class="form-name">이름</div>
@@ -242,9 +287,8 @@ body {
 					</div>
 					<div class="row mt-3 input-wrap">
 						<div class="form-name">닉네임</div>
-						<input class="form-control" type="text" id="memberNick" name="memberNick" value="${member.memberNick}">
+						<input class="form-control" type="text" id="memberNickname" name="memberNick" value="${member.memberNick}">
 					</div>
-						<input class="form-control" type="hidden" id="memberId" name="memberId" value="${member.memberId}">
 				</div>
 				<div class="mt-5 text-right">
 					<button class="btn btn-primary profile-button" id="btnsave">수정내역
@@ -252,21 +296,6 @@ body {
 				</div>
 				</div>
 			</form>
-			</c:if>
-			
-            <c:if test="${empty login }">
-			 <div class="card">
-            <div class="loginment">
-	            	<h2 class ="text-dark text-center">회원 정보 수정 페이지입니다.</h2>
-	            	<p class="text-center"> 
-	            		<span>로그인 후 이용해주세요.</span>
-	            	</p>
-	            <div class="mt-5 text-right">
-	           		<button type="button" class="btn btn-primary profile-button" id="gotologin">로그인 하기</button>
-	            </div>
-            </div>
-            </div>
-			</c:if>
 			
 		</div>
 	<br><br><br><br><br>

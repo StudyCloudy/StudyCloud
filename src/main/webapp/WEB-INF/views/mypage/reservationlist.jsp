@@ -157,8 +157,7 @@ table.shoping-cart-table tr td:last-child {
 							<tbody>
 								<tr>
 									<td width="90">
-									<img src="${pageContext.request.contextPath}/resources/${reserve.FILEUPLOAD_STOR } "
-										alt="studyroom-img" class="cart-product-imitation">
+										<img src="/upload/${reserve.FILEUPLOAD_STOR } "	alt="studyroom-img" class="cart-product-imitation">
 										</td>
 									<td class="desc">
 										<div class="text-navy">

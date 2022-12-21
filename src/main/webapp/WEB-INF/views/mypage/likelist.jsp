@@ -123,7 +123,12 @@ table.shoping-cart-table tr td:last-child {
 }
 
 .desc {
-	width: 50%;
+	width: 100%;
+}
+
+a {
+    color: black;
+	text-decoration-line: none; 
 }
 
 /* 버튼 css */
@@ -167,34 +172,44 @@ table.shoping-cart-table tr td:last-child {
                     <div class="table-responsive">
        					<table class="table shoping-cart-table">
                             <tbody>
+                        		<c:forEach var="mboard" items="${mboard}" varStatus="status">
+                            
                             <tr>
-        					    <td width="45">
-                                <img src="https://img.icons8.com/color/512/test-account.png" alt="..." class="cart-product-imitation">
+        					    <td width="45px">
+    							 <c:if test="${mboard.FILEUPLOAD_STOR ne null}">
+									<img class="rounded-circle mt-5"
+										src="${pageContext.request.contextPath}/resources/${mboard.FILEUPLOAD_STOR}" width="90px"><br>
+								</c:if>
+								<c:if test="${mboard.FILEUPLOAD_STOR eq null}">
+									<img class="rounded-circle mt-5"
+										src="https://img.icons8.com/color/512/test-account.png" width="25px" alt="..." class="cart-product-imitation"><br>
+								</c:if>  
                                 </td>                                    
                                 <td class="desc">
                                     <div class="text-navy" >
-                                     <h3>제목</h3> <a href="">오늘 강남역쪽에서 밤샘카공 하실분 계신가요</a>
+                                     <h3>제목</h3>  <a href="/mboard/detail?mboardNo=${mboard.MBOARD_NO }">${mboard.MBOARD_TITLE }</a>
                                     </div><br>
                                     <dl class="small m-b-none">
-                                        <dt>작성자</dt>
-                                        <dd>아이디 : cafestudyjjang</dd>
+                                    	<dt>내용</dt>
+                                        <dd>${mboard.MBOARD_CONTENT }</dd>
                                     </dl>
                                 </td>
                               </tr>
-                              <tr>  
-        					    <td width="90">
-                                <img src="https://img.icons8.com/color/512/test-account.png" alt="..." class="cart-product-imitation">
-                                </td>                                    
-                                <td class="desc">
-                                    <div class="text-navy" >
-                                   <h3>제목</h3> <a href="">엄청 춥지만 만나서 공부 하실분?</a>
-                                    </div><br>
-                                    <dl class="small m-b-none">
-                                        <dt>작성자</dt>
-                                        <dd>아이디 : verycold</dd>
-                                    </dl>
-                                </td>
-                            </tr>
+<!--                               <tr>   -->
+<!--         					    <td width="90"> -->
+<!--                                 <img src="https://img.icons8.com/color/512/test-account.png"  alt="..." class="cart-product-imitation"> -->
+<!--                                 </td>                                     -->
+<!--                                 <td class="desc"> -->
+<!--                                     <div class="text-navy" > -->
+<!--                                    <h3>제목</h3> <a href="">엄청 춥지만 만나서 공부 하실분?</a> -->
+<!--                                     </div><br> -->
+<!--                                     <dl class="small m-b-none"> -->
+<!--                                         <dt>작성자</dt> -->
+<!--                                         <dd>아이디 : verycold</dd> -->
+<!--                                     </dl> -->
+<!--                                 </td> -->
+<!--                             </tr> -->
+								</c:forEach>
                             </tbody>
                         </table>
                     </div>
@@ -205,34 +220,29 @@ table.shoping-cart-table tr td:last-child {
                     <div class="table-responsive">
                         <table class="table shoping-cart-table">
                             <tbody>
+                                <c:forEach var="mntboard" items="${mntboard}" varStatus="status">
                             <tr>
-        					    <td width="90">
-                                <img src="https://img.icons8.com/color/512/test-account.png" alt="..." class="cart-product-imitation">
+        					    <td width="45px">
+	   						  <c:if test="${mntboard.FILEUPLOAD_STOR ne null}">
+									<img class="rounded-circle mt-5"
+										src="${pageContext.request.contextPath}/resources/${mntboard.FILEUPLOAD_STOR}" width="90"><br>
+								</c:if>
+								<c:if test="${mntboard.FILEUPLOAD_STOR eq null}">
+									<img class="rounded-circle mt-5"
+										src="https://img.icons8.com/color/512/test-account.png" width="90px"  alt="..." class="cart-product-imitation"><br>
+								</c:if>  
                                 </td>                                    
                                 <td class="desc">
                                     <div class="text-navy" >
-                                     <h3>제목</h3> <a href="">오류 해결 해 주실 척척박사님 모십니다</a>
+                                     <h3>제목</h3>  <a href="/mntboard/detail?mntboardNo=${mntboard.MNTBOARD_NO }">${mntboard.MNTBOARD_TITLE }</a>
                                     </div><br>
                                     <dl class="small m-b-none">
-                                        <dt>작성자</dt>
-                                        <dd>아이디 : gaebalgaebal</dd>
+                                        <dt>분야</dt>
+                                        <dd>${mntboard.FIELD }</dd>
                                     </dl>
                                 </td>
                               </tr>
-                              <tr>  
-        					    <td width="90">
-                                <img src="https://img.icons8.com/color/512/test-account.png" alt="..." class="cart-product-imitation">
-                                </td>                                    
-                                <td class="desc">
-                                    <div class="text-navy" >
-                                   <h3>제목</h3> <a href="">자바 객체부분 공부 도와주실분..</a>
-                                    </div><br>
-                                    <dl class="small m-b-none">
-                                        <dt>작성자</dt>
-                                        <dd>아이디 : gaebalgaebal</dd>
-                                    </dl>
-                                </td>
-                            </tr>
+                            </c:forEach>
                             </tbody>
                         </table>
                     </div>
