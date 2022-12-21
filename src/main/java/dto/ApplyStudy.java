@@ -12,26 +12,29 @@ public class ApplyStudy {
 	private String memberAddress;
 	private String memberIntro;
 	private Date applystudyDate;
+	private int studyNo;
 	
 	public ApplyStudy() {}
-	
-	public ApplyStudy(int applystudyNo, String memberName, int memberNo, int memberAge, String memberJob, String memberAddress, 
-						String memberIntro, Date applystudyDate) {
+
+	public ApplyStudy(int applystudyNo, String memberName, int memberNo, int memberAge, String memberJob,
+			String memberAddress, String memberIntro, Date applystudyDate, int studyNo) {
 		super();
 		this.applystudyNo = applystudyNo;
 		this.memberName = memberName;
+		this.memberNo = memberNo;
 		this.memberAge = memberAge;
 		this.memberJob = memberJob;
 		this.memberAddress = memberAddress;
 		this.memberIntro = memberIntro;
 		this.applystudyDate = applystudyDate;
+		this.studyNo = studyNo;
 	}
 
 	@Override
 	public String toString() {
 		return "ApplyStudy [applystudyNo=" + applystudyNo + ", memberName=" + memberName + ", memberNo=" + memberNo
-				+ ", memberAge=" + memberAge + ", memberJob=" + memberJob + ", memberAddress=" + memberAddress + ", memberIntro=" + memberIntro
-				+ ", applystudyDate=" + applystudyDate + "]";
+				+ ", memberAge=" + memberAge + ", memberJob=" + memberJob + ", memberAddress=" + memberAddress
+				+ ", memberIntro=" + memberIntro + ", applystudyDate=" + applystudyDate + ", studyNo=" + studyNo + "]";
 	}
 
 	public int getApplystudyNo() {
@@ -62,16 +65,16 @@ public class ApplyStudy {
 		return memberAge;
 	}
 
+	public void setMemberAge(int memberAge) {
+		this.memberAge = memberAge;
+	}
+
 	public String getMemberJob() {
 		return memberJob;
 	}
 
 	public void setMemberJob(String memberJob) {
 		this.memberJob = memberJob;
-	}
-
-	public void setMemberAge(int memberAge) {
-		this.memberAge = memberAge;
 	}
 
 	public String getMemberAddress() {
@@ -97,7 +100,14 @@ public class ApplyStudy {
 	public void setApplystudyDate(Date applystudyDate) {
 		this.applystudyDate = applystudyDate;
 	}
-	
+
+	public int getStudyNo() {
+		return studyNo;
+	}
+
+	public void setStudyNo(int studyNo) {
+		this.studyNo = studyNo;
+	}
 	
 	
 	

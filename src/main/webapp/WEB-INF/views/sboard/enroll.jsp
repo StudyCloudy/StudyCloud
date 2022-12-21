@@ -208,10 +208,10 @@ function check() {
 		<div class="enrollbtn" style="text-align: center;">
 <!-- 		<input class="btn btn-primary" type="submit" value="신청하기" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="background-color: #6cc4dc; border: none;"> -->
 <!-- 		 <button class="btn btn-primary" type="submit" data-bs-target="staticBackdrop" data-bs-toggle="modal" style="background-color: #6cc4dc; border: none;">신청하기</button> -->
-		<button type="button" id="btnEnroll" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="background-color: #6cc4dc; border: none;">등록하기</button> 
+		<button type="button" id="btnConfirm" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="background-color: #6cc4dc; border: none;">등록하기</button> 
 		</div>
 		
-		 
+	</form>	 
  <!-- 스터디 등록 완료 알림 모달  -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -232,7 +232,7 @@ function check() {
 </div>
 		
 	</div>
-		</form>
+<!-- 		</form> -->
 <!-- </div> -->
 
 <br><br><br><br><br>

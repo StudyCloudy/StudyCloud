@@ -78,13 +78,14 @@ public class MypageController {
 	@PostMapping("/mypage/edit")
 	public String userUpdate(Member member, HttpSession session, Model model, HttpServletRequest req, MultipartFile file) {
 
-		if(session.getAttribute("member_no") != null) {
+		if(session.getAttribute("member_no") != null && session.getAttribute("loginid") != null) {
 			int member_no = (int) session.getAttribute("member_no");
-			
+			String id = session.getAttribute("loginid").toString(); 
 			member.setMemberNo(member_no);
+			logger.info("member : {}", member);
 			
 			if(member.getMemberPw() == null || member.getMemberPw() == "" || member.getMemberPw().isEmpty()) {
-				Member dbMember = memberService.getMemberById(member.getMemberId());
+				Member dbMember = memberService.getMemberById(id);
 				logger.info("dbMember : {}", dbMember);
 				member.setMemberPw(dbMember.getMemberPw());
 			}
@@ -182,19 +183,20 @@ public class MypageController {
 	public String wishlist(Model model, HttpServletRequest req) {
 		HttpSession session = req.getSession();
 		String id = (String) session.getAttribute("loginid");
+		int no = (int)session.getAttribute("member_no");
 		
 		//찜한 스터디
-		List<HashMap<String, Object>> studywish = mypageService.studywish(id);
+		List<HashMap<String, Object>> studywish = mypageService.studyWish(no);
 		model.addAttribute("study", studywish);
 		logger.info("study list {} :", studywish);
 		
 		//찜한 멘토
-		List<HashMap<String, Object>> mentowish = mypageService.mentowish(id);
+		List<HashMap<String, Object>> mentowish = mypageService.mentoWish(no);
 		model.addAttribute("mento", mentowish);
 		logger.info("mento list {} :", mentowish);
 		
 		//찜한 스터디공간
-		List<HashMap<String, Object>> sroomwish = mypageService.sroomwish(id);
+		List<HashMap<String, Object>> sroomwish = mypageService.studyroomWish(no);
 		model.addAttribute("sroom", sroomwish);
 		logger.info("sroom list {} :", sroomwish);
 		
