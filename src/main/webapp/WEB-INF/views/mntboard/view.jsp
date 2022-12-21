@@ -209,7 +209,7 @@ $(document).ready(function() {
 <div class="mnt_content">
 ${mntViewBoard.MNTBOARD_CONTENT }
 <div class="image">
-	<img style="width: 100%;" src="/upload/${fileUpload.fileUploadOri}" alt="mento-attach-img">
+	<img style=" width: 500px; height: 200px;" src="/upload/${fileUpload.fileUploadOri}" alt="mento-attach-img">
 </div>
 </div>
 

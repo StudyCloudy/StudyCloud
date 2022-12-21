@@ -206,9 +206,9 @@
 
 <div class="mt_content">
 ${mtViewBoard.MTBOARD_CONTENT }
-<div class="image">
-	<img style="width:100%" src="/upload/${fileUpload.fileUploadOri}" alt="mento-attach-img">
 </div>
+<div class="image">
+	<img style=" width: 500px; height: 200px;" src="/upload/${fileUpload.fileUploadOri}" alt="mento-attach-img">
 </div>
 
 
