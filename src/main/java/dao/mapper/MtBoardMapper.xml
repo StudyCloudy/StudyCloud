@@ -79,7 +79,6 @@
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
 	</select>
 	
-	<!-- 여기까지 -->
 	<update id="mtBoardHit" parameterType="int">
 		UPDATE mtboard
 		SET mtboard_hit = mtboard_hit + 1

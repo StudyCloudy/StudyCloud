@@ -8,7 +8,7 @@
 <title>글쓰기</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <c:import url="../layout/header.jsp" /> 
-<link rel="stylesheet" href="/resources/css/mtBoardWrite.css">   
+<link rel="stylesheet" href="/resources/css/mtBoardWrite.css?ver=2">   
 <script src="../resources/js/mtBoardWrite.js?ver=3"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
 <script type="text/javascript" src="/resources/se2/js/service/HuskyEZCreator.js"></script>
@@ -26,10 +26,6 @@ $(document).ready(function() {
 		updateContents();
 		
 		$("form").submit();
-	})
-	
-	$("#btnCancle").click(function() {
-		location.href = "/mntboard/list"
 	})
 	
 })
@@ -79,6 +75,7 @@ function updateContents() {
 <select class="form-select"  id="field" name="field" style="margin-top: 3px; font-size: 13px">
   <option selected >선택</option>
   <option>개발 · 프로그래밍</option>
+  <option>어학 · 외국어</option>
   <option>직무 · 마케팅</option>
   <option>커리어</option>
   <option>기타</option>
@@ -147,7 +144,7 @@ function updateContents() {
 </div><!-- 스크롤바 -->
 
 <div class="btn-zip">
-<input type="reset" id="cancel" class="btn btn-primary" value="취소">
+<a class="btn btn-primary" id="btn_Cancle" href="/mtboard/list">취소</a>
  <button class="btn btn-primary" id="btnWrite">등록</button>
 </div>
 

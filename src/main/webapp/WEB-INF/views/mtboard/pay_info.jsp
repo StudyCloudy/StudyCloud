@@ -102,8 +102,8 @@ function requestPay() {
         pg: "kakaopay",
         pay_method: "kakaopay",
         merchant_uid: 'merchant_' + new Date().getTime(),
-        name: "SkyCloud",
-        amount: 100,
+        name: "StudyCloud",
+        amount: totalPrice,
         buyer_email: '${email}',
         buyer_name: '${name}',
         buyer_tel: '${phone}'
@@ -197,26 +197,12 @@ function requestPay() {
 <span style="float: right">${info.price} * ${info.time}시간</span>
 <div class= "payBtnZip">
 <a class="btn btn-primary" type="button" onclick="requestPay()">결제하기</a>
-<a class="btn_back"type="button" >취소</a>
 </div>
 
 </div><!-- pay_content 끝 -->
 </div>
 </main>
 </main>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

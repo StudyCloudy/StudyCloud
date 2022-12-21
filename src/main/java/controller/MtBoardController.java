@@ -44,8 +44,14 @@ public class MtBoardController {
 	@Autowired MemberService memberService;
 
 	@RequestMapping("/list")
-	public void mtBoardList(@RequestParam(defaultValue = "1") int curPage, Model model) {
+	public void mtBoardList(@RequestParam(defaultValue = "1") int curPage, Model model, HttpServletRequest req) {
 
+
+		HttpSession session = req.getSession();
+		String id = (String) session.getAttribute("loginid");
+
+		Member member = memberService.getMemberById(id);
+		model.addAttribute("authority", id == null ? 0 : member.getAuthority());
 		
 		
 		Map<String, Object> map = new HashMap<>();
@@ -62,6 +68,7 @@ public class MtBoardController {
 
 	@RequestMapping("/listPaging")
 	public void mtBoardListPaging(@RequestParam Map<String, Object> map, Model model, HttpServletRequest req ) {
+		
 		
 		HttpSession session = req.getSession();
 		String id = (String) session.getAttribute("loginid");
@@ -160,7 +167,7 @@ public class MtBoardController {
 	}
 
 	@PostMapping("/write")
-	public String writePost(MtBoard mtBoard, MultipartFile file, HttpSession session) {
+	public String writePost(MtBoard mtBoard, MultipartFile file, HttpSession session, Model model) {
 		logger.debug("{}", mtBoard);
 		logger.debug("{}", file);
 
@@ -168,7 +175,8 @@ public class MtBoardController {
 		System.out.println("로그인 : " + session.getAttribute("member_no"));
 		logger.debug("{}", mtBoard);
 		logger.debug("파일 : {}", file);
-
+		
+		
 		// 게시글, 첨부파일
 		mtBoardService.write(mtBoard, file);
 
@@ -275,9 +283,10 @@ public class MtBoardController {
 	@RequestMapping("/mentoApply")
 	public void mentoApply() {}
 
+	
+	
 	@GetMapping("/applyMt")
-	public void applyMt(HttpServletRequest req, Model model 
-						, @RequestParam(required = false) int mtboardNo) {
+	public void applyMt(HttpServletRequest req, Model model) {
 		
 		HttpSession session = req.getSession();
 		int memberNo = (int) session.getAttribute("member_no");
@@ -296,19 +305,18 @@ public class MtBoardController {
 
 	@PostMapping("/applyMt")
 	@ResponseBody
-	public String applyMtPost(ApplyMt applyMt, HttpServletRequest req) {
-		logger.debug("{}", applyMt);
+	public String applyMtPost(ApplyMt applyMt, HttpServletRequest req, HttpSession session) {
+	      logger.debug("{}", applyMt);
 
-		try {
-			int member_no = (int) req.getAttribute("member_no");
-			applyMt.setMemberNo(member_no);
-			mtBoardService.applyMt(applyMt);
-			return "success";
-		} catch (Exception e) {
-			return "failed";
-		}
+	   
+	      int member_no = (int) session.getAttribute("member_no");
+	      applyMt.setMemberNo(member_no);
+	         
+	      mtBoardService.applyMt(applyMt);
+	         
+	      return "success";
 
-	}
+	   }
 
 	// ------------------------- 멘토링 신청 ----------------------------
 
