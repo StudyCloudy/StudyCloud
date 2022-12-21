@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
-<title>StudyCloud☁️</title>
+<title>StudyCloud</title>
 <c:import url="../layout/header.jsp" />
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>

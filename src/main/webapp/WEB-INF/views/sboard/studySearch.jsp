@@ -7,7 +7,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>StudyCloud☁️</title>
+<title>StudyCloud</title>
 <c:import url="../layout/header.jsp" />
 
 <!-- 부트스트랩 5.2  -->
@@ -223,6 +223,7 @@ h4, h6 {
 				<select class="form-select" aria-label="Default select example" name="category" id="category" style="color: #3f92b7; width: 100%;">
 					<option value="study_tag">#태그</option>
 					<option value="study_title">제목</option>
+					<option value="member_nick">작성자</option>
 				</select>
 		
 			</div>
