@@ -49,6 +49,11 @@
 	margin-top: 20px;
 }
 
+.table-hover>tbody>tr:hover>* {
+	background-color: #e3eff9; 
+    box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+}
+
 .table thead {
     background-color: #aacde5;
 }
@@ -142,16 +147,16 @@ myModal.addEventListener('shown.bs.modal', () => {
        	<div class="col-lg-12">
 				
 		    <div class="table-responsive">
-				<table class="table">
+				<table class="table table-hover">
 					<thead>
                         <tr>
-                            <th scope="col">NO</th>
-                            <th scope="col">아이디</th>
-                            <th scope="col">닉네임</th>
-                            <th scope="col">이름</th>
-                            <th scope="col">회원등급</th>
-                            <th scope="col">관리</th>
-                            <th scope="col">신청서</th>
+                            <th scope="col" style="width:10%">NO</th>
+                            <th scope="col" style="width:15%">아이디</th>
+                            <th scope="col" style="width:15%">닉네임</th>
+                            <th scope="col" style="width:15%">이름</th>
+                            <th scope="col" style="width:15%">회원등급</th>
+                            <th scope="col" style="width:15%">관리</th>
+                            <th scope="col" style="width:15%">신청서</th>
                         </tr>
                     </thead>
                     

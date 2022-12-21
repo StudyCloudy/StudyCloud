@@ -36,6 +36,11 @@
 	margin-top: 20px;
 }
 
+.table-hover>tbody>tr:hover>* {
+	background-color: #e3eff9; 
+    box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+}
+
 .table thead {
     background-color: #aacde5;
 }
@@ -57,6 +62,11 @@
 a {
 	text-decoration: none;
 	color: #212529;
+}
+
+td > a:hover{
+	text-decoration: underline;
+	color: #3f92b7;
 }
 
 /* 폰트어썸 reply 아이콘 */
@@ -89,15 +99,15 @@ a {
        	<div class="col-lg-12">
 				
 		    <div class="table-responsive">
-				<table class="table">
+				<table class="table table-hover">
 					<thead>
                         <tr>
-                            <th scope="col">NO</th>
-                            <th scope="col">스터디룸 명</th>
-                            <th scope="col">제목</th>
-                            <th scope="col">아이디</th>
-                            <th scope="col">닉네임</th>
-                            <th scope="col">등록일</th>
+                            <th scope="col" style="width:10%">NO</th>
+                            <th scope="col" style="width:25%">스터디룸 명</th>
+                            <th scope="col" style="width:25%">제목</th>
+                            <th scope="col" style="width:10%">아이디</th>
+                            <th scope="col" style="width:10%">닉네임</th>
+                            <th scope="col" style="width:20%">등록일</th>
                         </tr>
                     </thead>
                     
@@ -111,7 +121,7 @@ a {
 							<td><a href="/admin/qna/view?sRoomQnaNo=${qna.SROOMQNA_NO }&sRoomNo=${qna.SROOM_NO }">${qna.SROOMQNA_TITLE }</a></td>
 							<td class="text-center">${qna.MEMBER_ID }</td>
 							<td class="text-center">${qna.MEMBER_NICK }</td>
-							<td class="text-center"><fmt:formatDate value="${qna.SROOMQNA_DATE }" pattern="yy-MM-dd" /></td>
+							<td class="text-center"><fmt:formatDate value="${qna.SROOMQNA_DATE }" pattern="yyyy-MM-dd HH:MM:SS" /></td>
 		               </tr>
 		               </c:when>
                        <c:when test="${qna.SROOMQNA_STEP ne 0 }"> <!-- 답변글일 경우 -->
@@ -119,10 +129,10 @@ a {
                            	<td class="text-center">${qna.SROOMQNA_NO }</td>
                            	<td><a href="/sRoom/detail?sRoomNo=${qna.SROOM_NO }">${qna.SROOM_NAME }</a></td>
 							<td><a href="/admin/qna/view?sRoomQnaNo=${qna.SROOMQNA_NO }&sRoomNo=${qna.SROOM_NO }">
-									<i class="fa-solid fa-reply fa-rotate-180"></i>RE : ${qna.SROOMQNA_TITLE }</a></td>
+									<i class="fa-solid fa-reply fa-rotate-180"></i> RE : ${qna.SROOMQNA_TITLE }</a></td>
 							<td class="text-center">${qna.MEMBER_ID }</td>
 							<td class="text-center">${qna.MEMBER_NICK }</td>
-							<td class="text-center"><fmt:formatDate value="${qna.SROOMQNA_DATE }" pattern="yy-MM-dd" /></td>
+							<td class="text-center"><fmt:formatDate value="${qna.SROOMQNA_DATE }" pattern="yyyy-MM-dd HH:MM:SS" /></td>
 		               </tr>
 		               </c:when>
                    	</c:choose>

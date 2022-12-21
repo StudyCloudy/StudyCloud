@@ -54,8 +54,12 @@ $(document).ready(function() {
 
 /* 테이블 */
 .table {
-	text-align: center;
 	vertical-align: middle;
+}
+
+.table-hover>tbody>tr:hover>* {
+	background-color: #e3eff9; 
+    box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
 }
 
 .table thead {
@@ -63,6 +67,7 @@ $(document).ready(function() {
 }
 
 .table thead th {
+	text-align: center;
     padding: 10px;
     font-size: 16px;
     font-weight: bold;
@@ -78,6 +83,11 @@ $(document).ready(function() {
 a {
 	text-decoration: none;
 	color: #212529;
+}
+
+td > a:hover{
+	text-decoration: underline;
+	color: #3f92b7;
 }
 
 /* 버튼 */
@@ -142,24 +152,24 @@ $(document).ready(function() {
        	<div class="col-lg-12">
    		<div class="row">
 		    <div class="table-responsive">
-			<table class="table">
+			<table class="table table-hover">
                 
 			<thead>
 				<tr>
-					<th scope="col">NO</th>
-					<th scope="col">스터디룸 명</th>
-					<th scope="col">한줄 소개</th>
-					<th scope="col">가격</th>
+					<th scope="col" style="width:10%">NO</th>
+					<th scope="col" style="width:35%">스터디룸 명</th>
+					<th scope="col" style="width:35%">한줄 소개</th>
+					<th scope="col" style="width:20%">가격</th>
 				</tr>
 			</thead>
 			<tbody>
 			
 			<c:forEach items="${list }" var="studyroom">
 				<tr>
-					<td style="text-align:center;">${studyroom.sRoomNo }</td>
+					<td class="text-center">${studyroom.sRoomNo }</td>
 					<td><a href="/admin/studyroom/view?sRoomNo=${studyroom.sRoomNo }">${studyroom.sRoomName }</a></td>
 					<td>${studyroom.sRoomIntro }</td>
-					<td style="text-align:center;">${studyroom.sRoomPrice } 원/시간</td>
+					<td class="text-center">${studyroom.sRoomPrice } 원/시간</td>
 				</tr>
 			</c:forEach>
 
