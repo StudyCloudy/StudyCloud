@@ -131,20 +131,6 @@
 	where m.member_id = #{id}
 	</select>
 	
-	
-	<!-- 좋아요리스트 조회 -->
-	<select id='likelist' resultType='hashmap'>
-		select *
-		from mboard m
-		left join fileupload f on m.member_no = f.member_no
-		left join mboardlike ml on m.member_no = ml.member_no
-		left join mntboard nt on m.member_no = nt.member_no
-		left join mntboardlike nl on m.member_no = nl.member_no
-		and f.mboard_no is null
-		and f.mntboard_no is null
-		order by m.member_no desc
-	</select>
-	
 	<select id="myMentoList" resultType="hashmap" parameterType="String">
 		SELECT m.member_no, m.member_id, mt.mtboard_no, mt.field, mt.mtboard_title, mt.mtboard_content    
 		FROM applyMnt a
@@ -154,6 +140,30 @@
 		ON mt.mtboard_no = a.mtboard_no
 		WHERE m.member_id = #{id}
 	</select>
+	
+	<!-- 좋아요리스트 조회 -->
+	<select id='mlikelist' resultType='hashmap' parameterType="String">
+		SELECT distinct m.member_no, ml.mlike_no, ml.mboard_no, mb.mboard_title,
+		mb.mboard_content, f.fileupload_stor
+		FROM mboardlike ml
+		join fileupload f on ml.member_no = f.member_no
+		join member m on m.member_no = ml.member_no
+		join mboard mb on ml.member_no = mb.member_no
+		where m.member_id = #{id}
+	</select>
+	
+	<select id='mntikelist' resultType='hashmap' parameterType="String">
+		SELECT distinct m.member_no, nb.member_no, nl.mntboardlike_no, nb.mntboard_title, nb.mntboard_content, f.fileupload_stor, nb.field
+	 	 FROM mntboardlike nl
+	    join member m on m.member_no = nl.member_no
+	    join mntboard nb on nb.mntboard_no = nl.mntboard_no
+	    join fileUpload f on f.member_no = nb.member_no
+	    where m.member_id = #{id}
+	</select>
+	
+	
+	
+	
 
 
 </mapper>

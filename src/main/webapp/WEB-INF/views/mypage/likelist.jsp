@@ -172,26 +172,26 @@ a {
                     <div class="table-responsive">
        					<table class="table shoping-cart-table">
                             <tbody>
-                        		<c:forEach var="mboard" items="${mboard}" varStatus="status">
+                        		<c:forEach var="mlikelist" items="${mboard}" varStatus="status">
                             
                             <tr>
         					    <td width="45px">
-    							 <c:if test="${mboard.FILEUPLOAD_STOR ne null}">
+    							 <c:if test="${mlikelist.FILEUPLOAD_STOR ne null}">
 									<img class="rounded-circle mt-5"
-										src="${pageContext.request.contextPath}/resources/${mboard.FILEUPLOAD_STOR}" width="90px"><br>
+										src="${pageContext.request.contextPath}/resources/${mlikelist.FILEUPLOAD_STOR}" width="90px"><br>
 								</c:if>
-								<c:if test="${mboard.FILEUPLOAD_STOR eq null}">
+								<c:if test="${mlikelist.FILEUPLOAD_STOR eq null}">
 									<img class="rounded-circle mt-5"
-										src="https://img.icons8.com/color/512/test-account.png" width="25px" alt="..." class="cart-product-imitation"><br>
+										src="https://img.icons8.com/color/512/test-account.png" width="90px" alt="..." class="cart-product-imitation"><br>
 								</c:if>  
                                 </td>                                    
                                 <td class="desc">
                                     <div class="text-navy" >
-                                     <h3>제목</h3>  <a href="/mboard/detail?mboardNo=${mboard.MBOARD_NO }">${mboard.MBOARD_TITLE }</a>
+                                     <h3>제목</h3>  <a href="/mboard/detail?mboardNo=${mlikelist.MBOARD_NO }">${mlikelist.MBOARD_TITLE }</a>
                                     </div><br>
                                     <dl class="small m-b-none">
                                     	<dt>내용</dt>
-                                        <dd>${mboard.MBOARD_CONTENT }</dd>
+                                        <dd>${mlikelist.MBOARD_CONTENT }</dd>
                                     </dl>
                                 </td>
                               </tr>
@@ -220,25 +220,25 @@ a {
                     <div class="table-responsive">
                         <table class="table shoping-cart-table">
                             <tbody>
-                                <c:forEach var="mntboard" items="${mntboard}" varStatus="status">
+                                <c:forEach var="mntikelist" items="${mntboard}" varStatus="status">
                             <tr>
         					    <td width="45px">
-	   						  <c:if test="${mntboard.FILEUPLOAD_STOR ne null}">
+	   						  <c:if test="${mntikelist.FILEUPLOAD_STOR ne null}">
 									<img class="rounded-circle mt-5"
-										src="${pageContext.request.contextPath}/resources/${mntboard.FILEUPLOAD_STOR}" width="90"><br>
+										src="${pageContext.request.contextPath}/resources/${mntikelist.FILEUPLOAD_STOR}" width="90"><br>
 								</c:if>
-								<c:if test="${mntboard.FILEUPLOAD_STOR eq null}">
+								<c:if test="${mntikelist.FILEUPLOAD_STOR eq null}">
 									<img class="rounded-circle mt-5"
 										src="https://img.icons8.com/color/512/test-account.png" width="90px"  alt="..." class="cart-product-imitation"><br>
 								</c:if>  
                                 </td>                                    
                                 <td class="desc">
                                     <div class="text-navy" >
-                                     <h3>제목</h3>  <a href="/mntboard/detail?mntboardNo=${mntboard.MNTBOARD_NO }">${mntboard.MNTBOARD_TITLE }</a>
+                                     <h3>제목</h3>  <a href="/mntboard/detail?mntboardNo=${mntikelist.MNTBOARD_NO }">${mntikelist.MNTBOARD_TITLE }</a>
                                     </div><br>
                                     <dl class="small m-b-none">
                                         <dt>분야</dt>
-                                        <dd>${mntboard.FIELD }</dd>
+                                        <dd>${mntikelist.FIELD }</dd>
                                     </dl>
                                 </td>
                               </tr>

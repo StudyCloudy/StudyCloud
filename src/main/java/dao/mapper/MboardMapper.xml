@@ -118,7 +118,8 @@
 	</select>
 	
 	<select id="searchByKeyword" resultType="hashMap" parameterType="hashMap">
-		SELECT * FROM mboard
+		SELECT b.*, m.*
+		FROM mboard b, member m
 		WHERE 1=1
 		<choose>
 			<when test="category != null and category.equals('mboard_title')"> 
@@ -132,8 +133,13 @@
 			<when test="category != null and category.equals('mboard_date')">
 				AND mboard_date LIKE '%' || #{keyword } || '%'
 			</when>	
+			
+			<when test="category != null and category.equals('member_nick')">
+				AND member_nick LIKE '%' || #{keyword } || '%'
+			</when>	
 		</choose>
-	
+		AND b.member_no = m.member_no
+		ORDER BY mboard_no DESC
 	</select>
 	
 	

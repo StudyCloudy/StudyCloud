@@ -189,7 +189,7 @@ import service.face.MypageService;
 	@Override
 	public List<HashMap<String, Object>> mboard(String id) {
 
-		return mypageDao.likelist(id);
+		return mypageDao.mlikelist(id);
 	}
 
 
@@ -197,7 +197,7 @@ import service.face.MypageService;
 	@Override
 	public List<HashMap<String, Object>> mntboard(String id) {
 
-		return mypageDao.likelist(id);
+		return mypageDao.mntikelist(id);
 	}
 
 

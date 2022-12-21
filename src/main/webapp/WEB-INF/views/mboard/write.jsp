@@ -44,7 +44,7 @@ $(document).ready(function() {
 /* 	margin: 20%; */
 }
 
-.container{
+.container1{
 	margin: 0 auto;
 	width: 950px;
 	margin-top: 30px;
@@ -88,7 +88,8 @@ $(document).ready(function() {
 	</div>
 
 <form action="/mboard/write" id="form" method="post" enctype="multipart/form-data">
-	<div class="container">
+	<div class="container1">
+	<br><br>
 		<div class="mb-3">
   			<label for="title" class="form-label"></label>
   			<input type="text" class="form-control" id="mboardTitle" name="mboardTitle" placeholder="제목을 입력하세요">
