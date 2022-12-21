@@ -88,10 +88,7 @@
 			<when test="category != null and category.equals('study_title')">
 				AND study_title LIKE '%' || #{keyword } || '%'
 			</when>
-			
-			<when test="category != null and category.equals('member_nick')">
-				AND member_nick LIKE '%' || #{keyword } || '%'
-			</when>
+
 		</choose>	
 	</select>
 	

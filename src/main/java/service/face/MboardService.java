@@ -80,7 +80,7 @@ public interface MboardService {
 
 	/**
 	 * 좋아요
-	 * @param mboardNo
+	 * @param mBoardNo
 	 * @param memberNo
 	 * @return
 	 */

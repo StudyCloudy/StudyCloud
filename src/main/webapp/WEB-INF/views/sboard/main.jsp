@@ -7,7 +7,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>StudyCloud☁️</title>
+<title>StudyCloud</title>
 <c:import url="../layout/header.jsp" />
 
 <!-- 부트스트랩 5.2  -->
@@ -208,9 +208,9 @@ h4, h6 {
 		<span class="button-op">
 			<a class="btn btn-primary" href="./enroll" role="button" style="background-color: #6cc4dc; border: none;">스터디 개설하기🎯</a>
 		</span>
-<!-- 		<span class="button-op"> -->
-<!-- 			<a class="btn btn-primary" href="./main" role="button" style="background-color: #6cc4dc; border: none;">스터디 찾아보기</a> -->
-<!-- 		</span> -->
+		<span class="button-op">
+			<a class="btn btn-primary" href="./main" role="button" style="background-color: #6cc4dc; border: none;">스터디 찾아보기☁️</a>
+		</span>
 	</div>
 	
 	<br>
@@ -220,7 +220,7 @@ h4, h6 {
 	
 	<div class="search-tag" style="padding-left: 30px; margin-bottom: 25px;">
 			<div class="nav-option" style="float: left;">
-				<select class="form-select" aria-label="Default select example" style="color: #3f92b7; width: 100%;">
+				<select class="form-select" aria-label="Default select example" name="category" id="category" style="color: #3f92b7; width: 100%;">
 					<option value="study_tag">#태그</option>
 					<option value="study_title">제목</option>
 					<option value="member_nick">작성자</option>
@@ -235,6 +235,7 @@ h4, h6 {
 	    
 		
 			<br>
+			
 			
 			<c:forEach items="${slist }" var="studyboard">
 			<ul class="sboard-list">

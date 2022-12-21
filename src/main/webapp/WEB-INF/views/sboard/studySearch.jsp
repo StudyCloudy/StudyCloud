@@ -208,9 +208,9 @@ h4, h6 {
 		<span class="button-op">
 			<a class="btn btn-primary" href="./enroll" role="button" style="background-color: #6cc4dc; border: none;">스터디 개설하기🎯</a>
 		</span>
-<!-- 		<span class="button-op"> -->
-<!-- 			<a class="btn btn-primary" href="./main" role="button" style="background-color: #6cc4dc; border: none;">스터디 찾아보기</a> -->
-<!-- 		</span> -->
+		<span class="button-op">
+			<a class="btn btn-primary" href="./main" role="button" style="background-color: #6cc4dc; border: none;">스터디 찾아보기☁️</a>
+		</span>
 	</div>
 	
 	<br>
@@ -220,10 +220,9 @@ h4, h6 {
 	
 	<div class="search-tag" style="padding-left: 30px; margin-bottom: 25px;">
 			<div class="nav-option" style="float: left;">
-				<select class="form-select" aria-label="Default select example" style="color: #3f92b7; width: 100%;">
+				<select class="form-select" aria-label="Default select example" name="category" id="category" style="color: #3f92b7; width: 100%;">
 					<option value="study_tag">#태그</option>
 					<option value="study_title">제목</option>
-					<option value="member_nick">작성자</option>
 				</select>
 		
 			</div>
@@ -236,9 +235,9 @@ h4, h6 {
 		
 			<br>
 			
-			<c:forEach items="${searchResult }" var="studyboard">
 			<ul class="sboard-list">
 				<li class="study" style="list-style-type:none;">
+			<c:forEach items="${searchResult }" var="studyboard">
 					<div class="shadow p-3 mb-5 bg-body rounded" style="padding: 5px;">
 						<span class="badge">모집중</span>
 						<div class="title-and-detail">
@@ -246,17 +245,18 @@ h4, h6 {
 							<div class="study-detail" style="font-size: 14px; padding-bottom: 12px;">${studyboard.STUDY_TAG }
 						</div>
 					</div>
+			</c:forEach>
 				</li>	
 			</ul>
-			</c:forEach>
-
-			<c:import url="/WEB-INF/views/sboard/paging.jsp" />
 		</div>
+
 
  </form><!-- form end 끝 -->
 		
 		<br><br><br><br>
 </div>
+<br><br><br><br>
+			<c:import url="/WEB-INF/views/sboard/paging.jsp" />
 
 <c:import url="../layout/footer.jsp" />
 </body>

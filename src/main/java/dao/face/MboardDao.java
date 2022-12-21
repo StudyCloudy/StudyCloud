@@ -90,7 +90,11 @@ public interface MboardDao {
 	 */
 	public void delete(Mboard mboard);
 
-	
+	/**
+	 * 좋아요
+	 * @param mboardLike
+	 * @return
+	 */
 	public int likecount(MboardLike mboardLike);
 
 	public void insertLike(MboardLike mboardLike);
