@@ -115,10 +115,43 @@ public interface MypageService {
 	
 	//---- 마이스터디 ----
 	
-	
+	/**
+	 * 나의 멘토
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public List<HashMap<String, Object>> mymento(String id);
+	
+	/**
+	 * 나의 스터디
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public List<HashMap<String, Object>> mystudy(String id);
 	
+	
+	
+	//--- 좋아요리스트 ---
+	
+	/**
+	 * 번개개시판 좋아요 리스트 
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public List<HashMap<String, Object>> mboard(String id);
+
+	
+	/**
+	 * 멘티게시판 좋아요 리스트
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public List<HashMap<String, Object>> mntboard(String id);
+
 	
 
 	
