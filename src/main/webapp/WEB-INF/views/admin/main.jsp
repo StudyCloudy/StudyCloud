@@ -63,10 +63,10 @@ body {
   color: #012970;
 }
 
-.card-title span {
-  color: #899bbd;
-  font-size: 14px;
-  font-weight: 400;
+.card-title span { /* TODAY */
+  color:  #3f92b7;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .card-body {
@@ -119,6 +119,11 @@ body {
 /* 테이블 */
 th {
 	text-align: center;
+}
+
+/* 폰트어썸 reply 아이콘 */
+.fa-reply {
+	color: #6cc4dc;
 }
 
 /* 캘린더 */
@@ -193,7 +198,7 @@ th {
 	            <div class="col-xxl-6 col-md-6">
 	              	<div class="card">
 	                	<div class="card-body" style="height: 337px;">
-	                  		<h5 class="card-title">멘토 신청<span>| Today</span></h5>
+	                  		<h5 class="card-title">멘토 신청<span> | TODAY</span></h5>
 	                    	<div class="applyWrap">
 	                      		<p class="applyCnt">${todayMentoApply }</p>
 	                      		<p class="applyText">개의 신청 목록</p>
@@ -206,7 +211,7 @@ th {
 	            <div class="col-xxl-6 col-md-6">
 					<div class="card">
 	                	<div class="card-body" style="height: 337px;">
-		                	<h5 class="card-title">스터디 개설 신청<span>| Today</span></h5>
+		                	<h5 class="card-title">스터디 개설 신청<span> | TODAY</span></h5>
 	                    	<div class="applyWrap">
 	                      		<p class="applyCnt">${todayStudyApply }</p>
 	                      		<p class="applyText">개의 신청 목록</p>
@@ -270,8 +275,8 @@ th {
 						
 	            		           <c:when test="${preview.SROOMQNA_STEP ne 0 }"> <!-- 답변글일 경우 -->
                        				<tr>
-			                           	<td class="text-center">${preview.SROOMQNA_NO }</td>
-										<i class="fa-solid fa-reply fa-rotate-180"></i>RE : ${preview.SROOMQNA_TITLE }</a></td>
+			                           	<th class="text-center">${preview.SROOMQNA_NO }</td>
+										<td><a><i class="fa-solid fa-reply fa-rotate-180"></i> RE : ${preview.SROOMQNA_TITLE }</a></td>
 										<td class="text-center">${preview.MEMBER_NICK }</td>
 					               </tr>
 					               </c:when>

@@ -48,6 +48,11 @@
 	vertical-align: middle;
 }
 
+.table-hover>tbody>tr:hover>* {
+	background-color: #e3eff9; 
+    box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+}
+
 .table thead {
     background-color: #aacde5;
 }
@@ -146,16 +151,16 @@ $(document).ready(function() {
        	<div class="col-lg-12">
         	<div class="row">
 			    <div class="table-responsive">
-	                <table class="table">
+	                <table class="table table-hover">
 	                    <thead>
 	                        <tr>
-	                            <th scope="col">NO</th>
-	                            <th scope="col">아이디</th>
-	                            <th scope="col">닉네임</th>
-	                            <th scope="col">이름</th>
-	                            <th scope="col">이메일</th>
-	                            <th scope="col">연락처</th>
-	                            <th scope="col">회원등급</th>
+	                            <th scope="col" style="width:10%">NO</th>
+	                            <th scope="col" style="width:15%">아이디</th>
+	                            <th scope="col" style="width:15%">닉네임</th>
+	                            <th scope="col" style="width:10%">이름</th>
+	                            <th scope="col" style="width:20%">이메일</th>
+	                            <th scope="col" style="width:20%">연락처</th>
+	                            <th scope="col" style="width:10%">회원등급</th>
 	                        </tr>
 	                    </thead>
 	                    <tbody>
