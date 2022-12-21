@@ -37,84 +37,68 @@ $(document).ready(function() {
 	});
 });
 
+</script>
+
+<script type="text/javascript">
 $(document).ready(function() {
-	$("#btnList").click(function() {
-		location.href = "/board/list"
+	$("#btnMain").click(function() {
+		location.href = "/mboard/main"
 	})
 	
 	$("#btnUpdate").click(function() {
-		location.href = "/board/update?boardNo=${viewBoard.boardNo }"
+		location.href = "/mboard/update?mBoardNo=${detailMboard.MBOARD_NO }"
 	})
 	
 	$("#btnDelete").click(function() {
-		location.href = "/board/delete?boardNo=${viewBoard.boardNo }"
+		alert("번개글을 삭제하시겠습니까?")
+		location.href = "/mboard/delete?mBoardNo=${detailMboard.MBOARD_NO }"
 	})
 })
 
 </script>
 
+
 <!-- 좋아요 기능 js -->
 <script type="text/javascript">
-
-// var member_no = ${MEMBER_NO};
-// var mboard_likecnt = document.getElementBymemberNo("btn_like");
-// 	btn_like.onclick = function() { changeThumb(); }
+$(document).ready(function() {
 	
-// /* 좋아요 버튼 눌렀을 때 */
-// function changeThumb() {
-// 	$.ajax({
-// 		type: "POST"
-// 		url: "/clickThumb"
-// 		dataType: "json",
-// 		data: "member_no" + memberNo
-// 		success: function ( res ) {
-// 			if( res.resultCode == -1) {
-// 				Rnd.alert("좋아요 실패", "error", "확인", function(){});
-// 			} else {
-// 				if ( res.likechk == 1) {
-// 					${"btn_like"}.attr("src", "/resources/se2/img/thumbs-up-solid.svg");
-// 					${"#likecnt"}.empty();
-// 					${"#likecnt"}.append(res.likecnt);
-// 				} else if ( res.likechk == 0) {
-// 					$("#btn_like").attr("src", "/resources/se2/img/thumbs-up-regular.svg");
-// 					$("#likecnt").empty();
-// 					$("#likecnt").append(res.likecnt);
-// 				}
-// 			}
-// 		}
+// 	좋아요 여부 확인
+// 	var markcase = ${likecnt };
+	
+// 	if( markcase > 0) {
+// 		console.log(markcase);
+// 		$("#mLike").attr("src", "/resources/se2/img/thumbs-up-regular.svg");
+// 	} else {
+// 		console.log(markcase);
+// 		$("#mLike").attr("src", "/resources/se2/img/thumbs-up-solid.svg");
+// 	}
+	
+	$("#mLikebtn").on("click", function() {
+		var heart = $("#mLikebtn");
+		var no = ${detailMboard.MBOARD_NO };
 		
-// 	});
-// }
-
-$(document).ready(function () {
-	$('#btn_like').click(function(event) {
-		event.preventDefault();
-		
-		//로그인 if문 추후 구현
-		//..
-		
-		$.ajax ({
-			type: "POST"
-			,url: "/mboard/detail"
-			,data: JSON.stirngify(form)
-			success: function( result ) {
-				console.log("좋아요 성공!")
-// 				if(confirm("해당 상품 좋아요 등록 완. 목록페이지 이동 ㄱ?")) {
-// 					location.href='/마이페이지';
-// 				} else {
-// 					location.reload();
-// 				}
+		if(${empty login}) {
+			alert("로그인 후 이용해주세요.")
+			return false;
+		}
+	
+		$.ajax({
+			url: "/mboard/mboardLike"
+			, type : "POST"
+			, data : { "mboardNo" : no }
+			, success : function(res) {
+				heart.prop("name", res);
+				if(res==1) {
+					$("#mLike").attr("src", "/resources/se2/img/thumbs-up-regular.svg");
+				} else {
+					$("#mLike").attr("src", "/resources/se2/img/thumbs-up-solid.svg");
+					alert("번개 게시글 좋아요 등록 완료!")
+				}
 			}
-			, error: function(e) {
-				console.log(e);
-				alert("좋아요 실패!");
-				location.reload();
-			}
+			
 		})
 	})
 })
-
-
 
 </script>
 
@@ -233,6 +217,9 @@ textarea:focus {
 	border: none;
 }
 
+#mLike {
+	filter: invert(46%) sepia(93%) saturate(308%) hue-rotate(153deg) brightness(94%) contrast(87%);
+}
 
 </style>
 
@@ -249,7 +236,7 @@ textarea:focus {
 		<div class="title">
 			<h1>${detailMboard.MBOARD_TITLE }</h1>
 			<div class="button-ms" style="margin-top: 13px;">
-				<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#sendmessageModal" data-bs-whatever="yubin kim">✉️쪽지 보내기</button>
+<!-- 				<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#sendmessageModal" data-bs-whatever="yubin kim">✉️쪽지 보내기</button> -->
 <!-- 				<button type="button" class="btn btn-primary btn-sm" style="background-color: #6cc4dc; border: none;">✉️쪽지 보내기</button> -->
 			</div>
 <!-- 쪽지보내기 모달  -->
@@ -289,26 +276,31 @@ textarea:focus {
 			<div class="nav-info-detail">조회수 ${detailMboard.MBOARD_HIT }</div>
 			<div class="nav-info-detail" style="border-right: none;">like ${detailMboard.MBOARD_LIKECNT }</div>
 			
-<%-- 			<c:choose> --%>
 			<div class="thumbs_icon">
-				<!-- likechk가 0이면 빈 하트 -->
-<%-- 				<c:when test="${likechk eq '0' or empty likechk}"> --%>
-					<img src="/resources/se2/img/thumbs-up-regular.svg" id="btn_like" style="width: 25px; height: 25px; filter: invert(46%) sepia(93%) saturate(308%) hue-rotate(153deg) brightness(94%) contrast(87%); float: right; margin-right: 12px;">
-<%-- 				</c:when> --%>
-				<!-- likechk가 1일 때 -->
-<%-- 				<c:otherwise> --%>
-<!-- 					<img src="/resources/se2/img/thumbs-up-solid.svg" id="btn_like" style="width: 25px; height: 25px; filter: invert(46%) sepia(93%) saturate(308%) hue-rotate(153deg) brightness(94%) contrast(87%); float: right; margin-right: 12px;"> -->
-<%-- 				</c:otherwise> --%>
+				<div class="button" type="button" id="mLikebtn" name="mLikebtn">
+					<img src="/resources/se2/img/thumbs-up-regular.svg" id="mLike" name="mlike" style="width: 25px; height: 25px;float: right; margin-right: 12px;">
+				</div>
 			</div>
-<%-- 			</c:choose> --%>
 		</div>
 		
 		<div class="content">
 			${detailMboard.MBOARD_CONTENT }
 		</div>
+		<br><br><br><br><br>
+		<hr>
+		<div class="file">
+		<div class="filesection">🖇️첨부파일🖇️</div>
+				<a href="/mboard/download?fileUploadNo=${fileUpload.fileUploadNo }">${fileUpload.fileUploadOri }</a>
+		</div>
 		
-		
-		
+		<div class="go-button" style="float:right;">
+			<button type="button" id="btnMain" class="btn btn-primary" style="background-color: #6cc4dc; border: none;">목록</button>
+	
+			<c:if test="${memberNo eq detailMboard.MEMBER_NO }">
+					<button type="button" id="btnUpdate" class="btn btn-primary" style="background-color: #6cc4dc; border: none;">수정</button>
+					<button type="button" id="btnDelete" class="btn btn-danger" style="background-color: #6cc4dc; border: none;">삭제</button>
+			</c:if>
+		</div>
 </section>
 
 <!-- 댓글 부분 -->

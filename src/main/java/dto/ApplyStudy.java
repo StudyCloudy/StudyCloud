@@ -8,18 +8,20 @@ public class ApplyStudy {
 	private String memberName;
 	private int memberNo;
 	private int memberAge;
+	private String memberJob;
 	private String memberAddress;
 	private String memberIntro;
 	private Date applystudyDate;
 	
 	public ApplyStudy() {}
 	
-	public ApplyStudy(int applystudyNo, String memberName, int memberNo, int memberAge, String memberAddress, 
+	public ApplyStudy(int applystudyNo, String memberName, int memberNo, int memberAge, String memberJob, String memberAddress, 
 						String memberIntro, Date applystudyDate) {
 		super();
 		this.applystudyNo = applystudyNo;
 		this.memberName = memberName;
 		this.memberAge = memberAge;
+		this.memberJob = memberJob;
 		this.memberAddress = memberAddress;
 		this.memberIntro = memberIntro;
 		this.applystudyDate = applystudyDate;
@@ -28,7 +30,7 @@ public class ApplyStudy {
 	@Override
 	public String toString() {
 		return "ApplyStudy [applystudyNo=" + applystudyNo + ", memberName=" + memberName + ", memberNo=" + memberNo
-				+ ", memberAge=" + memberAge + ", memberAddress=" + memberAddress + ", memberIntro=" + memberIntro
+				+ ", memberAge=" + memberAge + ", memberJob=" + memberJob + ", memberAddress=" + memberAddress + ", memberIntro=" + memberIntro
 				+ ", applystudyDate=" + applystudyDate + "]";
 	}
 
@@ -58,6 +60,14 @@ public class ApplyStudy {
 
 	public int getMemberAge() {
 		return memberAge;
+	}
+
+	public String getMemberJob() {
+		return memberJob;
+	}
+
+	public void setMemberJob(String memberJob) {
+		this.memberJob = memberJob;
 	}
 
 	public void setMemberAge(int memberAge) {

@@ -256,7 +256,7 @@ a:hover {
 			</thead>
 			
 			<tbody>
-  				<c:forEach items="${mlist }" var="mboard">  
+  				<c:forEach items="${searchResult }" var="mboard">  
 					<tr>
 						<td>${mboard.MBOARD_NO}</td>
 						<td><a href="/mboard/detail?mBoardNo=${mboard.MBOARD_NO}" style="text-decoration: none; color: #367E9E;">${mboard.MBOARD_TITLE}</a></td>

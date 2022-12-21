@@ -91,45 +91,28 @@
 		<selectKey order="BEFORE" resultType="int" keyProperty="applystudyNo">
 			SELECT applystudy_seq.nextval FROM dual
 		</selectKey>
-		INSERT INTO applystudy ( applystudy_no, member_name, member_no, member_age, member_address, member_intro, applystudy_date)
-		VALUES( ${applystudyNo }, #{memberName }, #{memberNo }, #{memberAge }, #{memberAddress }, #{memberIntro }, #{applystudyDate } )
+		INSERT INTO applystudy ( applystudy_no, member_no, member_name, member_age, member_job, member_address, member_intro, applystudy_date)
+		VALUES( ${applystudyNo }, #{memberNo }, #{memberName }, #{memberAge }, #{memberJob }, #{memberAddress }, #{memberIntro }, sysdate )
 	</insert>
 	
-	<select id="cntSearchList" resultType="int">
-		SELECT count(*) 
-		FROM studyboard s
-		JOIN  member m ON (s.member_no = m.member_no)
-		WHERE
-		<foreach collection="slist" item="slist" separator="AND">
-			<choose>
-				<when test="slist == 'studyTag'.toString()">
-					s.study_tag like '%'||#{keyword}||'%'
-				</when>
-				<when test="slist == 'studyTitle'.toString()">
-					s.study_title like '%'||#{keyword}||'%'
-				</when>				
-			</choose>
-		</foreach>
-	</select>
+	<select id="searchByKeyword" resultType="hashmap" parameterType="hashmap">
+		SELECT * FROM studyboard
+		WHERE 1=1
+		<choose>
+			<when test="category != null and category.equals('study_tag')">
+				AND study_tag LIKE '%' || #{keyword } || '%'
+			</when>
+			
+			<when test="category != null and category.equals('study_title')">
+				AND study_title LIKE '%' || #{keyword } || '%'
+			</when>
+			
+			<when test="category != null and category.equals('member_nick')">
+				AND member_nick LIKE '%' || #{keyword } || '%'
+			</when>
+		</choose>	
+			ORDER BY member_no DESC
 	
-	<select id="searchByTagList" resultType="int">
-		SELECT count(*) 
-		FROM studyboard s
-		JOIN  member m ON (s.member_no = m.member_no)
-		WHERE
-		<foreach collection="slist" item="slist" separator="AND">
-			<choose>
-				<when test="slist == 'studyTag'.toString()">
-					s.study_tag like '%'||#{keyword}||'%'
-				</when>
-				<when test="slist == 'studyTitle'.toString()">
-					s.study_title like '%'||#{keyword}||'%'
-				</when>				
-			</choose>
-		</foreach>
-		ORDER BY study_no desc ) B
-		) studyboard
-		WHERE rnum BETWEEN #{startNo } AND #{endNo }
 	</select>
 	
 	</mapper>

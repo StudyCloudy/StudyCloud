@@ -200,6 +200,12 @@ public class SboardServiceImpl implements SboardService{
 		
 	}
 
+	@Override
+	public List<HashMap<String, Object>> searchKeyword(HashMap<String, Object> param) {
+		
+		return sboardDao.searchByKeyword(param);
+	}
+
 
 
 

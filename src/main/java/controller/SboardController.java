@@ -2,6 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -333,7 +334,7 @@ public class SboardController {
 	@GetMapping("/sboard/applyStudy")
 	public void applystudy() {}
 	
-	@PostMapping("/sboard/appltstudy")
+	@PostMapping("/sboard/applyStudy")
 	public String applystudyProc(
 			
 			Member member
@@ -355,6 +356,21 @@ public class SboardController {
 		//스터디 게시판 메인으로 리다이렉트
 		return "redirect:/sboard/main";
 		
+	}
+	
+	@GetMapping("/sboard/search")
+	public String sboardSearch(
+			
+			@RequestParam HashMap<String, Object> param
+			, Model model
+			
+			) {
+		
+		List<HashMap<String,Object>> searchResult = sboardService.searchKeyword(param);
+		logger.debug("{}", searchResult);
+		model.addAttribute("searchResult", searchResult);
+		
+		return "/sboard/studySearch";
 	}
 	
 	
