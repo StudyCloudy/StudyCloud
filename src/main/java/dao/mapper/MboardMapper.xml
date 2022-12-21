@@ -26,48 +26,48 @@
 	<update id="updateHit" parameterType="int">
 		UPDATE mboard
 		SET mboard_hit = mboard_hit + 1
-		WHERE mboard_no = #{mboardNo }
+		WHERE mboard_no = #{mBoardNo }
 	</update>	
 	
 	<select id="detailPageByMboardNo" resultType="hashMap" parameterType="int">
 		SELECT b.mboard_no, b.mboard_title, b.mboard_content, b.mboard_date, b.mboard_hit, b.mboard_cmtcnt, b.mboard_likecnt, m.member_id, m.member_nick
 		FROM mboard b
 		JOIN member m ON ( b.member_no = m.member_no )
-		WHERE mboard_no = #{mboardNo }
+		WHERE mboard_no = #{mBoardNo }
 	</select>
 	
 	
-	<select id=" selectMboardByMboardNo" resultType="hashMap" parameterType="dto.Mboard">
-		SELECT b.mboard_no, b.member_no, b.mboard_title, b.mboard_content, b.mboard_data, b.mboard_hit, b.mboard_cmtcnt, b.mboard_likecnt,
+	<select id=" selectMboardByMboardNo" resultType="hashMap" parameterType="int">
+		SELECT b.mboard_no, b.member_no, b.mboard_title, b.mboard_content, b.mboard_hit, b.mboard_cmtcnt, b.mboard_likecnt,
 			m.member_id, m.member_nick FROM mboard b
 		JOIN member m ON (b.member_no = m.member_no)
-		WHERE mboard_no = #{mboardNo}
+		WHERE mboard_no = #{mBoardNo }
 	</select>
 	
 	<!-- 게시글 삽입 -->
-	<insert id="insert" parameterType="dto.Mboard">
-		<selectKey order="BEFORE" resultType="int" keyProperty="mboardNo">
+	<insert id="insert" parameterType="Mboard">
+		<selectKey order="BEFORE" resultType="int" keyProperty="mBoardNo">
 			SELECT mboard_seq.nextval FROM dual
 		</selectKey>
 		INSERT INTO mboard ( mboard_no, member_no, mboard_title, mboard_content, mboard_date, mboard_hit, mboard_cmtcnt, mboard_likecnt)
-		VALUES( #{mboardNo }, #{memberNo }, #{mboardTitle }, #{mboardContent }, sysdate, #{mboardHit }, #{mboardCmtcnt }, #{mboardLikecnt } )
+		VALUES( #{mBoardNo }, #{memberNo }, #{mboardTitle }, #{mboardContent }, sysdate, #{mboardHit }, #{mboardCmtcnt }, #{mboardLikecnt } )
 	</insert>
 	
 	<!-- 파일 삽입 -->
-	<insert id="insertFile" parameterType="dto.FileUpload">
-		INSERT INTO FileUpload ( fileUpload_no, mBoard_no, fileUpload_ori, fileUpload_stor)
-		VALUES ( mboardfile_seq.nextval, #{mboardNo }, #{fileUploadOri }, #{fileUploadStor })
+	<insert id="insertFile" parameterType="FileUpload">
+		INSERT INTO fileUpload ( fileUpload_no, mBoard_no, fileUpload_ori, fileUpload_stor)
+		VALUES ( fileUpload_seq.nextval, #{mBoardNo }, #{fileUploadOri }, #{fileUploadStor })
 	</insert>	
 	
-	<select id="selectMboardFileByMboardNo" resultType="int" parameterType="dto.FileUpload"> 
+	<select id="selectMboardFileByMboardNo" resultType="FileUpload" parameterType="Mboard"> 
 		SELECT fileUpload_no, mboard_no, fileUpload_ori, fileUpload_stor
-		FROM FileUpload
-		WHERE mboard_no = #{mboardNo }
+		FROM fileUpload
+		WHERE mboard_no = #{mBoardNo }
 	</select>
 	
 	<select id="selectMboardFileByFileUploadNo" resultType="dto.FileUpload" parameterType="dto.FileUpload">
 		SELECT fileUpload_no, mboard_no, fileUpload_ori, fileUpload_stor
-		FROM FileUpload
+		FROM fileUpload
 		WHERE fileUpload_no = #{fileUploadNo }
 	</select>
 	
@@ -75,25 +75,65 @@
 		UPDATE mboard
 		SET mboard_title = #{mboardTitle },
 			mboard_content = #{mboardContent }
-		WHERE mboard_no = #{mboardNo }
+		WHERE mboard_no = #{mBoardNo }
 	</update>
 	
 	<!-- 기존 첨부파일 삭제 -->
 	<delete id="deleteFile" parameterType="dto.Mboard">
 		DELETE fileUpload
-		WHERE mboard_no = #{mboardNo }
+		WHERE mboard_no = #{mBoardNo }
 	</delete>
+	
+	<delete id="deleteByMboardNo" parameterType="dto.Mboard">
+		DELETE mboard WHERE mBoard_no = #{mBoardNo }
+	</delete>
+	
+	<select id="detailFile" parameterType="dto.Mboard" resultType="dto.FileUpload">
+		SELECT fileupload_no, fboard_no, fileupload_ori, fileupload_stor 
+		FROM fileupload
+		WHERE fileupload_no = #{mBoardNo}
+	</select>
 	
 	<!-- 기존 게시글 삭제 -->
 	<delete id="delete" parameterType="dto.Mboard">
 		DELETE mboard
-		WHERE mboard_no = #{mboardNo }
+		WHERE mboard_no = #{mBoardNo }
 	</delete>
 	
-	<!-- 좋아요 여부 -->
-	<select id="findlike" resultType="int">
-		SELECT count(*) from mboardlike
-		WHERE member_no = #{memberNo } AND mboard_no = #{mboardNo }
+	<select id="likecount" parameterType="dto.MboardLike" resultType="int">
+	 	SELECT count(*) FROM mboardlike
+	 	WHERE member_no = #{memberNo }
+	 	AND mboard_no = #{mBoardNo }
+	</select>
+	
+	<select id="insertLike" parameterType="dto.MboardLike">
+		INSERT INTO mboardlike 
+		VALUES ( mboardlike_seq.nextval, #{mBoardNo }, #{memberNo } )
+	</select>
+	
+	<select id="cancelLike" parameterType="dto.MboardLike">
+		DELETE mboardlike 
+		WHERE study_no = #{mBoardNo }
+		AND member_no = #{memberNo }
+	</select>
+	
+	<select id="searchByKeyword" resultType="hashMap" parameterType="hashMap">
+		SELECT * FROM mboard
+		WHERE 1=1
+		<choose>
+			<when test="category != null and category.equals('mboard_title')"> 
+				AND mboard_title LIKE '%' || #{keyword } || '%'
+			</when>		
+			
+			<when test="category != null and category.equals('mboard_content')"> 
+				AND mboard_content LIKE '%' || #{keyword } || '%'
+			</when>
+			
+			<when test="category != null and category.equals('mboard_date')">
+				AND mboard_date LIKE '%' || #{keyword } || '%'
+			</when>	
+		</choose>
+	
 	</select>
 	
 	

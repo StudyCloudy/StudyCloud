@@ -5,6 +5,7 @@ import java.util.List;
 
 import dto.FileUpload;
 import dto.Mboard;
+import dto.MboardLike;
 import util.Paging;
 
 public interface MboardDao {
@@ -28,14 +29,14 @@ public interface MboardDao {
 	 * 조회수 +1 증가
 	 * @param mboardNo
 	 */
-	public void updateHit(int mboardNo);
+	public void updateHit(Mboard mboard);
 
 	/**
 	 * 게시판 번호로 상세페이지 조회
 	 * @param mboardNo
 	 * @return
 	 */
-	public HashMap<String, Object> detailPageByMboardNo(int mboardNo);
+	public HashMap<String, Object> detailPageByMboardNo(Mboard mboard);
 
 	/**
 	 * 게시글 삽입
@@ -50,11 +51,11 @@ public interface MboardDao {
 	public void insertFile(FileUpload fileUpload);
 
 	/**
-	 * 첨부파일 삭제
+	 * 첨부파일
 	 * @param mboardNo - 게시글 번호로 조회
 	 * @return
 	 */
-	public List<HashMap<String, Object>> selectMboardFileByMboardNo(int mboardNo);
+	public FileUpload selectMboardFileByMboardNo(Mboard mboard);
 
 	/**
 	 * 
@@ -74,12 +75,36 @@ public interface MboardDao {
 	 * @param mboard
 	 */
 	public void deleteFile(Mboard mboard);
+	
+	/**
+	 * 게시글 삭제
+	 * @param mboard
+	 */
+	public void deleteByMboardNo(Mboard mboard);
+	
+	public FileUpload detailFile(Mboard mboard);
 
 	/**
 	 * 기존 게시글 삭제
 	 * @param mboard
 	 */
 	public void delete(Mboard mboard);
+
+	
+	public int likecount(MboardLike mboardLike);
+
+	public void insertLike(MboardLike mboardLike);
+
+	public void cancelLike(MboardLike mboardLike);
+
+
+	/**
+	 * 번개게시글 검색
+	 * @param param
+	 * @return
+	 */
+	public List<HashMap<String, Object>> searchByKeyword(HashMap<String, Object> param);
+
 	
 
 	

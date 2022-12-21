@@ -17,6 +17,22 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#btnUpdate").click(function(){
+		$("form").submit();
+	})
+		
+	$("#btnCancle").click(function () {
+		location.href = "/mboard/detail?mBoardNo=${detailMboard.MBOARD_NO }"
+	})
+})
+
+
+
+
+
+</script>
 <style type="text/css">
 .header-box {
 	color: white;
@@ -70,36 +86,34 @@
 		Publish the Flash-Gathering!
 	</div>
 
-<form action="./update" method="post" enctype="multipart/form-data">
-	<input type="hidden" name="mboardNo" value="${param.mboard_no }">
-	
+<form action="/mboard/update" id="form" method="post" enctype="multipart/form-data">
+<input type="hidden" name="mBoardNo" value="${param.mBoardNo }">
 	<div class="container">
 		<div class="mb-3">
-  			<label for="exampleFormControlInput1" class="form-label"></label>
-  			<input type="text" id="title" value="${param.mboard_title }" class="form-control" placeholder="제목을 입력하세요">
+  			<label for="title" class="form-label"></label>
+  			<input type="text" class="form-control" id="mboardTitle" name="mboardTitle" placeholder="제목을 입력하세요" value="${updateMboard.MBOARD_TITLE }">
 		</div>
 		
 		<div class="mb-3">
-  			<label for="exampleFormControlTextarea1" class="form-label"></label>
-  			<textarea class="form-control" id="content" rows="10" placeholder="내용을 입력하세요"></textarea>
+  			<label for="content" class="form-label"></label>
+  			<textarea class="form-control" id="mboardContent" name="mboardContent" rows="10" placeholder="내용을 입력하세요" value="${updateMboard.MBOARD_CONTENT }"></textarea>
 		</div>
 		
 		<div class="mb-3">
   			<label for="formFileSm" class="form-label"></label>
- 			<input class="form-control form-control-sm" id="formFileSm" type="file">
+ 			<input class="form-control form-control-sm" id="file" name="file" type="file" value="${fileUpload.fileUploadOri }">
 		</div>
 		
 		<div class="button">
-<!-- 			<button type="button" class="btn" type="submit">등록하기</button> -->
 <!-- 			<input type="submit" id="submit" class="btn btn-secondary" value="등록하기" style="margin-right: 5px;"> -->
 			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-  			등록하기
+  			수정하기
 			</button>
-			<input type="reset" id="cancel" class="btn btn-secondary" value="취소하기" style="margin-left: 5px;">
+			<input type="reset" id="btnCancel" class="btn btn-secondary" value="취소하기" style="margin-left: 5px;">
 		</div>
 		
 	</div>
-</form>
+<!-- </form> -->
 
 <!-- 번개 게시글 등록 완료 모달 -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -110,16 +124,17 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        번개스터디 글 수정이 완료되었습니다.
+        번개게시글 수정이 완료되었습니다.
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" style="background-color: #6cc4dc;" onclick="location.href='./mboardmain'">확인</button>
+        <button type="button" id="btnUpdate" class="btn btn-primary" style="background-color: #6cc4dc;">확인</button>
       </div>
     </div>
   </div>
 </div>
 
-</div>
+</form>
+</div><!-- whole 끝 -->
 
 <br><br><br><br><br>
 
