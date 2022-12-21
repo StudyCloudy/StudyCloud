@@ -157,7 +157,7 @@ public class MntBoardServiceImpl implements MntBoardService {
 		String storedName = originName + UUID.randomUUID().toString().split("-")[4];
 		
 		//저장할 파일의 정보 객체
-		File dest = new File( storedFolder, storedName );
+		File dest = new File( storedFolder, originName );
 		
 		try {
 			file.transferTo(dest);

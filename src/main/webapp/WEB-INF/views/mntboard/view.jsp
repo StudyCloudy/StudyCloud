@@ -38,7 +38,8 @@ function cntMove(pageNo, mntBoardNo) {
 		})
 	}
 	
- 
+
+
 $(document).ready(function() {
 	
 	var isLogin = $('#hiddenIsLogin').val()
@@ -199,20 +200,20 @@ $(document).ready(function() {
 </div> <!-- mnt_wrap1 끝 -->
 
 
-<%-- <div><a class="filedown" href="/mntboard/download?fileUploadNo=${fileUpload.fileUploadNo}">${fileUpload.fileUploadOri }</a></div> --%>
 <!-- 본문 -->
 <div class="mnt_wrap2">
 
 		
 <hr>
+<div><a class="filedown" style="font-size: 12px;" href="/mntboard/download?fileUploadNo=${fileUpload.fileUploadNo}">${fileUpload.fileUploadOri }</a></div>
 
 <div class="mnt_content">
 ${mntViewBoard.MNTBOARD_CONTENT }
 <div class="image">
 	<img style=" width: 500px; height: 200px;" src="/upload/${fileUpload.fileUploadOri}" alt="mento-attach-img">
 </div>
-</div>
 
+</div>
 
 </div><!-- mnt_wrap2 끝 -->
 <hr>	

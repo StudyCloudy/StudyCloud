@@ -198,7 +198,7 @@
 <span class="write_date"><fmt:formatDate value="${mtViewBoard.MTBOARD_DATE }" type="both" dateStyle="default" timeStyle="short"/></span>
 <hr>
 </div> <!-- mt_wrap1 끝 -->
-<%-- <div style="float: right;"><a class="filedown" href="/mtboard/download?fileUploadNo=${fileUpload.fileUploadNo}">${fileUpload.fileUploadOri }</a></div> --%>
+<div style="float: right;"><a class="filedown" style="font-size: 12px;" href="/mtboard/download?fileUploadNo=${fileUpload.fileUploadNo}">${fileUpload.fileUploadOri }</a></div>
 
 
 <!-- 본문 -->
