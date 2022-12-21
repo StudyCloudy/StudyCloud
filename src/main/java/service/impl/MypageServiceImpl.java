@@ -173,7 +173,7 @@ import service.face.MypageService;
 	//나의 멘토
 	@Override
 	public List<HashMap<String, Object>> mymento(String id) {
-		return mypageDao.mystudy(id);
+		return mypageDao.myMentoList(id);
 	}
 	
 	//나의 스터디
