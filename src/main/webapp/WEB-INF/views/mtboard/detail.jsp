@@ -198,7 +198,7 @@
 <span class="write_date"><fmt:formatDate value="${mtViewBoard.MTBOARD_DATE }" type="both" dateStyle="default" timeStyle="short"/></span>
 <hr>
 </div> <!-- mt_wrap1 끝 -->
-<div style="float: right;"><a class="filedown" href="/mtboard/download?fileUploadNo=${fileUpload.fileUploadNo}">${fileUpload.fileUploadOri }</a></div>
+<%-- <div style="float: right;"><a class="filedown" href="/mtboard/download?fileUploadNo=${fileUpload.fileUploadNo}">${fileUpload.fileUploadOri }</a></div> --%>
 
 
 <!-- 본문 -->
@@ -206,7 +206,11 @@
 
 <div class="mt_content">
 ${mtViewBoard.MTBOARD_CONTENT }
+<div class="image">
+	<img style="width:100%" src="/upload/${fileUpload.fileUploadOri}" alt="mento-attach-img">
 </div>
+</div>
+
 
 <a class="btn btn-primary" id="applyBtn"  type="button" style="float: right; font-size: 15px;">
 신청하기</a> 

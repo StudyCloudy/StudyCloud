@@ -137,7 +137,8 @@ function updateContents() {
 
 <div class="form-group">
 	<label for="file"></label>
-	<input type="file" id="file" name="file">
+	<input type="file" id="file" name="file" onchange="readURL(this)">
+	<img id="img_container" style="width:180px"/>
 </div>
 <br><br><br>
 
@@ -162,6 +163,17 @@ nhn.husky.EZCreator.createInIFrame({
 	fCreator: "createSEditor2"
 })
 
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById('img_container').src = e.target.result;
+    };
+    reader.readAsDataURL(input.files[0]);
+  } else {
+    document.getElementById('img_container').src = "";
+  }
+}
 </script>
 
 

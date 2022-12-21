@@ -199,7 +199,7 @@ $(document).ready(function() {
 </div> <!-- mnt_wrap1 끝 -->
 
 
-<div><a class="filedown" href="/mntboard/download?fileUploadNo=${fileUpload.fileUploadNo}">${fileUpload.fileUploadOri }</a></div>
+<%-- <div><a class="filedown" href="/mntboard/download?fileUploadNo=${fileUpload.fileUploadNo}">${fileUpload.fileUploadOri }</a></div> --%>
 <!-- 본문 -->
 <div class="mnt_wrap2">
 
@@ -208,6 +208,9 @@ $(document).ready(function() {
 
 <div class="mnt_content">
 ${mntViewBoard.MNTBOARD_CONTENT }
+<div class="image">
+	<img style="width: 100%;" src="/upload/${fileUpload.fileUploadOri}" alt="mento-attach-img">
+</div>
 </div>
 
 
