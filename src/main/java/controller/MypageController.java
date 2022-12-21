@@ -56,11 +56,14 @@ public class MypageController {
 			
 			if(session.getAttribute("member_no") != null) {
 				int member_no = (int)session.getAttribute("member_no");
+//				System.out.println("??????????" );
+				System.out.println("member_no {}"+ member_no);
 				Member member = new Member();
 				member.setMemberNo(member_no);
 				
 				member = memberService.memberInfoByNo(member);
 
+				System.out.println("member "+ member);
 				model.addAttribute("member", member);
 				model.addAttribute("picture", mypageService.selectProfile(member_no) );
 				
@@ -236,13 +239,26 @@ public class MypageController {
 	}
 
 	
-	@GetMapping("/likelist")
-	public String likelist() {
+	//좋아요 목록
+	
+	@RequestMapping("/likelist")
+	public String likelist(Model model, HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		String id = (String) session.getAttribute("loginid");
 		
-		logger.info("/likelist [GET]성공");
+		//번개게시판 좋아요
+		List<HashMap<String, Object>> mboard = mypageService.mboard(id);
+		model.addAttribute("mboard", mboard);
+		logger.info("mboard list {} :", mboard);
+		
+		//멘티찾기게시판 좋아요
+		List<HashMap<String, Object>> mntboard = mypageService.mntboard(id);
+		model.addAttribute("mntboard", mntboard);
+		logger.info("mntboard list {} :", mntboard);
+		
 		
 		return "mypage/likelist";
-		
+	
 	}
 	
 

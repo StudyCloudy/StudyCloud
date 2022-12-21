@@ -36,6 +36,7 @@
 				location.href = "/mtboard/update?mtboardNo=${mtViewBoard.MTBOARD_NO}"
 		 })
 		$("#MtbtnDelete").click(function() {
+			alert('게시글을 삭제하였습니다.')
 			location.href = "/mtboard/delete?mtboardNo=${mtViewBoard.MTBOARD_NO}"
 		}) 
 		
@@ -102,10 +103,8 @@
 		}else{
 			alert('로그인 이후 이용해주세요.')
 		} 
-		
-	})
-		
-		
+		 
+		})
 })	
 
 </script>

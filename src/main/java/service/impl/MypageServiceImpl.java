@@ -200,9 +200,28 @@ import service.face.MypageService;
 		return mypageDao.mystudy(id);
 	}
 	
+	//나의 스터디
 	@Override
 	public List<HashMap<String, Object>> mystudy(String id) {
 		return mypageDao.mystudy(id);
+	}
+
+	
+	//--- 좋아요리스트 ---
+
+	//번개게시판 좋아요
+	@Override
+	public List<HashMap<String, Object>> mboard(String id) {
+
+		return mypageDao.likelist(id);
+	}
+
+
+	//멘티게시판 좋아요
+	@Override
+	public List<HashMap<String, Object>> mntboard(String id) {
+
+		return mypageDao.likelist(id);
 	}
 
 

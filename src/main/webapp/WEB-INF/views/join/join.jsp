@@ -13,6 +13,19 @@
 
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript">
+function kakaoLogin() {
+
+    $.ajax({
+        url: '/login/getKakaoAuthUrl',
+        type: 'get',
+        async: false,
+        dataType: 'text',
+        success: function (res) {
+            location.href = res;
+        }
+    });
+
+  }
 
 $(document).ready(function() {
 
@@ -57,19 +70,7 @@ $(document).ready(function() {
 Kakao.init('ebc8fc53624cdd3b21b34f099837f10c');
 console.log(Kakao.isInitialized()); // sdk초기화여부판단
 
-function kakaoLogin() {
 
-    $.ajax({
-        url: '/login/getKakaoAuthUrl',
-        type: 'get',
-        async: false,
-        dataType: 'text',
-        success: function (res) {
-            location.href = res;
-        }
-    });
-
-  }
   
 //-------------------------------------------
 
@@ -463,7 +464,8 @@ margin-left: -7%;
 							<div class=buts>
 								<button class="btn btn-bold btn-primary" id="btnjoin">JOIN</button>
 								<img src="https://ifh.cc/g/7XpWOg.png" alt="카카오계정 로그인" onclick="kakaoLogin();"
-								style="height: 46px; width: 50%; padding-left: 5px;"> <a href="javascript:void(0)"></a> <br>							</div>
+								style="height: 46px; width: 50%; padding-left: 5px;"> <a href="javascript:void(0)"></a> <br>
+							</div>
 							<br>
 						</div>
 					</form>

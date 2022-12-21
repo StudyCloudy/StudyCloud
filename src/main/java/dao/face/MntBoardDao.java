@@ -103,8 +103,9 @@ public interface MntBoardDao {
 	 * 게시글 삭제
 	 * @param mntBoard
 	 */
-	public void deleteMntBoard(MntBoard mntBoard);
+	public void deleteLikeByMntBoardNo(MntBoard mntBoard);
 	public void deleteComtByMntBoardNo(MntBoard mntBoard);
+	public void deleteMntBoard(MntBoard mntBoard);
 
 	
 	// 댓글
@@ -147,6 +148,7 @@ public interface MntBoardDao {
 	
 	// 글쓰기 멤버 닉네임 불러오기
 	public String getNickByMemberNo(int memberNo);
+
 
 
 	

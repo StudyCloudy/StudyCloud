@@ -10,6 +10,20 @@
 <meta charset="UTF-8">
 <title>StudyCloud</title>
 
+<script type="text/javascript">
+
+$(document).ready(function() {
+	
+
+$("#gotologin").on("click", function(){
+	location.href="/login";
+	
+	})
+
+})
+
+</script>
+
 <style type="text/css" >
 
 * {
@@ -100,12 +114,63 @@ a:hover {
 	color: #3F92B7;
 }
 
+/* 로그인 하지 않았을 때 */
+
+.loginmentcard {
+	border: 0;
+	border-radius: 0px;
+ 	margin-bottom: 30px; 
+ 	margin-top: 10%;
+ 	height: 90%;
+ 	width: 70%;
+	-webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.03);
+	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.03);
+	-webkit-transition: .5s;
+	transition: .5s;
+}
+
+#gotologin {
+	margin-left: 35%;
+}
+
+.loginment {
+	padding-bottom: 20%;
+	padding-top: 10%;
+	width: 40%;
+	margin-left: 50%;
+}
+
+.profile-button {
+	background: #6CC4DC;
+	box-shadow: none;
+	border: none;
+	margin-left: -20%;
+	font-size: 15px;
+	padding: 10px;
+	width: 30%;
+}
+
+.profile-button:hover {
+	background: #3F92B7;
+}
+
+.profile-button:focus {
+	background: #3F92B7;
+	box-shadow: none;
+}
+
+.profile-button:active {
+	background: #3F92B7;
+	box-shadow: none;
+}
+
 </style>
 </head>
 
 
 <body>
 
+<c:if test="${not empty login }">
 
 <div class="container">
     <div class="row">
@@ -115,7 +180,7 @@ a:hover {
                     <div class="card-img pt-2 pb-3"> <img src="https://img.icons8.com/dusk/512/circled-user-male-skin-type-3.png" alt=""> </div>
                     <div class="name h5">회원 프로필</div><br>
                    <a href="/mypage/edit" class="testimonial">회원 정보 수정</a><br><br>
-                   <a href="/message" class="testimonial">내 쪽지함</a><br><br>
+<!--                    <a href="/message" class="testimonial">내 쪽지함</a><br><br> -->
                    <a href="/withdrawal" class="testimonial">회원 탈퇴</a>
                     
                 </div>
@@ -128,7 +193,7 @@ a:hover {
                     <div class="name h5"><a href="/mystudy">참여중인 스터디</a></div><br>
                     <div class="testimonial">나의 멘토</div><br>
                     <div href="" class="testimonial">나의 스터디</div><br>
-                    <div href="" class="testimonial">온라인 스터디</div><br>
+<!--                     <div href="" class="testimonial">온라인 스터디</div><br> -->
                 </div>
             </div>
         </div>
@@ -153,6 +218,22 @@ a:hover {
         </div>
     </div>
 </div>
+</c:if>
+
+
+  <c:if test="${empty login }">
+			 <div class="loginmentcard">
+            <div class="loginment">
+	            	<h2 class ="text-dark text-center">접속 권한이 없습니다.</h2>
+	            	<p class="text-center"> 
+	            		<span>로그인 후 이용해주세요.</span>
+	            	</p>
+	            <div class="mt-5 text-right">
+	           		<button type="button" class="btn btn-primary profile-button" id="gotologin">로그인 하기</button>
+	            </div>
+            </div>
+            </div>
+			</c:if>
 
 </body>
 

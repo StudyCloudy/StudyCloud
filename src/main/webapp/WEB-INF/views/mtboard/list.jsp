@@ -19,7 +19,7 @@
 <body>
 
 <script type="text/javascript">
-	var sort = "mtboard_date";
+	var sort = "mtboard_no";
 	var page = 1;
 
 	var keyword;
@@ -128,6 +128,20 @@
 		type = undefiend;
 		getList()
  	}) 
+ 	
+ 	
+ $(document).ready(function() {	
+	 $("#mtApplyBtn").click(function() {
+			console.log("클릭됨");
+		var authority = ${authority}	
+			
+		if(authority == 2){
+			alert('이미 등록된 멘토입니다.')
+				} else{
+					location.href="/mtboard/mentoApply"
+				}
+			})
+	});
 </script>
 
 
@@ -142,7 +156,7 @@
 			<strong class="mentoring_txt">
 				📚 당신의 지식을 함께 공유해 볼 수 있어요! 📚
 			</strong><br><br>
-		<a class="btn btn-primary" href ="/mtboard/mentoApply" type="button">멘토 지원하기</a>
+		<a class="btn btn-primary" type="button" id="mtApplyBtn">멘토 지원하기</a>
 	</div>
 </div>
 
@@ -160,32 +174,41 @@
     <th style="background-color: #aacde5;" ><i class="fa-solid fa-caret-down"></i> 분야 별 보기 <i class="fa-solid fa-caret-down"></i></th>
     </tr>
      
-    <tr> 
+   <tr> 
   	<td>
   	<input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" value="개발 · 프로그래밍"  onclick="pageField(event)">
 	<label class="btn btn-secondary" for="option1" >개발 · 프로그래밍</label>
 	</td>
 	</tr>
-	<tr>
-	<td>
-	<input type="radio" class="btn-check" name="options" id="option2" autocomplete="off" value="직무 · 마케팅" onclick="pageField(event)">
-	<label class="btn btn-secondary" for="option2">직무 · 마케팅</label>
+	
+    <tr> 
+  	<td>
+  	<input type="radio" class="btn-check" name="options" id="option2" autocomplete="off" value="어학 · 외국어"  onclick="pageField(event)">
+	<label class="btn btn-secondary" for="option2" >어학 · 외국어</label>
 	</td>
 	</tr>
 	
 	<tr>
 	<td>
-	<input type="radio" class="btn-check" name="options" id="option3" autocomplete="off" value="커리어" onclick="pageField(event)">
-	<label class="btn btn-secondary" for="option3">커리어</label>
+	<input type="radio" class="btn-check" name="options" id="option3" autocomplete="off" value="직무 · 마케팅" onclick="pageField(event)">
+	<label class="btn btn-secondary" for="option3">직무 · 마케팅</label>
 	</td>
 	</tr>
 	
 	<tr>
 	<td>
-  	<input type="radio" class="btn-check" name="options" id="option4" autocomplete="off" value="기타" onclick="pageField(event)">
-	<label class="btn btn-secondary" for="option4">기타</label>
+	<input type="radio" class="btn-check" name="options" id="option4" autocomplete="off" value="커리어" onclick="pageField(event)">
+	<label class="btn btn-secondary" for="option4">커리어</label>
 	</td>
 	</tr>
+	
+	<tr>
+	<td>
+  	<input type="radio" class="btn-check" name="options" id="option5" autocomplete="off" value="기타" onclick="pageField(event)">
+	<label class="btn btn-secondary" for="option5">기타</label>
+	</td>
+	</tr>
+	
 	</table>
 	</div>
 	
@@ -204,7 +227,7 @@
 
 <div class="radio_bt">	
 <div class="form-check">
-  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked  onclick="pageSort('mtboard_date')">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked  onclick="pageSort('mtboard_no')">
   <label class="form-check-label" for="flexRadioDefault1">최신순</label>
 </div>
 <div class="form-check">

@@ -15,11 +15,6 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <script type="text/javascript">
-/* $(document).ready(function(){
-	$("#apply_btn").click(function(){
-		$("form").submit();
-	})
-}) */
 
 $(document).ready(function(){ 
     $("#apply_btn").on('click',function(){ // 제출 버튼 이벤트 지정
@@ -37,6 +32,7 @@ $(document).ready(function(){
 			
         })
     })
+    
 })
 
 </script>
@@ -71,6 +67,7 @@ $(document).ready(function(){
 <div class="naming">분야
 <select class="form-select" aria-label="Default select example" id="field" name="field" style="margin-top: 5px; font-size: 13px">
   <option>개발 · 프로그래밍</option>
+  <option>어학 · 외국어</option>
   <option>직무 · 마케팅</option>
   <option>커리어</option>
   <option>기타</option>

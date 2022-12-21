@@ -95,7 +95,7 @@ public class LoginController {
 		
 	//로그아웃
 	
-	@RequestMapping("login/logout")
+	@RequestMapping("/login/logout")
 	
 	public String logout(HttpSession session) {
 		session.invalidate();
