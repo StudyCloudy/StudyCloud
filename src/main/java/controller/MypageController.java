@@ -183,20 +183,20 @@ public class MypageController {
 	public String wishlist(Model model, HttpServletRequest req) {
 		HttpSession session = req.getSession();
 		String id = (String) session.getAttribute("loginid");
-		String id = (String) session.getAttribute("member_no");
+		int no = (int)session.getAttribute("member_no");
 		
 		//찜한 스터디
-		List<HashMap<String, Object>> studywish = mypageService.studywish(id);
+		List<HashMap<String, Object>> studywish = mypageService.studyWish(no);
 		model.addAttribute("study", studywish);
 		logger.info("study list {} :", studywish);
 		
 		//찜한 멘토
-		List<HashMap<String, Object>> mentowish = mypageService.mentowish(id);
+		List<HashMap<String, Object>> mentowish = mypageService.mentoWish(no);
 		model.addAttribute("mento", mentowish);
 		logger.info("mento list {} :", mentowish);
 		
 		//찜한 스터디공간
-		List<HashMap<String, Object>> sroomwish = mypageService.sroomwish(id);
+		List<HashMap<String, Object>> sroomwish = mypageService.studyroomWish(no);
 		model.addAttribute("sroom", sroomwish);
 		logger.info("sroom list {} :", sroomwish);
 		
