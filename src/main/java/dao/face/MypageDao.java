@@ -93,15 +93,6 @@ public interface MypageDao {
 	
 	
 	/**
-	 * 위시리스트 조회
-	 * 
-	 * @param id
-	 * @return
-	 */
-	public List<HashMap<String, Object>> wishlist(String id);
-	
-	
-	/**
 	 * 마이스터디 조회
 	 * 
 	 * @param id
@@ -111,13 +102,21 @@ public interface MypageDao {
 	
 	
 	/**
-	 * 좋아요리스트 조회
+	 * 참여중인 스터디(나의 멘토)
 	 * 
 	 * @param id
 	 * @return
 	 */
-	public List<HashMap<String, Object>> likelist(String id);
+	public List<HashMap<String, Object>> myMentoList(String id);
+	
 
+	/**
+	 * 위시리스트 조회
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public List<HashMap<String, Object>> wishlist(String id);
 
 	/**
 	 * 위시리스트 (멘토)
@@ -137,14 +136,23 @@ public interface MypageDao {
 	 */
 	public List<HashMap<String, Object>> studyWish(int memberNo);
 
+
 	/**
-	 * 참여중인 스터디(나의 멘토)
+	 * 좋아요리스트 조회 (번개 게시판)
 	 * 
 	 * @param id
 	 * @return
 	 */
-	public List<HashMap<String, Object>> myMentoList(String id);
+	public List<HashMap<String, Object>> mlikelist(String id);
 
+
+	/**
+	 * 좋아요리스트 조회 (멘티 게시판)
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public List<HashMap<String, Object>> mntikelist(String id);
 
 
 	
