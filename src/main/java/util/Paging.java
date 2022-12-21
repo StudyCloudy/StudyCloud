@@ -66,7 +66,7 @@ public class Paging {
 
 		// 총 페이지 수 계산
 		totalPage = totalCount / listCount; // 총 게시글 수 / 한 페이지 게시글 수
-		if (totalPage % listCount > 0)
+		if (totalPage % listCount >= 0)
 			totalPage++;
 
 		// 총 페이지 수 보정
