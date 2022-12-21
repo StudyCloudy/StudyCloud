@@ -45,6 +45,7 @@
 		update fileUpload
 			set fileUpload_ori = #{fileUploadOri},
 			fileUpload_stor = #{fileUploadStor}
+		where member_no = #{memberNo}
 	</select>		
 	
 	<!-- 예약 목록 조회 -->
@@ -90,18 +91,49 @@
         order by s.member_no desc
    		</select>
 
+	<select id="studyroomWish" resultType="hashmap" parameterType="int">
+		 select * from sroommark sm
+        join member m on sm.member_no = m.member_no
+        join studyroom sr on sm.sroom_no = sr.sroom_no
+        left join fileupload f on sr.sroom_no = f.sroom_no
+        where sm.member_no = #{memberNo}
+	</select>
+
+
+	<select id="studyWish" resultType="hashmap" parameterType="int">
+		select * from studymark sm
+        join member m on sm.member_no = m.member_no
+        join studyboard sb on sm.study_no = sb.study_no
+       left join fileupload f on sb.member_no = f.member_no and f.fboard_no is null and  mtboard_no is null and mntboard_no is null and mboard_no is null and sroom_no is null
+        where sm.member_no = #{memberNo}
+	</select>
+	
+	
+	<select id="mentorWish" resultType="hashmap" parameterType="int">
+		select * from mtmark mk
+        join mtboard mb on mk.mtboard_no = mb.mtboard_no
+        join member mt on mb.member_no = mt.member_no
+       left join fileupload f on mt.member_no = f.member_no
+       and f.fboard_no is null
+       and  f.mtboard_no is null and f.mntboard_no is null and f.mboard_no is null and f.sroom_no is null
+        where mk.member_no = #{memberNo}
+	</select>
+
 
 	<!-- 마이스터디 조회 -->
-	<select id='mystudy' resultType='hashmap'>
-		select *
-        from applymnt a
-		left join fileupload f on a.member_no = f.member_no
-		left join mtboard mt on a.member_no = mt.member_no
-		left  join studyboard sb on a.member_no = sb.member_no
-		and f.fboard_no is null
-		and f.mtboard_no is null
-		and f.mntboard_no is null and f.mboard_no is null and f.sroom_no is null
-		order by a.member_no desc
+	<select id='mystudy' resultType='hashmap' parameterType="String">
+	select m.member_no, m.member_id, mt.mtboard_no, mt.field, mt.mtboard_title, mt.mtboard_content
+        , s.study_no, sb.study_title, sb.study_content, sb.study_tag
+	FROM applyMnt a
+	JOIN member m
+	ON m.member_no = a.member_no
+	JOIN mtboard mt
+	ON mt.mtboard_no = a.mtboard_no
+	JOIN applyStudy s
+	ON s.member_no = m.member_no
+	JOIN studyBoard sb
+	ON s.study_no = sb.study_no
+	WHERE m.member_id = #{id}
 	</select>
 	
 	
