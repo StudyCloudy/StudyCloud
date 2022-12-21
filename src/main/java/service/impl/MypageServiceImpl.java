@@ -2,6 +2,7 @@ package service.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -118,6 +119,7 @@ import service.face.MypageService;
 	}
 
 
+	//회원탈퇴
 	@Override
 	public void withdrawal(Member member) {
 		mypageDao.withdrawal(member);
@@ -125,6 +127,7 @@ import service.face.MypageService;
 	}
 	
 
+	//회원탈퇴 시 비밀번호 체크
 	@Override
 	public int passCheck(Member member) {
 		int result = mypageDao.checkPw(member);
@@ -133,12 +136,14 @@ import service.face.MypageService;
 	}
 
 
+	//프로필사진 조회
 	@Override
 	public FileUpload selectProfile(int memberNo) {
 		return mypageDao.selectProfile(memberNo);
 	}
 
 
+	//프로필사진 변경
 	@Override
 	public void updateProfile(FileUpload file) {
 		mypageDao.updateProfile(file);
@@ -146,9 +151,58 @@ import service.face.MypageService;
 	}
 
 
+	//예약내역 조회
 	@Override
-	public List<Reservation> reservationlist(String id) {
+	public List<HashMap<String, Object>> reservationlist(String id) {
 		return mypageDao.reservationlist(id);
+	}
+
+	
+	//쪽지함 조회
+	@Override
+	public List<HashMap<String, Object>> messagelist(String id) {
+		return mypageDao.messagelist(id);
+	}
+
+
+	
+	//------- 위시리스트 -------
+	
+	//찜한 스터디
+	@Override
+	public List<HashMap<String, Object>> studywish(String id) {
+		return mypageDao.wishlist(id);
+	}
+
+
+	//찜한 멘토
+	@Override
+	public List<HashMap<String, Object>> mentowish(String id) {
+		return mypageDao.wishlist(id);
+
+	}
+
+
+	//찜한 스터디룸
+	@Override
+	public List<HashMap<String, Object>> sroomwish(String id) {
+		return mypageDao.wishlist(id);
+
+	}
+
+	
+	
+	//----- 마이스터디 -----
+	
+	//나의 멘토
+	@Override
+	public List<HashMap<String, Object>> mymento(String id) {
+		return mypageDao.mystudy(id);
+	}
+	
+	@Override
+	public List<HashMap<String, Object>> mystudy(String id) {
+		return mypageDao.mystudy(id);
 	}
 
 

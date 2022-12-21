@@ -145,98 +145,49 @@ table.shoping-cart-table tr td:last-child {
 
 <body>
 
-  <div class="col-md-9">
-  	<div class="card">
-  			<div class="title">예약 내역</div><br><br>
-                <div class="ibox-content">
-                    <div class="table-responsive">
-                        <table class="table shoping-cart-table">
-                            <tbody>
-                            <tr>
-        					    <td width="90">
-                                <img src="https://modo-phinf.pstatic.net/20200716_57/1594864756852jOdzL_JPEG/mosaZPjgYw.jpeg?type=f336_336" alt="..." class="cart-product-imitation">
-                                </td>                                    
-                                <td class="desc">
-                                    <div class="text-navy" >
-                                    <h3>${sroom.sroomName}</h3>
-                                    </div><br>
-                                    <dl class="small m-b-none">
-                                        <dt>예약 정보</dt><br>
-                                        <dd>예약 날짜 : 2022년 11월 15일</dd>
-                                        <dd>예약 시간 : 10시~15시</dd>
-                                        <dd>인원 : 4명</dd>
-                                    </dl>
-                                </td>
-                                <td>
-								<button class="btn btn-primary delete-button" type="button">취소</button>                               
-								</td>
-                                <td></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    </div>
-                    
-                <div class="ibox-content">
-                    <div class="table-responsive">
-                        <table class="table shoping-cart-table">
-                            <tbody>
-                            <tr>
-        					    <td width="90">
-                                <img src="https://modo-phinf.pstatic.net/20210118_192/1610946849604hfY3t_JPEG/mosazdlBnY.jpeg?type=f320_320" alt="..." class="cart-product-imitation">
-                                </td>                                    
-                          	    <td class="desc">
-                                    <div class="text-navy" >
-                                    <h3>ENI스터디룸</h3>
-                                    </div><br>
-                                    <dl class="small m-b-none">
-                                        <dt>예약 정보</dt><br>
-                                        <dd>예약 날짜 : 2022년 11월 21일</dd>
-                                        <dd>예약 시간 : 17시~21시</dd>
-                                        <dd>인원 : 6명</dd>
-                                    </dl>
-                                </td>
-                                <td>
-								<button class="btn btn-primary delete-button" type="button">취소</button>                               
-								</td>
-                                <td></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    </div>
-                    
-                 <div class="ibox-content">
-                    <div class="table-responsive">
-                        <table class="table shoping-cart-table">
-                            <tbody>
-                            <tr>
-       					    <td width="90">
-                               <img src="https://ldb-phinf.pstatic.net/20150901_244/14410338887412ja3X_JPEG/SUBMIT_1416958175779_35966443.jpg" alt="..." class="cart-product-imitation">
-                               </td>                                    
-                                <td class="desc">
-                                   <div class="text-navy" >
-                                   <h3>옐로스톤 스터디룸</h3>
-                                   </div><br>
-                                   <dl class="small m-b-none">
-                                       <dt>예약 정보</dt><br>
-                                       <dd>예약 날짜 : 2022년 11월 26일</dd>
-                                       <dd>예약 시간 : 15시~18시</dd>
-                                       <dd>인원 : 5명</dd>
-                                   </dl>
-                               </td>
-                                <td>
-								<button class="btn btn-primary delete-button" type="button">취소</button>                               
-								</td>
-                                <td></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    </div>
-					</div>
-                </div>
-      
+	<div class="col-md-9">
+		<div class="card">
+			<div class="title">예약 내역</div>
+			<br>
+			<br>
+			<div class="ibox-content">
+				<div class="table-responsive">
+					<table class="table shoping-cart-table">
+						<c:forEach var="reserve" items="${list}" varStatus="status">
+							<tbody>
+								<tr>
+									<td width="90">
+									<img src="${pageContext.request.contextPath}/resources/${reserve.FILEUPLOAD_STOR } "
+										alt="studyroom-img" class="cart-product-imitation">
+										</td>
+									<td class="desc">
+										<div class="text-navy">
+											<h3>${reserve.SROOM_NAME}</h3>
+										</div>
+										<br>
+										<dl class="small m-b-none">
+											<dt>예약 정보</dt>
+											<br>
+											<dd>예약 날짜 : ${reserve.RESERVE_DATE}</dd>
+											<dd>입실 시간 : ${reserve.RESERVE_STIME}</dd>
+											<dd>퇴실 시간 : ${reserve.RESERVE_ETIME}</dd>
+											<dd>인원 : ${reserve.RESERVE_PEOPLE}</dd>
+										</dl>
+									</td>
+<!-- 									<td> -->
+<!-- 										<button class="btn btn-primary delete-button" type="button">취소</button> -->
+<!-- 									</td> -->
+									<td></td>
+								</tr>
+							</tbody>
+						</c:forEach>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 
 </body>
 </html>

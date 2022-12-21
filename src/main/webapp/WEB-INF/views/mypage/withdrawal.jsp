@@ -47,7 +47,7 @@ $(document).ready(function(e){
 				success: function(data){
 					if(data=="success"){
 						alert("탈퇴되었습니다");
-						window.location.href = '/logout'
+						window.location.href = '/mainpage'
 					}else if (data == "disaccord"){
 						alert("입력하신 비밀번호와 회원정보가 일치하지 않습니다.");
 					} else {
@@ -118,7 +118,8 @@ body {
 
 .col-md-6 {
 	flex: 0 0 auto;
-	width: 60%;
+	width: 150%;
+	margin-left: 50%;
 }
 
 
@@ -216,12 +217,12 @@ body {
 
 						<div class="card-body">
 						
-						<h6>탈퇴안내</h6>
+						<h6>탈퇴안내</h6><br>
 						<div class="message">사용하고 계신 아이디는 탈퇴할 경우 재사용 및 복구가 불가능합니다.<br>
-							탈퇴한 아이디는 본인과 타인 모두 재사용 및 복구가 불가하오니 신중하게 선택하시기 바랍니다.</div><br>
+							탈퇴한 아이디는 본인과 타인 모두 재사용 및 복구가 불가하오니 <br> 신중하게 선택하시기 바랍니다.</div><br>
 
 							<div class="form-group">
-								<input class="form-control" type="password" id="memberPw" placeholder=" 비밀번호 입력">
+								<input class="form-control" type="password" id="memberPw" placeholder=" 비밀번호 입력"><br>
 								<input class="form-control" type="password" id="passwdCheck" placeholder=" 비밀번호 확인">
 							</div>
 							<br>

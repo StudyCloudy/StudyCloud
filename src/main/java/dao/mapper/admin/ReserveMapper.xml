@@ -26,17 +26,28 @@
 				ORDER BY reserve_no DESC
 			) B
 		) Reservation
-<!-- 		WHERE rnum BETWEEN #{startNo } AND #{endNo } -->
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
 	</select>
 
 	<!-- 예약 검색 -->
-	<select id="searchName" resultType="hashmap">
+	<select id="searchName" resultType="hashmap" parameterType="hashmap">
 		SELECT S.*, M.*, R.*
 		FROM studyroom S, member M, reservation R
-		WHERE S.sroom_no = R.sroom_no
-		AND R.member_no = M.member_no
-		AND sroom_name LIKE '%'|| #{keyword }|| '%'
-	</select>
+		
+		WHERE 1=1
+		<choose>
+			<when test="category != null and category.equals('member_name')">
+				AND M.member_name LIKE '%' || #{keyword } || '%'
+			</when>
+
+			<when test="category != null and category.equals('sroom_name')">
+				AND S.sroom_name LIKE '%' || #{keyword } || '%'
+			</when>
+		</choose>
+		AND S.sroom_no = R.sroom_no
+		AND R.member_no =  M.member_no
+		ORDER BY reserve_no DESC
+	</select>	
 	
 	<!-- 예약 상세조회 -->
 	<select id="selectReserve" resultType="hashmap" parameterType="dto.Reservation">
@@ -50,11 +61,13 @@
 	<!-- 관리자 메인페이지 미리보기 -->
 	<select id="previewReserve" resultType="hashmap">
 		SELECT R.*, M.*, S.*
-		FROM reservation R, member M, studyroom S
-		WHERE R.member_no = M.member_no
-		AND R.sroom_no = S.sroom_no
-		<![CDATA[AND rownum <= 5]]> 
+		FROM reservation R
+		JOIN studyroom S
+		ON R.sroom_no = S.sroom_no
+		JOIN member M
+		ON R.member_no = M.member_no
+		<![CDATA[WHERE rownum <= 5]]> 
 		ORDER BY reserve_no DESC
 	</select>
-	
+
 </mapper>

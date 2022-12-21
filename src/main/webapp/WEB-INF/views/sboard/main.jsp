@@ -19,26 +19,50 @@
 
 <script type="text/javascript">
 function getSearchList(){
+// 	$.ajax({
+// 		type: 'GET',
+// 		url : "/sboard/getSearchList",
+// 		data : $("form[name=search-form]").serialize(),
+// 		success : function(result){
+// 			//테이블 초기화
+// 			$('#sboard-list > tbody').empty();
+// 			if(result.length>=1){
+// 				result.forEach(function(item){
+// 					str='<ul>'
+// 					str += "<a href = '/sboard/detail?studyNo=" + studyboard.STUDY_NO + "'>" + "</a>";
+// // 					str+="<td><a href = '/sboard/detail?studyNo=" + studyboard.STUDY_NO + "'>"  + "</a></td>";
+// 					str+="<div>"+studyboard.STUDY_TAG +"</div>";
+// 					str+="</ul>"
+// 					$('#boardtable').append(str);
+//         		})				 
+// 			}
+// 		}
+// 	})
+// }
+
+function getSearch() {
+	var pageNo = ${paging.curPage };
+	var tagword = $("#tagName").val();
+	
+	if( tagword == "") {
+		alert("태그를 입력해주세요.");
+		return false;
+	}
+	
 	$.ajax({
-		type: 'GET',
-		url : "/sboard/getSearchList",
-		data : $("form[name=search-form]").serialize(),
-		success : function(result){
-			//테이블 초기화
-			$('#sboard-list > tbody').empty();
-			if(result.length>=1){
-				result.forEach(function(item){
-					str='<ul>'
-					str += "<a href = '/sboard/detail?studyNo=" + studyboard.STUDY_NO + "'>" + "</a>";
-// 					str+="<td><a href = '/sboard/detail?studyNo=" + studyboard.STUDY_NO + "'>"  + "</a></td>";
-					str+="<div>"+studyboard.STUDY_TAG +"</div>";
-					str+="</ul>"
-					$('#boardtable').append(str);
-        		})				 
-			}
+		url: "/sboard/searchtag",
+		type: "POST",
+		data: { "studyTag" : tagword },
+		success : function(r){
+			console.log('ajax 요청 성공');
+			$("#study_tag").html(r);
 		}
 	})
+	
 }
+
+function 
+
 
 </script>
 
@@ -187,8 +211,8 @@ h4, h6 {
 	
 	<div class="search-tag" style="padding-left: 30px; margin-bottom: 25px;">
 		<form name="search-form" autocomplete="off" class="d-flex" role="search">
-	        	<input class="form-control me-2" type="search" placeholder="#태그를 검색해보세요." name="keyword" aria-label="Search">
-	        	<button class="btn btn-outline-light" type="submit" onclick="getSearchList()">search</button>
+	        	<input class="form-control me-2" type="text" name="tagName" id="tagName" placeholder="#태그를 검색해보세요." name="keyword" aria-label="Search">
+	        	<button class="btn btn-outline-light" type="submit" onclick="getSearch()">search</button>
 	     </form>
 	</div>
 			<div class="nav-option">

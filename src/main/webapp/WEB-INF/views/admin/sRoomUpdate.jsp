@@ -17,12 +17,13 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	
-	$("#btnWrite").click(function() {
+	$("#btnUpdate").click(function() {
 		
 		updateContents();
 		
 		$("form").submit();
 	})
+	
 	
 })
 
@@ -59,9 +60,8 @@ form { margin: 40px 5px auto;}
 </head>
 <body>
 
-<form action="/admin/studyroom/update" method="post" enctype="multipart/form-data"> <!-- 첨부파일 첨부 -->
-
-
+<form action="/admin/studyroom/update" method="post" enctype="multipart/form-data">
+<input type="hidden" name="sRoomNo" value="${param.sRoomNo }">
 <main id="main" class="main">
   
 <div class="container">
@@ -79,47 +79,47 @@ form { margin: 40px 5px auto;}
 		<div class="mb-3 row form-group">
 			<label for="sRoomName" class="col-sm-2 col-form-label">스터디룸 이름</label>
 		    <div class="col-sm-10">
-		    	<input type="text" class="form-control" id="sRoomName" name="sRoomName">
+		    	<input type="text" class="form-control" id="sRoomName" name="sRoomName" value="${studyroom.sRoomName }">
 		    </div>
 		</div>
 		    
 		<div class="mb-3 row form-group">
 			<label for="sRoomAddr" class="col-sm-2 col-form-label">주소</label>
 		    <div class="col-sm-10">
-		    	<input type="text" class="form-control" id="sRoomAddr" name="sRoomAddr">
+		    	<input type="text" class="form-control" id="sRoomAddr" name="sRoomAddr" value="${studyroom.sRoomAddr }">
 		    </div>
 		</div>
 		
 		<div class="mb-3 row input-group">
 			<label for="sRoomPrice" class="col-sm-2 col-form-label">가격 (원/시간)</label>
 		    <div class="col-sm-4" style="margin-left: 2px;">
-		    	<input type="text" class="form-control" id="sRoomPrice" name="sRoomPrice">
+		    	<input type="text" class="form-control" id="sRoomPrice" name="sRoomPrice" value="${studyroom.sRoomPrice }">
 		    </div>
 		    
 			<label for="sRoomPeople" class="col-sm-2 col-form-label">인원</label>
 		    <div class="col-sm-4">
-		    	<input type="text" class="form-control" id="sRoomPeople" name="sRoomPeople" style="width: 330px;">
+		    	<input type="text" class="form-control" id="sRoomPeople" name="sRoomPeople" value="${studyroom.sRoomPeople }" style="width: 330px;">
 		    </div>
 		</div>
 				
 		<div class="mb-3 row form-group">
 		   <label for="sRoomIntro" class="col-sm-2 col-form-label">한줄소개</label>
 		    <div class="col-sm-10">
-		       <input type="text" class="form-control" id="sRoomIntro" name="sRoomIntro">
+		       <input type="text" class="form-control" id="sRoomIntro" name="sRoomIntro" value="${studyroom.sRoomIntro}">
 		    </div>
 		</div>
 		
 		<div class="mb-3 row form-group">
 			<label for="sRoomInfo" class="col-sm-2 col-form-label">공간소개</label>
 		  	<div class="col-sm-10" >
-		  		<textarea class="form-control" id="sRoomInfo" name="sRoomInfo" rows="10"></textarea>
+		  		<textarea class="form-control" id="sRoomInfo" name="sRoomInfo" rows="10">${studyroom.sRoomInfo }</textarea>
 		  	</div>
 		</div>
 
 		<div class="mb-3 row form-group">
 			<label for="sRoomRole" class="col-sm-2 col-form-label">이용&환불규정</label>
 		    <div class="col-sm-10">
-		  		<textarea class="form-control" id="sRoomRole" name="sRoomRole" rows="10"></textarea>
+		  		<textarea class="form-control" id="sRoomRole" name="sRoomRole" rows="10">${studyroom.sRoomRole }</textarea>
 		  	</div>
 		</div>
 
@@ -131,7 +131,7 @@ form { margin: 40px 5px auto;}
 		</div>	
 
 		<div class="text-center" style="margin-top: 70px;">
-			<button id="btnWrite" class="sRoom_insert_btn">수정</button>
+			<button type="button" id="btnUpdate" class="sRoom_insert_btn">수정</button>
 			<button id="btnCancel" class="sRoom_insert_btn_cancel">취소</button>
 		</div>
 

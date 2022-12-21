@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,7 +25,6 @@ import dao.face.MemberDao;
 import dao.face.MypageDao;
 import dto.FileUpload;
 import dto.Member;
-import dto.Reservation;
 import service.face.MemberService;
 import service.face.MypageService;
 
@@ -101,7 +100,7 @@ public class MypageController {
 				mypageService.insertProfile(member, file);
 			}
 			
-			return "redirect:/edit";
+			return "redirect:/mypage/edit";
 		}else {
 			return "redirect:/login";
 		}
@@ -160,63 +159,78 @@ public class MypageController {
 
 	
 	
+	// 쪽지함
 	
-	@GetMapping("/message")
-	public String message() {
-		
-		logger.info("/message [GET]성공");
+	@RequestMapping("/message")
+	public String message(Model model, HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		String id = (String) session.getAttribute("loginid");
+		List<HashMap<String, Object>> Message = mypageService.messagelist(id);
+		model.addAttribute("list", Message);
+		logger.info("message list {} :", Message);
 		
 		return "mypage/message";
-	
 	}
 	
+
+	//위시리스트
 	
-	@GetMapping("/wishlist")
-	public String wishlist() {
+	@RequestMapping("/wishlist")
+	public String wishlist(Model model, HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		String id = (String) session.getAttribute("loginid");
 		
-		logger.info("/wishlist [GET]성공");
+		//찜한 스터디
+		List<HashMap<String, Object>> studywish = mypageService.studywish(id);
+		model.addAttribute("study", studywish);
+		logger.info("study list {} :", studywish);
+		
+		//찜한 멘토
+		List<HashMap<String, Object>> mentowish = mypageService.mentowish(id);
+		model.addAttribute("mento", mentowish);
+		logger.info("mento list {} :", mentowish);
+		
+		//찜한 스터디공간
+		List<HashMap<String, Object>> sroomwish = mypageService.sroomwish(id);
+		model.addAttribute("sroom", sroomwish);
+		logger.info("sroom list {} :", sroomwish);
+		
 		
 		return "mypage/wishlist";
-	
 	}
 	
-	@GetMapping("/mystudy")
-	public String mystudy() {
+	
+	//마이스터디
+	
+	@RequestMapping("/mystudy")
+	public String mystudy(Model model, HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		String id = (String) session.getAttribute("loginid");
 		
-		logger.info("/mystudy [GET]성공");
+		//나의 멘토
+		List<HashMap<String, Object>> mymento = mypageService.mymento(id);
+		model.addAttribute("mymento", mymento);
+		logger.info("mymento list {} :", mymento);
+		
+		//나의 스터디
+		List<HashMap<String, Object>> mystudy = mypageService.mystudy(id);
+		model.addAttribute("mystudy", mystudy);
+		logger.info("mystudy list {} :", mystudy);
+		
 		
 		return "mypage/mystudy";
-		
+	
 	}
 	
-	
 	// 예약 목록
-	
-//	@RequestMapping(value="/reservationlist")
-//	public String reservationlist(@RequestParam Map<String, Object> paramMap, Reservation reservation, Model model) {
-//
-//		Reservation reservationlist = MypageService.selectList(reservation);
-//
-//		if(reservationlist != null) {
-//
-//			model.addAttribute("reservationlist", reservationlist);
-//
-//			return "/mypage/reservationlist";
-//
-//		} else {
-//
-//			return "/mainpage";
-//		}
-//
-//	}
-	
+
 	@RequestMapping("/reservationlist")
 	public String reservationlist(Model model, HttpServletRequest req) {
 		HttpSession session = req.getSession();
 		String id = (String) session.getAttribute("loginid");
-		List<Reservation> list = mypageService.reservationlist(id);
-		model.addAttribute("list", list);
-		logger.info("list {} :", list);
+		List<HashMap<String, Object>> Reservation = mypageService.reservationlist(id);
+		model.addAttribute("list", Reservation);
+		logger.info("reserve list {} :", Reservation);
 		
 		return "mypage/reservationlist";
 	}
@@ -230,6 +244,8 @@ public class MypageController {
 		return "mypage/likelist";
 		
 	}
+	
+
 	
 	@GetMapping("/mtbooklist")
 	public String mtbooklist() {

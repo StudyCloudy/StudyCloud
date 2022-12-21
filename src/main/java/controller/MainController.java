@@ -39,8 +39,7 @@ public class MainController {
 		logger.info("/main [GET]");
 		
 		//로그인 세션
-//		int member_no = (int) session.getAttribute("member_no");
-//		member.setMemberNo(member_no);
+//		int memberNo = (int) session.getAttribute("member_no");
 		session.setAttribute("member", member.getMemberNo());
 		
 		//인기멘토링

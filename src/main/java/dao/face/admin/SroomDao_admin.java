@@ -25,6 +25,14 @@ public interface SroomDao_admin {
 	 * @return 페이징이 적용된 게시글 목록
 	 */
 	public List<StudyRoom> selectList(Paging paging);
+	
+	/**
+	 * 스터디룸 검색
+	 * 
+	 * @param param - 검색할 키워드
+	 * @return - 게시글 목록
+	 */
+	public List<HashMap<String, Object>> searchName(HashMap<String, Object> param);
 
 	/**
 	 * 게시글 정보를 삽입한다
@@ -70,6 +78,26 @@ public interface SroomDao_admin {
 	 */
 	public void deleteFile(StudyRoom studyroom);
 
+	/**
+	 * 게시글을 참조하고 있는 F key 삭제 (예약정보)
+	 * 
+	 * @param studyroom - 삭제할 글 번호
+	 */
+	public void deleteReserve(StudyRoom studyroom);
+	
+	/**
+	 * 게시글을 참조하고 있는 F key 삭제 (스터디룸 리뷰)
+	 * 
+	 * @param studyroom
+	 */
+	public void deleteReview(StudyRoom studyroom);
+
+	/**
+	 * 게시글을 참조하고 있는 F key 삭제 (QnA 문의글)
+	 * 
+	 * @param studyroom
+	 */
+	public void deleteQna(StudyRoom studyroom);
 	/**
 	 * 게시글 삭제
 	 * 
@@ -123,6 +151,15 @@ public interface SroomDao_admin {
 	 * @return QnA 목록
 	 */
 	public List<HashMap<String, Object>> previewQna();
+
+	/**
+	 * 전체 게시글 수를 조회한다
+	 * 
+	 * @return - 총 게시글 수
+	 */
+	public int selectCntQna();
+
+
 
 
 

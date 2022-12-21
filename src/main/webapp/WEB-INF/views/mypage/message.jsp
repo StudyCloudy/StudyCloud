@@ -90,58 +90,57 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-12 d-flex justify-content-center right-bck">
-            <div class="registration-right"><br><br>
-            
-                <h2>받은 쪽지함</h2>
-                <div class="event-list">
-                    <div class="card flex-row"><img class="card-img-left img-fluid" src="https://img.icons8.com/color/512/test-account.png" />
-                        <div class="card-body">
-                            <h4 class="card-title h5 h4-sm"><i class="fas fa-caret-right" aria-hidden="true"></i><span>AUG 01 2021</span><i class="fas fa-caret-right" aria-hidden="true"></i><span>12:00 PM</span> </h4>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
-                        </div>
-                    </div>
-                    <div class="card flex-row"><img class="card-img-left img-fluid" src="https://img.icons8.com/color/512/test-account.png" />
-                        <div class="card-body">
-                            <h4 class="card-title h5 h4-sm"><i class="fas fa-caret-right" aria-hidden="true"></i><span>AUG 01 2021</span><i class="fas fa-caret-right" aria-hidden="true"></i><span>12:00 PM</span> </h4>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
-                        </div>
-                    </div>
-                    <div class="card flex-row"><img class="card-img-left img-fluid" src="https://img.icons8.com/color/512/test-account.png" />
-                        <div class="card-body">
-                            <h4 class="card-title h5 h4-sm"><i class="fas fa-caret-right" aria-hidden="true"></i><span>AUG 01 2021</span><i class="fas fa-caret-right" aria-hidden="true"></i><span>12:00 PM</span> </h4>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div><br><br>
-        <div class="col-md-12 d-flex justify-content-center right-bck">
-            <div class="registration-right">
-                <h2>보낸 쪽지함</h2>
-                <div class="event-list">
-                    <div class="card flex-row"><img class="card-img-left img-fluid" src="https://img.icons8.com/color/512/test-account.png" />
-                        <div class="card-body">
-                            <h4 class="card-title h5 h4-sm"><i class="fas fa-caret-right" aria-hidden="true"></i><span>AUG 01 2021</span><i class="fas fa-caret-right" aria-hidden="true"></i><span>12:00 PM</span> </h4>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
-                        </div>
-                    </div>
-                    <div class="card flex-row"><img class="card-img-left img-fluid" src="https://img.icons8.com/color/512/test-account.png" />
-                        <div class="card-body">
-                            <h4 class="card-title h5 h4-sm"><i class="fas fa-caret-right" aria-hidden="true"></i><span>AUG 01 2021</span><i class="fas fa-caret-right" aria-hidden="true"></i><span>12:00 PM</span> </h4>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
-                        </div>
-                    </div>
-                    <div class="card flex-row"><img class="card-img-left img-fluid" src="https://img.icons8.com/color/512/test-account.png" />
-                        <div class="card-body">
-                            <h4 class="card-title h5 h4-sm"><i class="fas fa-caret-right" aria-hidden="true"></i><span>AUG 01 2021</span><i class="fas fa-caret-right" aria-hidden="true"></i><span>12:00 PM</span> </h4>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+			<div class="col-md-12 d-flex justify-content-center right-bck">
+				<div class="registration-right">
+					<br>
+					<br>
+
+					<h2>받은 쪽지함</h2>
+					<div class="event-list">
+						<c:forEach var="message" items="${list}" varStatus="status">
+
+							<div class="card flex-row">
+								<img class="card-img-left img-fluid"
+									src="${pageContext.request.contextPath}/resources/${message.FILEUPLOAD_STOR } "
+									alt="studyroom-img" class="cart-product-imitation">
+								<!--                     <div class="card flex-row"><img class="card-img-left img-fluid" src="https://img.icons8.com/color/512/test-account.png" /> -->
+								<div class="card-body">
+									<h4 class="card-title h5 h4-sm">
+										<i class="fas fa-caret-right" aria-hidden="true"></i><span>${message.SEND_DATE}</span><i
+											class="fas fa-caret-right" aria-hidden="true"></i>
+									</h4>
+									<p class="card-text">${message.MS_CONTENT}</p>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+			</div>
+			<br> <br>
+			<div class="col-md-12 d-flex justify-content-center right-bck">
+				<div class="registration-right">
+					<h2>보낸 쪽지함</h2>
+					<div class="event-list">
+						<c:forEach var="message" items="${list}" varStatus="status">
+
+							<div class="card flex-row">
+								<img class="card-img-left img-fluid"
+									src="${pageContext.request.contextPath}/resources/${message.FILEUPLOAD_STOR } "
+									alt="studyroom-img" class="cart-product-imitation">
+								<!--                     <div class="card flex-row"><img class="card-img-left img-fluid" src="https://img.icons8.com/color/512/test-account.png" /> -->
+								<div class="card-body">
+									<h4 class="card-title h5 h4-sm">
+										<i class="fas fa-caret-right" aria-hidden="true"></i><span>${message.SEND_DATE}</span><i
+											class="fas fa-caret-right" aria-hidden="true"></i>
+									</h4>
+									<p class="card-text">${message.MS_CONTENT}</p>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+			</div>
+		</div>
     
     
 </div>

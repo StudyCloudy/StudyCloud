@@ -154,11 +154,11 @@ myModal.addEventListener('shown.bs.modal', () => {
 								</c:when>
 								
 								<c:when test="${applymt.member.authority eq 2}">
-									스터디장
+									멘토
 								</c:when>
 								
 								<c:when test="${applymt.member.authority eq 3}">
-									멘토
+									스터디장
 								</c:when>
 								</c:choose>
 							</td>
@@ -171,7 +171,7 @@ myModal.addEventListener('shown.bs.modal', () => {
 							<div class="modal-dialog modal-dialog modal-dialog-scrollable"> <!-- 모달창 스크롤 -->
 							<div class="modal-content">
 							  	<div class="modal-header">
-							    	<h5 class="modal-title" id="applyModal">${applymt.member.memberNick } 님의 스터디 신청서</h5>
+							    	<h5 class="modal-title" id="applyModal">${applymt.member.memberNick } 님의 멘토 신청서</h5>
 						  			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 								</div>
 							
